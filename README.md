@@ -18,7 +18,7 @@ npm install light-observable
 ```
 
 ## Why
-Because sometimes you don't need all this things.
+Because sometimes you just don't need all these tons of classes, dozens of schedulers and countless operators.
 
 ## License
 ```
