@@ -11,11 +11,11 @@
     "build:bundle": "rollup -c rollup.config.js",
     "prebuild": "rimraf lib && rimraf es",
     "test": "npm run test:lint && npm run test:jest && npm run test:size",
-    "test:size": "size-limit",
+    "test:size": "npm run build && size-limit",
     "test:lint": "tslint -t verbose './src/**/*.ts' './src/**/*.tsx' -p ./tsconfig.json -c ./tslint.json",
     "test:jest": "jest --runInBand",
     "precommit": "lint-staged",
-    "prepush": "npm run build && npm run test",
+    "prepush": "npm run test",
     "prepublishOnly": "npm run build"
   },
   "lint-staged": {
