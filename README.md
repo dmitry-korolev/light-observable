@@ -3,22 +3,68 @@
 
 An implementation of Observables for JavaScript. Requires a Promise polyfill.
 
-This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable).
+This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable). Some of extras are inspired by [observable-operators](https://github.com/nmuldavin/ObservableOperators).
 
 ## Features:
 * **Standard**: fully compatible with the [Observable Proposal](https://github.com/tc39/proposal-observable).
-* **Tiny**: only 829 bytes in gzip.
+* **Tiny**: Observable itself is only [829 bytes in gzip](.size-limit.js).
 * **Type-safe**: written in typescript.
 * **Reliable**: 100% code coverage.
-* **Moderate**: only standard methods are included.
+* **Moderate**: only standard methods are included to the Observable and Observable prototype.
+
+### Extras
+* `pipe`: an utility to pipe functions together
+    ```js
+    import { pipe } from 'light-observable'
+    import { from } from 'rxjs'
+    import { mergeMap } from 'rxjs/operators'
+  
+    import myStream from './myStream'
+  
+    const RxStream = pipe(
+      from,
+      mergeMap(...)
+    )(myStream)
+    ```
+* `createSubject`: an utility that returns a tuple of an observable stream and a controller sink.
+    ```js
+    import { createSubject } from 'light-observable'
+    const [stream, sink] = createSubject()
+  
+    stream.subscribe(console.log)
+    sink.next(1) // > 1
+    sink.next(2) // > 2
+    ```
+* `EMPTY`: represents an empty Observable, which completes right after subscribing
+* Bunch of pipeable operators:
+    * `filter`
+    * `map`
+    * `forEach`
+    * `merge`
+    * `share`
 
 ## Install
 ```bash
 npm install light-observable
 ```
 
+## Usage
+```js
+import { Observable } from 'light-observable'
+
+const o = new Observable(observer => {
+  observer.next(1)
+  observer.next(2)
+  observer.complete()
+})
+
+o.subscribe(console.log)
+// > 1
+// > 2
+```
+
 ## Why
-Because sometimes you just don't need all these tons of classes, dozens of schedulers and countless operators.
+Because sometimes you just don't need all these tons of classes, dozens of schedulers and countless operators. Only some of them. Someday.
 
 ## License
 ```
