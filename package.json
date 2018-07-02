@@ -1,6 +1,6 @@
 {
   "name": "light-observable",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Light observable ponyfill",
   "main": "es/index.js",
   "typings": "es/index.d.ts",
