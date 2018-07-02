@@ -23,6 +23,7 @@
     ]
   },
   "exclude": [
+    "**/__tests__/**/*.ts",
     "**/*.spec.ts",
     "**/*.spec.tsx"
   ],

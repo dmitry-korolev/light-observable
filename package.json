@@ -6,9 +6,9 @@
   "jsnext:main": "es/index.js",
   "typings": "es/index.d.ts",
   "scripts": {
-    "build": "npm run build:module && npm run build:bundle",
-    "build:module": "tsc",
-    "build:bundle": "rollup -c rollup.config.js",
+    "build": "npm run build:es6 && npm run build:cjs",
+    "build:es6": "tsc",
+    "build:cjs": "rollup -c rollup.config.js",
     "prebuild": "rimraf lib && rimraf es",
     "test": "npm run test:lint && npm run test:jest && npm run test:size",
     "test:size": "npm run build && size-limit",
@@ -33,17 +33,6 @@
   ],
   "author": "Dmitry Korolev <dmitry@korolev.dk> (https://korolev.dk)",
   "license": "Apache-2.0",
-  "size-limit": [
-    {
-      "name": "Bundle",
-      "path": "./lib/index.js",
-      "limit": "829B"
-    },
-    {
-      "name": "ES",
-      "path": "./es/index.js"
-    }
-  ],
   "jest": {
     "transform": {
       ".(ts|tsx|js|jsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"

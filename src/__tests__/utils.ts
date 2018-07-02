@@ -39,3 +39,7 @@ export function getObserver<T>(inner?: PartialObserver<T> | ((value: T) => void)
   }).subscribe(inner || {})
   return observer! // tslint:disable-line no-unnecessary-type-assertion
 }
+
+it('dummy', () => {
+  expect(true).toBe(true)
+})
