@@ -1,15 +1,11 @@
 module.exports = [
   {
-    name: 'Bundle',
-    path: './lib/index.js',
+    name: 'Observable',
+    path: './es/Observable.js',
     limit: '829B'
   },
   {
-    name: 'ES',
+    name: 'Total',
     path: './es/index.js'
-  },
-  {
-    name: 'Extras',
-    path: './es/extras/index.js'
   }
 ]

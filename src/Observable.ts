@@ -36,16 +36,17 @@ export class Observable<T> implements Subscribable<T> {
   static from<A>(ish: A[]): Observable<A>
   static from<A>(ish: any) {
     const C = typeof this === 'function' ? this : Observable
+    const error = `${ish} is not an object`
 
     if (ish == null) {
-      throw new TypeError(`${ish} is not an object`)
+      throw new TypeError(error)
     }
 
     if (ish[$$observable]) {
       const observable = ish[$$observable]()
 
       if (Object(observable) !== observable) {
-        throw new TypeError(`${ish} is not an object`)
+        throw new TypeError(error)
       }
 
       if (isObservable(observable) && observable.constructor === C) {
