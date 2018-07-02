@@ -1,6 +1,6 @@
 {
   "name": "light-observable",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Light observable ponyfill",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
