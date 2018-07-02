@@ -1,5 +1,5 @@
 import { enqueue } from './helpers/enqueue'
-import { $$iterator, $$observable } from './helpers/symbols'
+import { getSymbol } from './helpers/symbols'
 import { ObservableSubscription } from './ObservableSubscription'
 import { PartialObserver, Subscribable, Subscriber } from './types.h'
 
@@ -42,8 +42,8 @@ export class Observable<T> implements Subscribable<T> {
       throw new TypeError(error)
     }
 
-    if (ish[$$observable]) {
-      const observable = ish[$$observable]()
+    if (ish[getSymbol('observable')]) {
+      const observable = ish[getSymbol('observable')]()
 
       if (Object(observable) !== observable) {
         throw new TypeError(error)
@@ -56,8 +56,8 @@ export class Observable<T> implements Subscribable<T> {
       return new C<A>((observer) => observable.subscribe(observer))
     }
 
-    if (ish[$$iterator]) {
-      return new C(fromArray(ish[$$iterator]()))
+    if (ish[getSymbol('iterator')]) {
+      return new C(fromArray(ish[getSymbol('iterator')]()))
     }
 
     // For old browsers that doesn't support @@iterator
@@ -104,7 +104,7 @@ export class Observable<T> implements Subscribable<T> {
     return new ObservableSubscription(observer, this._source)
   }
 
-  [$$observable]() {
+  [getSymbol('observable')]() {
     return this
   }
 }
