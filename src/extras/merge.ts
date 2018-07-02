@@ -2,6 +2,7 @@ import { getSpecies } from '../helpers/getSpecies'
 import { Subscribable } from '../types.h'
 import { Unary } from './pipe'
 
+export function merge<T>(): Unary<Subscribable<T>, Subscribable<T>>
 export function merge<T, A>(arg1: Subscribable<A>): Unary<Subscribable<T>, Subscribable<T | A>>
 export function merge<T, A, B>(
   arg1: Subscribable<A>,
