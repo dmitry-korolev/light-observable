@@ -30,15 +30,15 @@ export function merge<T>(): Unary<Subscribable<T>, Subscribable<T>>
 export function merge(
   ...streams: Array<Subscribable<any>>
 ): Unary<Subscribable<any>, Subscribable<any>> {
-  return (stream: Subscribable<any>) => {
-    const C = getSpecies(stream)
-    const allStreams = [stream].concat(streams)
+  return (otherStream: Subscribable<any>) => {
+    const C = getSpecies(otherStream)
+    const allStreams = [otherStream].concat(streams)
 
     return new C((observer) => {
       let numObservers = allStreams.length
 
-      const subscriptions = allStreams.map((operator) => {
-        return operator.subscribe({
+      const subscriptions = allStreams.map((stream) => {
+        return stream.subscribe({
           next(value) {
             observer.next(value)
           },

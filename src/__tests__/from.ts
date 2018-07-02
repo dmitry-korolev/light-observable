@@ -1,4 +1,4 @@
-import { $$observable } from '../helpers/symbols'
+import { getSymbol } from '../helpers/symbols'
 import { Observable } from '../Observable'
 import { Observer } from '../types.h'
 import { testMethodProperty } from './utils'
@@ -54,7 +54,7 @@ describe('from', () => {
     it('wraps the input if it is not an instance of Observable', () => {
       const obj = {
         constructor: Observable,
-        [$$observable]() {
+        [getSymbol('observable')]() {
           return this
         }
       }
@@ -67,7 +67,7 @@ describe('from', () => {
       expect(() =>
         // @ts-ignore
         Observable.from({
-          [$$observable]: 1
+          [getSymbol('observable')]: 1
         })
       ).toThrow()
     })
@@ -76,7 +76,7 @@ describe('from', () => {
       expect(() => {
         // @ts-ignore
         Observable.from({
-          [$$observable]() {
+          [getSymbol('observable')]() {
             return 1
           }
         })
@@ -97,7 +97,7 @@ describe('from', () => {
 
       // @ts-ignore
       const observable = Observable.from({
-        [$$observable]() {
+        [getSymbol('observable')]() {
           return inner
         }
       })
