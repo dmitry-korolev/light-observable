@@ -2,7 +2,7 @@ module.exports = [
   {
     name: 'Observable',
     path: './es/Observable.js',
-    limit: '822B'
+    limit: '1078B'
   },
   {
     name: 'Total',
