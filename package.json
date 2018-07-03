@@ -13,7 +13,7 @@
     "test": "npm run test:lint && npm run test:jest && npm run test:size",
     "test:size": "npm run build && size-limit",
     "test:lint": "tslint -t verbose './src/**/*.ts' './src/**/*.tsx' -p ./tsconfig.json -c ./tslint.json",
-    "test:jest": "jest --runInBand --coverage --coverageReporters=text-lcov | coveralls",
+    "test:jest": "jest",
     "precommit": "lint-staged",
     "prepush": "npm run test",
     "prepublishOnly": "npm run build"
@@ -80,6 +80,7 @@
     "husky": "^0.14.3",
     "jest": "^23.1.0",
     "lint-staged": "^7.2.0",
+    "most": "^1.7.3",
     "observable-operators": "^1.7.3",
     "prettier": "^1.13.6",
     "redux": "^4.0.0",
@@ -101,5 +102,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "symbol-observable": "^1.2.0"
   }
 }
