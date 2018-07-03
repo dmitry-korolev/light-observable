@@ -7,10 +7,15 @@ This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable)
 
 ## Features:
 * **Standard**: fully compatible with the [Observable Proposal](https://github.com/tc39/proposal-observable).
-* **Tiny**: Observable itself is only [1078 bytes in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
+* **Tiny**: Observable itself is only [928 bytes in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
 * **Type-safe**: written in typescript.
 * **Reliable**: 100% code coverage.
 * **Moderate**: only standard methods are included to the Observable and Observable prototype.
+
+## Differences from zen-observable
+* Uses `symbol-observable` polyfill instead of own implementation.
+* Subscribing and iterating over arrays in `.of` and `.from` methods are synchronous.
+* `PartitialObserver` allows a `start` method, which will receive a subscription before calling the source.
 
 ### Extras
 * `pipe`: an utility to pipe functions together
@@ -41,7 +46,7 @@ This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable)
     * `map`
     * `forEach`
     * `merge`
-    * `share`
+    * `tap`
 
 ## Install
 ```bash

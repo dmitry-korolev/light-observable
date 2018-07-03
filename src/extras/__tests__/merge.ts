@@ -1,5 +1,6 @@
 import { Observable } from '../../Observable'
 import { merge } from '../merge'
+import { createSubject } from '../subject'
 
 describe('(Operator) merge', () => {
   it('returns a new Observable', () => {
@@ -47,5 +48,21 @@ describe('(Operator) merge', () => {
     )
 
     expect(errorHandler2).toHaveBeenCalledWith('error')
+  })
+
+  it('unsubscribes', () => {
+    const [stream, sink] = createSubject()
+    const o = merge(stream)(Observable.of(1))
+    const results: any[] = []
+
+    const sub = o.subscribe((x: any) => results.push(x))
+    expect(results).toEqual([1])
+
+    sink.next(2)
+    expect(results).toEqual([1, 2])
+
+    sub.unsubscribe()
+    sink.next(3)
+    expect(results).toEqual([1, 2])
   })
 })

@@ -53,7 +53,7 @@ describe('observer.error', () => {
     }).not.toThrow()
   })
 
-  it('queues if the subscription is not initialized', async () => {
+  it('queues if the subscription is not initialized', () => {
     let error
     new Observable((x) => {
       x.error({})
@@ -62,27 +62,24 @@ describe('observer.error', () => {
         error = err
       }
     })
-    expect(error).not.toBeDefined()
-    await null
+
     expect(error).toBeDefined()
   })
 
-  it('queues if the observer is running', async () => {
+  it('queues if the observer is running', () => {
     let observer: Observer<any>
     let error
     new Observable((x) => {
       observer = x
     }).subscribe({
       next() {
-        observer.error({})
+        observer.error({ test: 123 })
       },
       error(e) {
         error = e
       }
     })
     observer!.next(1)
-    expect(error).not.toBeDefined()
-    await null
     expect(error).toBeDefined()
   })
 

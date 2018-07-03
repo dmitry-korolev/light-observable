@@ -1,6 +1,5 @@
 import { Observable } from '../../Observable'
 import { createSubject } from '../subject'
-import { getObserver } from '../../__tests__/utils'
 
 describe('(Observable) subject', () => {
   it('should return a tuple of an observable and a sink', () => {
@@ -80,12 +79,11 @@ describe('(Observable) subject', () => {
   })
 
   describe('complete', () => {
-    it('does not subscribe if subject is completed', async () => {
+    it('does not subscribe if subject is completed', () => {
       const [stream, sink] = createSubject()
       sink.complete()
 
       const subscription = stream.subscribe()
-      await null
       expect(subscription.closed).toBe(true)
     })
   })

@@ -70,12 +70,10 @@ describe('observer.complete', () => {
         completed = true
       }
     })
-    expect(completed).toBe(false)
-    await null
     expect(completed).toBe(true)
   })
 
-  it('queues if the observer is running', async () => {
+  it('queues if the observer is running', () => {
     let observer: Observer<any>
     let completed = false
     new Observable((x) => {
@@ -89,8 +87,6 @@ describe('observer.complete', () => {
       }
     })
     observer!.next('test')
-    expect(completed).toBe(false)
-    await null
     expect(completed).toBe(true)
   })
 

@@ -1,5 +1,5 @@
 import { ObservableSubscription } from '../ObservableSubscription'
-import { SignalType, SubscriptionState } from '../types.h'
+import { SignalType } from '../types.h'
 import { cleanupSubscription } from './cleanupSubscription'
 import { closeSubscription } from './closeSubscription'
 
@@ -8,7 +8,9 @@ export function notifySubscription<T>(
   type: SignalType,
   value: any
 ) {
-  subscription._state = SubscriptionState.running
+  if (subscription.closed) {
+    return
+  }
 
   const observer = subscription._observer
 
@@ -22,6 +24,7 @@ export function notifySubscription<T>(
       if (observer.next) {
         observer.next(value)
       }
+
       break
 
     case SignalType.error:
@@ -42,9 +45,7 @@ export function notifySubscription<T>(
       break
   }
 
-  if ((subscription._state as any) === SubscriptionState.closed) {
+  if (subscription.closed) {
     cleanupSubscription(subscription)
-  } else if (subscription._state === SubscriptionState.running) {
-    subscription._state = SubscriptionState.ready
   }
 }

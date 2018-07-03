@@ -8,7 +8,6 @@ export const createSubject = <T>(): [Subscribable<T>, Observer<T>] => {
   const observable = new Observable<T>((observer) => {
     if (completed) {
       observer.complete()
-      return () => undefined
     }
 
     observers.add(observer)

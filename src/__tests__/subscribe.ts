@@ -94,7 +94,7 @@ describe('subscribe', () => {
     expect(completed).toBe(true)
   })
 
-  it('enqueues a job to send error if subscriber throws', async () => {
+  it('enqueues a job to send error if subscriber throws', () => {
     const error = {}
     let errorValue
     new Observable(() => {
@@ -105,24 +105,6 @@ describe('subscribe', () => {
       }
     })
 
-    expect(errorValue).not.toBeDefined()
-    await null
     expect(errorValue).toBe(error)
-  })
-
-  it('does not send error if unsubscribed', async () => {
-    const error = {}
-    let errorValue
-    const subscription = new Observable(() => {
-      throw error
-    }).subscribe({
-      error(e) {
-        errorValue = e
-      }
-    })
-    subscription.unsubscribe()
-    expect(errorValue).not.toBeDefined()
-    await null
-    expect(errorValue).not.toBeDefined()
   })
 })

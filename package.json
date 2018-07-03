@@ -14,6 +14,8 @@
     "test:size": "npm run build && size-limit",
     "test:lint": "tslint -t verbose './src/**/*.ts' './src/**/*.tsx' -p ./tsconfig.json -c ./tslint.json",
     "test:jest": "jest",
+    "test:jest:ci": "jest --runInBand --coverage --coverageReporters=text-lcov | coveralls",
+    "test:ci": "npm run test:lint && npm run test:jest:ci && npm run test:size",
     "precommit": "lint-staged",
     "prepush": "npm run test",
     "prepublishOnly": "npm run build"

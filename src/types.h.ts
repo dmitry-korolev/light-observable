@@ -8,6 +8,7 @@ export interface NextObserver<T> {
   next: (value: T) => void
   error?: (err: any) => void
   complete?: () => void
+  start?: (subscription: Subscription) => void
 }
 
 export interface ErrorObserver<T> {
@@ -15,6 +16,7 @@ export interface ErrorObserver<T> {
   next?: (value: T) => void
   error: (err: any) => void
   complete?: () => void
+  start?: (subscription: Subscription) => void
 }
 
 export interface CompletionObserver<T> {
@@ -22,6 +24,7 @@ export interface CompletionObserver<T> {
   next?: (value: T) => void
   error?: (err: any) => void
   complete: () => void
+  start?: (subscription: Subscription) => void
 }
 
 export type PartialObserver<T> = NextObserver<T> | ErrorObserver<T> | CompletionObserver<T>
@@ -44,14 +47,6 @@ export type Subscribable<T> = {
     error?: (reason: any) => void,
     complete?: () => void
   ): Subscription
-}
-
-export const enum SubscriptionState {
-  initializing,
-  buffering,
-  ready,
-  running,
-  closed
 }
 
 export const enum SignalType {
