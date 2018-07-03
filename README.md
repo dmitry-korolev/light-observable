@@ -7,7 +7,7 @@ This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable)
 
 ## Features:
 * **Standard**: fully compatible with the [Observable Proposal](https://github.com/tc39/proposal-observable).
-* **Tiny**: Observable itself is only [829 bytes in gzip](.size-limit.js).
+* **Tiny**: Observable itself is only [822 bytes in gzip](.size-limit.js).
 * **Type-safe**: written in typescript.
 * **Reliable**: 100% code coverage.
 * **Moderate**: only standard methods are included to the Observable and Observable prototype.

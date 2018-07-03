@@ -1,9 +1,26 @@
-import { Subscribable } from '../types.h'
+import { getSpecies } from '../helpers/getSpecies'
+import { Subscribable, Subscription } from '../types.h'
 import { createSubject } from './subject'
 
 export const share = <T>(source: Subscribable<T>): Subscribable<T> => {
+  const C = getSpecies(source)
   const [nextSource, sink] = createSubject()
-  source.subscribe(sink)
+  let subscription: Subscription
+  let refCount = 0
 
-  return nextSource
+  return new C((observer) => {
+    if (refCount === 0) {
+      subscription = source.subscribe(sink)
+    }
+    const disposer = nextSource.subscribe(observer)
+    refCount++
+
+    return () => {
+      refCount--
+      if (refCount === 0) {
+        subscription.unsubscribe()
+      }
+      disposer.unsubscribe()
+    }
+  })
 }
