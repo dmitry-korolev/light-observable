@@ -75,7 +75,7 @@ describe('compatibility', () => {
     expect(result).toEqual([10, 20, 30])
   })
 
-  it('should be compatible with redux', async () => {
+  it('should be compatible with redux', () => {
     const { createStore } = require('redux')
     const { Observable } = require('../Observable')
 
@@ -83,7 +83,6 @@ describe('compatibility', () => {
     const result: any[] = []
     const o = Observable.from(reduxStore as any).subscribe((x: any) => result.push(x))
 
-    await null
     expect(result.length).toEqual(1)
 
     reduxStore.dispatch({ type: 'test' })

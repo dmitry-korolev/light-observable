@@ -1,5 +1,5 @@
 import { Observable } from '../Observable'
-import { Observer } from '../types.h'
+import { Observer, Subscription } from '../types.h'
 import { testMethodProperty } from './utils'
 
 describe('from', () => {
@@ -115,7 +115,7 @@ describe('from', () => {
       expect(() => Observable.from({ [Symbol.iterator]: 1 })).toThrow()
     })
 
-    it('returns an observable wrapping iterables', async () => {
+    it('returns an observable wrapping iterables', () => {
       const calls: any[] = []
       Observable.from(iterable).subscribe({
         next(v) {
@@ -126,23 +126,24 @@ describe('from', () => {
         }
       })
 
-      expect(calls).toEqual([])
-      await null
       expect(calls).toEqual([['next', 1], ['next', 2], ['next', 3], ['complete']])
     })
 
-    it('stops iterating if observer is closed', async () => {
+    it('stops iterating if observer is closed', () => {
       const result: number[] = []
-      const subscription = Observable.from([1, 2, 3, 4]).subscribe({
+      let subscription: Subscription
+      Observable.from([1, 2, 3, 4]).subscribe({
+        start(s) {
+          subscription = s
+        },
         next(x) {
           result.push(x)
           if (x === 2) {
-            subscription.unsubscribe()
+            subscription!.unsubscribe()
           }
         }
       })
 
-      await null
       expect(result).toEqual([1, 2])
     })
   })

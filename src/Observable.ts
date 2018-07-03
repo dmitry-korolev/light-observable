@@ -1,20 +1,17 @@
 import $$observable from 'symbol-observable'
-import { enqueue } from './helpers/enqueue'
 import { ObservableSubscription } from './ObservableSubscription'
 import { PartialObserver, Subscribable, Subscriber } from './types.h'
 
 const fromArray = <T>(arrayLike: ArrayLike<T>): Subscriber<T> => {
   return (observer) => {
-    enqueue(() => {
-      for (const item of arrayLike as T[]) {
-        if (observer.closed) {
-          return
-        }
-        observer.next(item)
+    for (const item of arrayLike as T[]) {
+      if (observer.closed) {
+        return
       }
+      observer.next(item)
+    }
 
-      observer.complete()
-    })
+    observer.complete()
   }
 }
 

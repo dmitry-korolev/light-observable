@@ -73,7 +73,7 @@ describe('observer.next', () => {
     expect(observer!.closed).toBe(true)
   })
 
-  it('queues if the subscription is not initialized', async () => {
+  it('forwards arguments', async () => {
     const values: number[] = []
     let observer: Observer<any>
     new Observable<number>((x) => {
@@ -83,34 +83,15 @@ describe('observer.next', () => {
       next(val) {
         values.push(val)
         if (val === 1) {
-          observer.next(3)
+          observer.next(2)
         }
       }
     })
-    observer!.next(2)
-    expect(values).toEqual([])
-    await null
-    expect(values).toEqual([1, 2])
-    await null
+    observer!.next(3)
     expect(values).toEqual([1, 2, 3])
   })
 
-  it('drops queue if subscription is closed', async () => {
-    const values: number[] = []
-    const subscription = new Observable<number>((x) => {
-      x.next(1)
-    }).subscribe({
-      next(val) {
-        values.push(val)
-      }
-    })
-    expect(values).toEqual([])
-    subscription.unsubscribe()
-    await null
-    expect(values).toEqual([])
-  })
-
-  it('queues if the observer is running', async () => {
+  it('queues if the observer is running', () => {
     let observer: Observer<any>
     const values: number[] = []
     new Observable<number>((x) => {
@@ -122,8 +103,6 @@ describe('observer.next', () => {
       }
     })
     observer!.next(1)
-    expect(values).toEqual([1])
-    await null
     expect(values).toEqual([1, 2])
   })
 

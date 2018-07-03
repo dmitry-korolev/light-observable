@@ -77,5 +77,18 @@ describe('subscription', () => {
         get: true
       })
     })
+
+    it('does nothing if subscription is closed', () => {
+      const subscription = getSubscription()
+      expect(subscription._observer).toBeDefined()
+
+      subscription.unsubscribe()
+      expect(subscription._observer).toBeUndefined()
+
+      subscription._observer = {}
+
+      subscription.unsubscribe()
+      expect(subscription._observer).toBeDefined()
+    })
   })
 })

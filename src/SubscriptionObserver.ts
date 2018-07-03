@@ -1,6 +1,6 @@
-import { onNotify } from './helpers/onNotify'
+import { notifySubscription } from './helpers/notifySubscription'
 import { ObservableSubscription } from './ObservableSubscription'
-import { Observer, SignalType, SubscriptionState } from './types.h'
+import { Observer, SignalType } from './types.h'
 
 export class SubscriptionObserver<T> implements Observer<T> {
   _subscription: ObservableSubscription<T>
@@ -10,18 +10,18 @@ export class SubscriptionObserver<T> implements Observer<T> {
   }
 
   get closed() {
-    return this._subscription._state === SubscriptionState.closed
+    return this._subscription.closed
   }
 
   next(value: T) {
-    onNotify(this._subscription, SignalType.next, value)
+    notifySubscription(this._subscription, SignalType.next, value)
   }
 
   error(reason: any) {
-    onNotify(this._subscription, SignalType.error, reason)
+    notifySubscription(this._subscription, SignalType.error, reason)
   }
 
   complete() {
-    onNotify(this._subscription, SignalType.complete)
+    notifySubscription(this._subscription, SignalType.complete, undefined)
   }
 }
