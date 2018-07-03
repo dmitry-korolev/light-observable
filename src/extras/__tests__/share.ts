@@ -1,12 +1,11 @@
+import { Observable } from '../../Observable'
 import { filter } from '../filter'
 import { map } from '../map'
 import { pipe } from '../pipe'
 import { share } from '../share'
-import { createSubject } from '../subject'
 
 describe('(Observable) share', () => {
-  it('should multicast values', () => {
-    const [stream, sink] = createSubject<number>()
+  it('should multicast values', async () => {
     let filterCount = 0
     let mapCount = 0
     let mapCount2 = 0
@@ -25,13 +24,19 @@ describe('(Observable) share', () => {
         mapCount2++
         return x * 2
       })
-    )(stream)
+    )(Observable.of(2))
+
+    await null
+
+    expect(filterCount).toEqual(0)
+    expect(mapCount).toEqual(0)
+    expect(mapCount2).toEqual(0)
 
     const sub1 = o.subscribe()
     const sub2 = o.subscribe()
     const sub3 = o.subscribe()
 
-    sink.next(2)
+    await null
 
     expect(filterCount).toEqual(1)
     expect(mapCount).toEqual(1)
