@@ -1,4 +1,4 @@
-import { Observer, Subscribable } from '../types.h'
+import { Observer, Subscribable } from '../core/types.h'
 import { getSpecies } from './getSpecies'
 
 export const transform = <T, R = T>(

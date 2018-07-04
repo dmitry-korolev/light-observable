@@ -1,0 +1,8 @@
+export { filter } from './filter'
+export { forEach } from './forEach'
+export { map } from './map'
+export { merge } from './merge'
+export { pipe } from './pipe'
+export { skipRepeats } from './skipRepeats'
+export { tap } from './tap'
+export { throttle } from './throttle'

@@ -2,9 +2,8 @@
   "name": "light-observable",
   "version": "2.0.0",
   "description": "Light observable ponyfill",
-  "main": "lib/index.js",
-  "jsnext:main": "es/index.js",
-  "typings": "es/index.d.ts",
+  "main": "index.js",
+  "typings": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/dmitry-korolev/light-observable/"
@@ -13,16 +12,16 @@
     "url": "https://github.com/dmitry-korolev/light-observable/issues"
   },
   "scripts": {
-    "build": "npm run build:es6 && npm run build:cjs",
+    "build": "npm run build:es6",
     "build:es6": "tsc -p ./tsconfig.json",
-    "build:cjs": "rollup -c rollup.config.js",
-    "prebuild": "rimraf lib && rimraf es",
+    "prebuild": "rimraf index.js && rimraf types && rimraf core && rimraf helpers && rimraf operators && rimraf observable",
     "test": "npm run test:lint && npm run test:jest && npm run test:size",
     "test:size": "npm run build && size-limit",
     "test:lint": "tslint -t verbose './src/**/*.ts' './src/**/*.tsx' -p ./tsconfig.json -c ./tslint.json",
     "test:jest": "jest",
     "test:jest:ci": "jest --runInBand --coverage --coverageReporters=text-lcov | coveralls",
     "test:ci": "npm run test:lint && npm run test:jest:ci && npm run test:size",
+    "pretest": "rimraf coverage",
     "precommit": "lint-staged",
     "prepush": "npm run test",
     "prepublishOnly": "npm run build"
