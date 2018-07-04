@@ -5,6 +5,13 @@
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
   "typings": "es/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmitry-korolev/light-observable/"
+  },
+  "bugs": {
+    "url": "https://github.com/dmitry-korolev/light-observable/issues"
+  },
   "scripts": {
     "build": "npm run build:es6 && npm run build:cjs",
     "build:es6": "tsc -p ./tsconfig.json",
