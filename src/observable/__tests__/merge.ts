@@ -1,17 +1,17 @@
 import { Observable } from '../..'
-import { createSubject } from '../../observable'
 import { merge } from '../merge'
+import { createSubject } from '../subject'
 
-describe('(Operator) merge', () => {
+describe('(Observable) merge', () => {
   it('returns a new Observable', () => {
-    expect(merge(Observable.of(1))(Observable.of(1))).toBeInstanceOf(Observable)
+    expect(merge(Observable.of(1), Observable.of(1))).toBeInstanceOf(Observable)
   })
 
   it('emits all values from all input observables', async () => {
     const outputValues: any[] = []
 
     await new Promise((resolve) =>
-      merge(Observable.of(4, 5, 6), Observable.of(7, 8, 9))(Observable.of(1, 2, 3)).subscribe({
+      merge(Observable.of(1, 2, 3), Observable.of(4, 5, 6), Observable.of(7, 8, 9)).subscribe({
         next(value) {
           outputValues.push(value)
         },
@@ -28,7 +28,7 @@ describe('(Operator) merge', () => {
     const errorHandler2 = jest.fn()
 
     await new Promise((resolve) =>
-      merge(Observable.of(1))(errorObservable).subscribe({
+      merge(Observable.of(1), errorObservable).subscribe({
         error(e) {
           errorHandler1(e)
           resolve()
@@ -39,7 +39,7 @@ describe('(Operator) merge', () => {
     expect(errorHandler1).toHaveBeenCalledWith('error')
 
     await new Promise((resolve) =>
-      merge(errorObservable)(Observable.of(1)).subscribe({
+      merge(errorObservable, Observable.of(1)).subscribe({
         error(e) {
           errorHandler2(e)
           resolve()
@@ -52,7 +52,7 @@ describe('(Operator) merge', () => {
 
   it('unsubscribes', () => {
     const [stream, sink] = createSubject()
-    const o = merge(stream)(Observable.of(1))
+    const o = merge(stream, Observable.of(1))
     const results: any[] = []
 
     const sub = o.subscribe((x: any) => results.push(x))
