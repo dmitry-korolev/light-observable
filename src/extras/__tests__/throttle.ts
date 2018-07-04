@@ -3,7 +3,7 @@ import { throttle } from '../throttle'
 
 jest.useFakeTimers()
 
-describe('throttle', () => {
+describe('(Operator) throttle', () => {
   it('throttles function', () => {
     const [stream, sink] = createSubject()
     const throttledStream = throttle(1000)(stream)
