@@ -16,6 +16,7 @@ const fromArray = <T>(arrayLike: ArrayLike<T>): Subscriber<T> => {
 }
 
 export class Observable<T> implements Subscribable<T> {
+  static of(): Observable<any>
   static of<A>(a: A): Observable<A>
   static of<A, B>(a: A, b: B): Observable<A | B>
   static of<A, B, C>(a: A, b: B, c: C): Observable<A | B | C>
