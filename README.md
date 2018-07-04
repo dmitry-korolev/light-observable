@@ -41,12 +41,7 @@ This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable)
     sink.next(2) // > 2
     ```
 * `EMPTY`: represents an empty Observable, which completes right after subscribing
-* Bunch of pipeable operators:
-    * `filter`
-    * `map`
-    * `forEach`
-    * `merge`
-    * `tap`
+* Bunch of pipeable operators: `filter`, `map`, `forEach`, `merge`, `tap`, `throttle`.
 
 ## Install
 ```bash
