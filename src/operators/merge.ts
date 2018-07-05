@@ -1,6 +1,6 @@
 import { Subscribable } from '../core/types.h'
+import { Unary } from '../helpers/pipe'
 import { merge as mergeObservable } from '../observable'
-import { Unary } from './pipe'
 
 export function merge<T>(): Unary<Subscribable<T>, Subscribable<T>>
 export function merge<T, A>(arg1: Subscribable<A>): Unary<Subscribable<T>, Subscribable<T | A>>
@@ -29,8 +29,8 @@ export function merge<T, A, B, C, D, E>(
 export function merge(
   ...streams: Array<Subscribable<any>>
 ): Unary<Subscribable<any>, Subscribable<any>> {
-  return (otherStream: Subscribable<any>) => {
-    const allStreams = [otherStream].concat(streams)
+  return (stream: Subscribable<any>) => {
+    const allStreams = [stream].concat(streams)
 
     return mergeObservable.apply(null, allStreams)
   }

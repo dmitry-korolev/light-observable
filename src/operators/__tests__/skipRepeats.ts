@@ -1,4 +1,4 @@
-import { pipe } from '../pipe'
+import { pipe } from '../../helpers/pipe'
 import { skipRepeats } from '../skipRepeats'
 import { createSubject } from '../../observable/subject'
 

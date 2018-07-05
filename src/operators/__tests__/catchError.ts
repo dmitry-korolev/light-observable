@@ -1,6 +1,6 @@
 import { Observable } from '../../core/Observable'
 import { catchError } from '../catchError'
-import { pipe } from '../pipe'
+import { pipe } from '../../helpers/pipe'
 import { createSubject } from '../../observable/subject'
 
 describe('(Operator) catchError', () => {

@@ -10,7 +10,7 @@ This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable)
 * **Tiny**: Observable itself is only [926 bytes in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
 * **Type-safe**: written in typescript.
 * **Reliable**: 100% code coverage.
-* **Moderate**: only standard methods are included to the Observable and Observable prototype.
+* **Moderate**: only standard methods are included to the Observable and Observable prototype + special `Observable.prototype.pipe` method that allows usage of pipeable operators.
 
 ## Differences from zen-observable
 * Uses `symbol-observable` polyfill instead of own implementation.

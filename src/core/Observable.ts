@@ -1,4 +1,5 @@
 import $$observable from 'symbol-observable'
+import { pipe, Unary } from '../helpers/pipe'
 import { ObservableSubscription } from './ObservableSubscription'
 import { PartialObserver, Subscribable, Subscriber } from './types.h'
 
@@ -100,6 +101,65 @@ export class Observable<T> implements Subscribable<T> {
     }
 
     return new ObservableSubscription(observer, this._source)
+  }
+
+  pipe(): Observable<T>
+  pipe<A>(op1: Unary<T, A>): Observable<A>
+  pipe<A, B>(op1: Unary<T, A>, op2: Unary<A, B>): Observable<B>
+  pipe<A, B, C>(op1: Unary<T, A>, op2: Unary<A, B>, op3: Unary<B, C>): Observable<C>
+  pipe<A, B, C, D>(
+    op1: Unary<T, A>,
+    op2: Unary<A, B>,
+    op3: Unary<B, C>,
+    op4: Unary<C, D>
+  ): Observable<D>
+  pipe<A, B, C, D, E>(
+    op1: Unary<T, A>,
+    op2: Unary<A, B>,
+    op3: Unary<B, C>,
+    op4: Unary<C, D>,
+    op5: Unary<D, E>
+  ): Observable<E>
+  pipe<A, B, C, D, E, F>(
+    op1: Unary<T, A>,
+    op2: Unary<A, B>,
+    op3: Unary<B, C>,
+    op4: Unary<C, D>,
+    op5: Unary<D, E>,
+    op6: Unary<E, F>
+  ): Observable<F>
+  pipe<A, B, C, D, E, F, G>(
+    op1: Unary<T, A>,
+    op2: Unary<A, B>,
+    op3: Unary<B, C>,
+    op4: Unary<C, D>,
+    op5: Unary<D, E>,
+    op6: Unary<E, F>,
+    op7: Unary<F, G>
+  ): Observable<G>
+  pipe<A, B, C, D, E, F, G, H>(
+    op1: Unary<T, A>,
+    op2: Unary<A, B>,
+    op3: Unary<B, C>,
+    op4: Unary<C, D>,
+    op5: Unary<D, E>,
+    op6: Unary<E, F>,
+    op7: Unary<F, G>,
+    op8: Unary<G, H>
+  ): Observable<H>
+  pipe<A, B, C, D, E, F, G, H, I>(
+    op1: Unary<T, A>,
+    op2: Unary<A, B>,
+    op3: Unary<B, C>,
+    op4: Unary<C, D>,
+    op5: Unary<D, E>,
+    op6: Unary<E, F>,
+    op7: Unary<F, G>,
+    op8: Unary<G, H>,
+    op9: Unary<H, I>
+  ): Observable<I>
+  pipe(...operators: Array<Unary<any, any>>): Observable<T> {
+    return pipe.apply(null, operators)(this)
   }
 
   [$$observable]() {

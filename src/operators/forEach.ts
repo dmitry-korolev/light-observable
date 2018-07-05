@@ -1,21 +1,4 @@
-import { Subscribable } from '../core/types.h'
-import { Unary } from './pipe'
+import { curry } from '../helpers/curry'
+import { forEach as forEachObservable } from '../observable/forEach'
 
-export const forEach = <S>(fn: (value: S) => void): Unary<Subscribable<S>, Promise<void>> => (
-  stream: Subscribable<S>
-) => {
-  return new Promise((resolve, reject) => {
-    const subscription = stream.subscribe({
-      next(value) {
-        try {
-          fn(value)
-        } catch (e) {
-          reject(e)
-          subscription.unsubscribe()
-        }
-      },
-      error: reject,
-      complete: resolve
-    })
-  })
-}
+export const forEach = curry(forEachObservable)

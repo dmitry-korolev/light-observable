@@ -1,5 +1,5 @@
 import { Observable } from '../../core/Observable'
-import { pipe } from '../pipe'
+import { pipe } from '../../helpers/pipe'
 import { tap } from '../tap'
 
 describe('(Operator) tap', () => {
