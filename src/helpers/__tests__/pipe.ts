@@ -1,4 +1,4 @@
-import { Observable } from '../../core/Observable'
+import { of } from '../../observable/of'
 import { filter } from '../../operators/filter'
 import { forEach } from '../../operators/forEach'
 import { map } from '../../operators/map'
@@ -34,7 +34,7 @@ describe('(Util) pipe', () => {
       map((x: number) => x * 3),
       filter((x) => x % 2 === 0),
       forEach((x) => result.push(x))
-    )(Observable.of(1, 2, 3, 4, 5))
+    )(of(1, 2, 3, 4, 5))
 
     expect(result).toEqual([6, 12])
   })
