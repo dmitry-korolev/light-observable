@@ -32,6 +32,13 @@ docs/_book
 _book
 .tempdocs
 compiled
+/index.js
+/index.js.map
+/operators/
+/observable/
+/types/
+/core/
+/helpers/
 
 # Cache
 .awcache
