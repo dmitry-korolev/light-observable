@@ -47,3 +47,4 @@ compiled
 
 # Private data
 .npmrc
+/index.d.ts
