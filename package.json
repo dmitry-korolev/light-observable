@@ -3,7 +3,7 @@
   "version": "2.1.1",
   "description": "Light observable ponyfill",
   "main": "index.js",
-  "typings": "types/index.d.ts",
+  "typings": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/dmitry-korolev/light-observable/"
@@ -14,7 +14,7 @@
   "scripts": {
     "build": "npm run build:es6",
     "build:es6": "tsc -p ./tsconfig.json",
-    "prebuild": "rimraf index.js && rimraf types && rimraf core && rimraf helpers && rimraf operators && rimraf observable",
+    "prebuild": "rimraf index.js && rimraf index.d.ts && rimraf core && rimraf helpers && rimraf operators && rimraf observable",
     "test": "npm run test:lint && npm run test:jest && npm run test:size",
     "test:size": "npm run build && size-limit",
     "test:lint": "tslint -t verbose './src/**/*.ts' './src/**/*.tsx' -p ./tsconfig.json -c ./tslint.json",
