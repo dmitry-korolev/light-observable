@@ -2,7 +2,7 @@ import { Observable } from '../Observable'
 import { Observer } from '../types.h'
 import { testMethodProperty } from './utils'
 
-describe('subscribe', () => {
+describe('(Core) subscribe', () => {
   it('is a method of Observable.prototype', () => {
     testMethodProperty(Observable.prototype, 'subscribe', {
       configurable: true,

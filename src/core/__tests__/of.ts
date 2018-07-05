@@ -1,7 +1,7 @@
 import { Observable } from '../Observable'
 import { testMethodProperty } from './utils'
 
-describe('of', () => {
+describe('(Core) of', () => {
   it('is a method on Observable', () => {
     testMethodProperty(Observable, 'of', {
       configurable: true,

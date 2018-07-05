@@ -7,7 +7,7 @@ This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable)
 
 ## Features:
 * **Standard**: fully compatible with the [Observable Proposal](https://github.com/tc39/proposal-observable).
-* **Tiny**: Observable itself is only [926 bytes in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
+* **Tiny**: Observable itself is only [973 bytes in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
 * **Type-safe**: written in typescript.
 * **Reliable**: 100% code coverage.
 * **Moderate**: only standard methods are included to the Observable and Observable prototype + special `Observable.prototype.pipe` method that allows usage of pipeable operators.
@@ -41,7 +41,7 @@ This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable)
     sink.next(2) // > 2
     ```
 * `EMPTY`: represents an empty Observable, which completes right after subscribing
-* Bunch of pipeable operators: `filter`, `map`, `forEach`, `merge`, `tap`, `throttle`.
+* Bunch of pipeable operators: `filter`, `map`, `forEach`, `merge`, `tap`, `throttle` etc.
 
 ## Install
 ```bash
@@ -67,9 +67,9 @@ o.subscribe(console.log)
 Because sometimes you just don't need all these tons of classes, dozens of schedulers and countless operators. Only some of them. Someday.
 
 ## Notice on interoperability
-RxJS doesn't use 'symbol-observable' polyfill. This may cause some weird issues with interop depending on the import order. It is recommended to install and import `symbol-observable` polyfill before RxJS.
+RxJS 6 doesn't use 'symbol-observable' polyfill. This may cause some weird issues with interop depending on the import order. It is recommended to install and import `symbol-observable` polyfill before RxJS.
 
-See an [issue](https://github.com/benlesh/symbol-observable/issues/38) for details.
+See the [issue](https://github.com/benlesh/symbol-observable/issues/38) for details.
 
 ## License
 ```

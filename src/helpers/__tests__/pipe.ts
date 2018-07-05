@@ -1,8 +1,8 @@
 import { Observable } from '../../core/Observable'
-import { filter } from '../filter'
-import { forEach } from '../forEach'
-import { map } from '../map'
-import { pipe } from '../../helpers/pipe'
+import { filter } from '../../operators/filter'
+import { forEach } from '../../operators/forEach'
+import { map } from '../../operators/map'
+import { pipe } from '../pipe'
 
 describe('(Util) pipe', () => {
   it('should return function', () => {

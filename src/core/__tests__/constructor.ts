@@ -1,7 +1,7 @@
 import { Observable } from '../Observable'
 import { testMethodProperty } from './utils'
 
-describe('constructor', () => {
+describe('(Core) constructor', () => {
   it('throws if called as a function', () => {
     // @ts-ignore
     // tslint:disable-next-line no-empty

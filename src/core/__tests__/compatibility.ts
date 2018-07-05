@@ -15,7 +15,7 @@ function permute(arr: any[]): any[][] {
   )
 }
 
-describe('compatibility', () => {
+describe('(Core) compatibility', () => {
   describe('require order', () => {
     const variants = permute([
       () => ({ Rx: require('rxjs') }),

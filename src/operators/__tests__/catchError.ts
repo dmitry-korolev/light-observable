@@ -1,20 +1,19 @@
 import { Observable } from '../../core/Observable'
-import { catchError } from '../catchError'
 import { pipe } from '../../helpers/pipe'
+import { of } from '../../observable/of'
 import { createSubject } from '../../observable/subject'
+import { catchError } from '../catchError'
 
 describe('(Operator) catchError', () => {
   it('returns a new Observable', () => {
-    expect(catchError(() => Observable.of(1))(Observable.of(2))).toBeInstanceOf(Observable)
+    expect(catchError(() => of(1))(of(2))).toBeInstanceOf(Observable)
   })
 
   it('does not propagate errors from original stream', async () => {
     const errorHandler = jest.fn()
 
     await new Promise((resolve) =>
-      catchError(() => Observable.of(1))(
-        new Observable((observer) => observer.error(new Error()))
-      ).subscribe({
+      catchError(() => of(1))(new Observable((observer) => observer.error(new Error()))).subscribe({
         error: errorHandler,
         complete: resolve
       })
@@ -33,7 +32,7 @@ describe('(Operator) catchError', () => {
     const outputValues: any[] = []
 
     await new Promise((resolve) =>
-      catchError(() => Observable.of(3, 4, 5))(source).subscribe({
+      catchError(() => of(3, 4, 5))(source).subscribe({
         next: (value) => {
           outputValues.push(value)
         },
@@ -47,7 +46,7 @@ describe('(Operator) catchError', () => {
   it('passes the error value to the mapping function', async () => {
     const source = new Observable((observer) => observer.error('error'))
 
-    const map = jest.fn(() => Observable.of(1))
+    const map = jest.fn(() => of(1))
 
     await new Promise((resolve) =>
       catchError(map)(source).subscribe({
@@ -59,12 +58,12 @@ describe('(Operator) catchError', () => {
   })
 
   it('does not modify stream if no error occurs', async () => {
-    const source = Observable.of(1, 2, 3)
+    const source = of(1, 2, 3)
 
     const outputValues: any[] = []
 
     await new Promise((resolve) =>
-      catchError(() => Observable.of(3, 4, 5))(source).subscribe({
+      catchError(() => of(3, 4, 5))(source).subscribe({
         next: (value) => {
           outputValues.push(value)
         },

@@ -2,7 +2,7 @@ import { Observable } from '../Observable'
 import { Observer, Subscription } from '../types.h'
 import { testMethodProperty } from './utils'
 
-describe('from', () => {
+describe('(Core) from', () => {
   const iterable = {
     *[Symbol.iterator]() {
       yield 1

@@ -2,7 +2,7 @@ import { Observable } from '../Observable'
 import { Observer } from '../types.h'
 import { getObserver, testMethodProperty } from './utils'
 
-describe('observer.next', () => {
+describe('(Core) observer.next', () => {
   it('is a method of SubscriptionObserver', () => {
     const observer = getObserver()
     testMethodProperty(Object.getPrototypeOf(observer), 'next', {

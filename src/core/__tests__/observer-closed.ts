@@ -2,7 +2,7 @@ import { Observable } from '../Observable'
 import { Observer } from '../types.h'
 import { testMethodProperty } from './utils'
 
-describe('observer.closed', () => {
+describe('(Core) observer.closed', () => {
   it('is a getter on SubscriptionObserver.prototype', () => {
     let observer
     new Observable((x) => {

@@ -1,7 +1,7 @@
-import { getSpecies } from '../../helpers/getSpecies'
-import { Observable } from '../Observable'
+import { Observable } from '../../core/Observable'
+import { getSpecies } from '../getSpecies'
 
-describe('getSpecies', () => {
+describe('(Util) getSpecies', () => {
   it('should return constructor of an object', () => {
     expect(getSpecies(new Observable(() => undefined))).toBe(Observable)
     expect(getSpecies([])).toBe(Array)

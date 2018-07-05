@@ -1,7 +1,7 @@
 import { Observable } from '../Observable'
 import { testMethodProperty } from './utils'
 
-describe('subscription', () => {
+describe('(Core) subscription', () => {
   // tslint:disable-next-line no-empty
   function getSubscription(subscriber = () => {}) {
     return new Observable(subscriber).subscribe()
