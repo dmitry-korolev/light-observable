@@ -1,12 +1,12 @@
 import { createSubject } from '../../observable/subject'
-import { throttle } from '../throttle'
+import { throttleTime } from '../throttleTime'
 
 jest.useFakeTimers()
 
 describe('(Operator) throttle', () => {
   it('throttles function', () => {
     const [stream, sink] = createSubject()
-    const throttledStream = throttle(1000)(stream)
+    const throttledStream = throttleTime(1000)(stream)
     const fn = jest.fn()
 
     throttledStream.subscribe(fn)
@@ -32,7 +32,7 @@ describe('(Operator) throttle', () => {
 
   it('passes disposer', () => {
     const [stream, sink] = createSubject()
-    const throttledStream = throttle(10)(stream)
+    const throttledStream = throttleTime(10)(stream)
     const fn = jest.fn()
     const disposer = throttledStream.subscribe(fn)
 
