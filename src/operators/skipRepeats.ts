@@ -1,4 +1,4 @@
-import { Observable } from '..'
+import { Observable } from '../core/Observable'
 import { Subscribable } from '../core/types.h'
 import { curry } from '../helpers/curry'
 import { skipRepeats as skipRepeatsObservable } from '../observable/skipRepeats'

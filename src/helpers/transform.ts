@@ -1,4 +1,4 @@
-import { Observable } from '..'
+import { Observable } from '../core/Observable'
 import { Observer, Subscribable } from '../core/types.h'
 import { getSpecies } from './getSpecies'
 

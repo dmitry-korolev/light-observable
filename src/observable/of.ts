@@ -1,4 +1,4 @@
-import { Observable } from '..'
+import { Observable } from '../core/Observable'
 
 export function of<A>(a: A): Observable<A>
 export function of<A, B>(a: A, b: B): Observable<A | B>

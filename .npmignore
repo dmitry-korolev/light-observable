@@ -39,6 +39,11 @@ compiled
 
 # Other
 tsconfig.json
+tslint.json
 testSetup.ts
 src/
 examples/
+.coveralls.yml
+.size-limit.js
+.travis.yml
+.prettierrc

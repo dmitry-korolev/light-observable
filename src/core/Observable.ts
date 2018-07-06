@@ -163,5 +163,5 @@ export class Observable<T> implements Subscribable<T> {
 }
 
 function isObservable(x: any): x is Observable<any> {
-  return x instanceof Observable // SPEC: Brand check
+  return x instanceof Observable
 }
