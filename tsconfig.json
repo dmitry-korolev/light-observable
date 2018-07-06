@@ -16,7 +16,6 @@
     "outDir": "./",
     "skipLibCheck": true,
     "importHelpers": false,
-    "jsx": "react",
     "typeRoots": [
       "./node_modules/@types",
       "./src/models/global.d.ts"

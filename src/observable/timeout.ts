@@ -1,7 +1,8 @@
-import { Subscribable } from '..'
+import { Observable } from '../core/Observable'
+import { Subscribable } from '../core/types.h'
 import { getSpecies } from '../helpers/getSpecies'
 
-export const timeout = <T>(time: number, stream: Subscribable<T>) => {
+export const timeout = <T>(time: number, stream: Subscribable<T>): Observable<T> => {
   const C = getSpecies(stream)
 
   return new C<T>((observer) => {

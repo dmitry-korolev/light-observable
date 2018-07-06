@@ -3,7 +3,10 @@ import { Subscribable } from '../core/types.h'
 // tslint:disable-next-line no-empty
 const noop = (...a: any[]) => {}
 
-export const forEach = <S>(fn: (value: S) => void = noop, stream: Subscribable<S>) => {
+export const forEach = <S>(
+  fn: (value: S) => void = noop,
+  stream: Subscribable<S>
+): Promise<void> => {
   return new Promise((resolve, reject) => {
     const subscription = stream.subscribe({
       next(value) {

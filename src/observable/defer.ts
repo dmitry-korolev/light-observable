@@ -1,4 +1,4 @@
-import { Observable } from '..'
+import { Observable } from '../core/Observable'
 
 type Unwrap<T> = T extends Promise<infer R> ? R : T
 
