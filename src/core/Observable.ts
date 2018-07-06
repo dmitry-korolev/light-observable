@@ -104,19 +104,24 @@ export class Observable<T> implements Subscribable<T> {
   }
 
   pipe(): Observable<T>
-  pipe<A>(op1: Unary<T, A>): A
-  pipe<A, B>(op1: Unary<T, A>, op2: Unary<A, B>): B
-  pipe<A, B, C>(op1: Unary<T, A>, op2: Unary<A, B>, op3: Unary<B, C>): C
-  pipe<A, B, C, D>(op1: Unary<T, A>, op2: Unary<A, B>, op3: Unary<B, C>, op4: Unary<C, D>): D
+  pipe<A>(op1: Unary<Observable<T>, A>): A
+  pipe<A, B>(op1: Unary<Observable<T>, A>, op2: Unary<A, B>): B
+  pipe<A, B, C>(op1: Unary<Observable<T>, A>, op2: Unary<A, B>, op3: Unary<B, C>): C
+  pipe<A, B, C, D>(
+    op1: Unary<Observable<T>, A>,
+    op2: Unary<A, B>,
+    op3: Unary<B, C>,
+    op4: Unary<C, D>
+  ): D
   pipe<A, B, C, D, E>(
-    op1: Unary<T, A>,
+    op1: Unary<Observable<T>, A>,
     op2: Unary<A, B>,
     op3: Unary<B, C>,
     op4: Unary<C, D>,
     op5: Unary<D, E>
   ): E
   pipe<A, B, C, D, E, F>(
-    op1: Unary<T, A>,
+    op1: Unary<Observable<T>, A>,
     op2: Unary<A, B>,
     op3: Unary<B, C>,
     op4: Unary<C, D>,
@@ -124,7 +129,7 @@ export class Observable<T> implements Subscribable<T> {
     op6: Unary<E, F>
   ): F
   pipe<A, B, C, D, E, F, G>(
-    op1: Unary<T, A>,
+    op1: Unary<Observable<T>, A>,
     op2: Unary<A, B>,
     op3: Unary<B, C>,
     op4: Unary<C, D>,
@@ -133,7 +138,7 @@ export class Observable<T> implements Subscribable<T> {
     op7: Unary<F, G>
   ): G
   pipe<A, B, C, D, E, F, G, H>(
-    op1: Unary<T, A>,
+    op1: Unary<Observable<T>, A>,
     op2: Unary<A, B>,
     op3: Unary<B, C>,
     op4: Unary<C, D>,
@@ -143,7 +148,7 @@ export class Observable<T> implements Subscribable<T> {
     op8: Unary<G, H>
   ): H
   pipe<A, B, C, D, E, F, G, H, I>(
-    op1: Unary<T, A>,
+    op1: Unary<Observable<T>, A>,
     op2: Unary<A, B>,
     op3: Unary<B, C>,
     op4: Unary<C, D>,
