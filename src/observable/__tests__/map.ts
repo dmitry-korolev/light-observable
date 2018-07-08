@@ -1,5 +1,5 @@
 import { Observable } from '../../core/Observable'
-import { map } from '../map'
+import { map } from '../../operators/map'
 
 describe('(Operator) map', () => {
   it('returns a new Observable', () => {

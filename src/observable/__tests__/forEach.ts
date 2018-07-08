@@ -1,6 +1,6 @@
 import { Observable } from '../../core/Observable'
-import { of } from '../../observable/of'
-import { forEach } from '../forEach'
+import { forEach } from '../../operators/forEach'
+import { of } from '../of'
 
 describe('(Operator) forEach', () => {
   it('returns a promise', () => {

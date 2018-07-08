@@ -1,6 +1,6 @@
-import { Observable } from '../..'
-import { of } from '../../observable/of'
-import { timeout } from '../timeout'
+import { Observable } from '../../index'
+import { timeout } from '../../operators/timeout'
+import { of } from '../of'
 
 jest.useFakeTimers()
 

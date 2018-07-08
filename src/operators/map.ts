@@ -1,8 +1,6 @@
 import { Observable } from '../core/Observable'
 import { Subscribable } from '../core/types.h'
-import { curry } from '../helpers/curry'
 import { map as mapObservable } from '../observable/map'
 
-export const map: <T, R>(fn: (value: T) => R) => (stream: Subscribable<T>) => Observable<R> = curry(
-  mapObservable
-)
+export const map = <T, R>(fn: (value: T) => R) => (stream: Subscribable<T>): Observable<R> =>
+  mapObservable(fn, stream)

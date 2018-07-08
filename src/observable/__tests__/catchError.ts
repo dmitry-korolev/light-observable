@@ -1,8 +1,8 @@
 import { Observable } from '../../core/Observable'
 import { pipe } from '../../helpers/pipe'
-import { of } from '../../observable/of'
-import { createSubject } from '../../observable/subject'
-import { catchError } from '../catchError'
+import { catchError } from '../../operators/catchError'
+import { of } from '../of'
+import { createSubject } from '../subject'
 
 describe('(Operator) catchError', () => {
   it('returns a new Observable', () => {

@@ -1,6 +1,6 @@
 import { Observable } from '../../core/Observable'
 import { pipe } from '../../helpers/pipe'
-import { tap } from '../tap'
+import { tap } from '../../operators/tap'
 
 describe('(Operator) tap', () => {
   it('should perform side effect', () => {

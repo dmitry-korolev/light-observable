@@ -49,6 +49,8 @@ export type Subscribable<T> = {
   ): Subscription
 }
 
+export type FromInput<T> = Subscribable<T> | Iterable<T> | T[]
+
 export const enum SignalType {
   next,
   error,
