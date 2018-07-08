@@ -1,6 +1,6 @@
 import { pipe } from '../../helpers/pipe'
-import { skipRepeats } from '../skipRepeats'
-import { createSubject } from '../../observable/subject'
+import { skipRepeats } from '../../operators/skipRepeats'
+import { createSubject } from '../subject'
 
 describe('(Observable) skipRepeats', () => {
   it('filters same values', () => {

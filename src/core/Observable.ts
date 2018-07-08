@@ -1,7 +1,7 @@
 import $$observable from 'symbol-observable'
 import { pipe, Unary } from '../helpers/pipe'
 import { ObservableSubscription } from './ObservableSubscription'
-import { PartialObserver, Subscribable, Subscriber } from './types.h'
+import { FromInput, PartialObserver, Subscribable, Subscriber } from './types.h'
 
 const fromArray = <T>(arrayLike: ArrayLike<T>): Subscriber<T> => {
   return (observer) => {
@@ -29,11 +29,7 @@ export class Observable<T> implements Subscribable<T> {
     return new C(fromArray(items))
   }
 
-  static from<A>(ish: Subscribable<A>): Observable<A>
-  static from<A>(ish: Iterable<A>): Observable<A>
-  static from<A>(ish: Promise<A>): Observable<A>
-  static from<A>(ish: A[]): Observable<A>
-  static from<A>(ish: any) {
+  static from<A>(ish: FromInput<A>) {
     const C = typeof this === 'function' ? this : Observable
     const error = `${ish} is not an object`
 
@@ -41,8 +37,8 @@ export class Observable<T> implements Subscribable<T> {
       throw new TypeError(error)
     }
 
-    if (ish[$$observable]) {
-      const observable = ish[$$observable]()
+    if ((ish as any)[$$observable]) {
+      const observable = (ish as any)[$$observable]()
 
       if (Object(observable) !== observable) {
         throw new TypeError(error)
@@ -55,8 +51,8 @@ export class Observable<T> implements Subscribable<T> {
       return new C<A>((observer) => observable.subscribe(observer))
     }
 
-    if (Symbol.iterator && ish[Symbol.iterator]) {
-      return new C(fromArray(ish[Symbol.iterator]()))
+    if (Symbol.iterator && (ish as any)[Symbol.iterator]) {
+      return new C(fromArray((ish as any)[Symbol.iterator]()))
     }
 
     // For old browsers that doesn't support @@iterator

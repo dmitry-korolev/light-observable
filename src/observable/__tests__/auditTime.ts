@@ -1,7 +1,7 @@
 import { Observable } from '../../core/Observable'
-import { createSubject } from '../../observable'
-import { of } from '../../observable/of'
-import { auditTime } from '../auditTime'
+import { auditTime } from '../../operators/auditTime'
+import { createSubject } from '../index'
+import { of } from '../of'
 
 jest.useFakeTimers()
 

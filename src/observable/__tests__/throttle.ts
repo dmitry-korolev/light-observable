@@ -1,5 +1,5 @@
-import { createSubject } from '../../observable/subject'
-import { throttleTime } from '../throttleTime'
+import { throttleTime } from '../../operators/throttleTime'
+import { createSubject } from '../subject'
 
 jest.useFakeTimers()
 

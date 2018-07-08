@@ -1,6 +1,6 @@
-import { Observable } from '../..'
-import { createSubject } from '../../observable'
-import { merge } from '../merge'
+import { Observable } from '../../core/Observable'
+import { merge } from '../../operators/merge'
+import { createSubject } from '../subject'
 
 describe('(Operator) merge', () => {
   it('returns a new Observable', () => {

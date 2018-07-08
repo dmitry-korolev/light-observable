@@ -1,6 +1,6 @@
 import { Observable } from '../../core/Observable'
-import { of } from '../../observable/of'
-import { filter } from '../filter'
+import { filter } from '../../operators/filter'
+import { of } from '../of'
 
 describe('(Operator) filter', () => {
   it('returns a new Observable', () => {

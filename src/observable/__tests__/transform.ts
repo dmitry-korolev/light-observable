@@ -1,5 +1,5 @@
-import { transform } from '../../helpers/transform'
 import { Observable } from '../../core/Observable'
+import { transform } from '../../helpers/transform'
 
 describe('(Operator) transform', () => {
   it('returns a new observable', () => {
