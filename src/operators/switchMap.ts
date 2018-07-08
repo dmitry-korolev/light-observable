@@ -1,8 +1,7 @@
 import { Observable } from '..'
-import { Subscribable } from '../core/types.h'
-import { curry } from '../helpers/curry'
+import { FromInput, Subscribable } from '../core/types.h'
 import { switchMap as switchMapObservable } from '../observable'
 
-export const switchMap: <T, R>(
-  fn: (value: T) => Subscribable<R> | Iterable<R> | Promise<R> | R[]
-) => (stream: Subscribable<T>) => Observable<R> = curry(switchMapObservable)
+export const switchMap = <T, R>(fn: (value: T) => FromInput<R>) => (
+  stream: Subscribable<T>
+): Observable<R> => switchMapObservable(fn, stream)

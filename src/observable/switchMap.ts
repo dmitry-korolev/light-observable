@@ -1,9 +1,9 @@
 import { Observable } from '../core/Observable'
-import { Subscribable, Subscription } from '../core/types.h'
+import { FromInput, Subscribable, Subscription } from '../core/types.h'
 import { getSpecies } from '../helpers/getSpecies'
 
 export const switchMap = <T, R>(
-  fn: (value: T) => Subscribable<R> | Iterable<R> | Promise<R> | R[],
+  fn: (value: T) => FromInput<R>,
   stream: Subscribable<T>
 ): Observable<R> => {
   const C = getSpecies(stream)
