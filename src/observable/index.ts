@@ -1,5 +1,6 @@
 export { auditTime } from './auditTime'
 export { catchError } from './catchError'
+export { concat } from './concat'
 export { createSubject } from './subject'
 export { defer } from './defer'
 export { EMPTY } from './empty'
