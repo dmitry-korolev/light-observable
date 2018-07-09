@@ -1,4 +1,5 @@
 import { Observable } from '../..'
+import { startWith } from '../../operators'
 import { concat } from '../../operators/concat'
 
 describe('(Operator) concat', () => {
@@ -53,5 +54,26 @@ describe('(Operator) concat', () => {
     )
 
     expect(errorHandler2).toHaveBeenCalledWith('error')
+  })
+
+  it('returns subscription', () => {
+    const o = new Observable((ob) => ob.next(1))
+    const subscribe = o.subscribe.bind(o)
+    let subA: any
+    o.subscribe = (s: any) => {
+      subA = subscribe(s)
+      jest.spyOn(s, 'unsubscribe')
+      return subA
+    }
+
+    const subB = o.pipe(startWith([1])).subscribe()
+
+    expect(subA.closed).toBe(false)
+    expect(subB.closed).toBe(false)
+
+    subB.unsubscribe()
+
+    expect(subA.closed).toBe(true)
+    expect(subB.closed).toBe(true)
   })
 })

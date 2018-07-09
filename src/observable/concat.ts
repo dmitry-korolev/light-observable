@@ -6,24 +6,26 @@ const subscribe = (
   sources: Array<Subscribable<any>>,
   observer: Observer<any>,
   onSubscribe: (s: Subscription) => void
-) =>
-  onSubscribe(
-    sources[0].subscribe({
-      next(value) {
-        observer.next(value)
-      },
-      error(e) {
-        observer.error(e)
-      },
-      complete() {
-        if (sources.length > 1) {
-          subscribe(sources.slice(1), observer, onSubscribe)
-        } else {
-          observer.complete()
-        }
+) => {
+  return sources[0].subscribe({
+    start(s) {
+      onSubscribe(s)
+    },
+    next(value) {
+      observer.next(value)
+    },
+    error(e) {
+      observer.error(e)
+    },
+    complete() {
+      if (sources.length > 1) {
+        subscribe(sources.slice(1), observer, onSubscribe)
+      } else {
+        observer.complete()
       }
-    })
-  )
+    }
+  })
+}
 
 export function concat<A>(arg1: Subscribable<A>): Observable<A>
 export function concat<A, B>(arg1: Subscribable<A>, arg2: Subscribable<B>): Observable<A | B>
