@@ -1,4 +1,5 @@
 import { Observable } from '../..'
+import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { fromPromise } from '../fromPromise'
 
 describe('(Observable) fromPromise', () => {
@@ -7,11 +8,7 @@ describe('(Observable) fromPromise', () => {
   })
 
   it('should emit the resolved value and complete upon promise resolution', async () => {
-    const observer = {
-      next: jest.fn(),
-      complete: jest.fn()
-    }
-
+    const observer = getTestObserver()
     fromPromise(Promise.resolve('value')).subscribe(observer)
 
     await null

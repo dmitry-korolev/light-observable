@@ -1,5 +1,6 @@
 export { auditTime } from './auditTime'
 export { catchError } from './catchError'
+export { combineLatest } from './combineLatest'
 export { concat } from './concat'
 export { filter } from './filter'
 export { forEach } from './forEach'

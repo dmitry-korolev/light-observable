@@ -3,11 +3,11 @@ import { Observer, Subscribable, Subscription } from '../core/types.h'
 import { getSpecies } from '../helpers/getSpecies'
 
 const subscribe = (
-  sources: Array<Subscribable<any>>,
+  streams: Array<Subscribable<any>>,
   observer: Observer<any>,
   onSubscribe: (s: Subscription) => void
 ) => {
-  return sources[0].subscribe({
+  return streams[0].subscribe({
     start(s) {
       onSubscribe(s)
     },
@@ -18,8 +18,8 @@ const subscribe = (
       observer.error(e)
     },
     complete() {
-      if (sources.length > 1) {
-        subscribe(sources.slice(1), observer, onSubscribe)
+      if (streams.length > 1) {
+        subscribe(streams.slice(1), observer, onSubscribe)
       } else {
         observer.complete()
       }
@@ -55,8 +55,8 @@ export function concat<A, B, C, D, E, F>(
   arg5: Subscribable<E>,
   arg6: Subscribable<F>
 ): Observable<A | B | C | D | E | F>
-export function concat(...sources: Array<Subscribable<any>>): Observable<any> {
-  const C = getSpecies(sources[0])
+export function concat(...streams: Array<Subscribable<any>>): Observable<any> {
+  const C = getSpecies(streams[0])
 
   return new C((observer) => {
     let subscription: Subscription
@@ -64,7 +64,7 @@ export function concat(...sources: Array<Subscribable<any>>): Observable<any> {
       subscription = newSubscription
     }
 
-    subscribe(sources, observer, onSubscribe)
+    subscribe(streams, observer, onSubscribe)
 
     return () => {
       subscription.unsubscribe()

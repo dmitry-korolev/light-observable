@@ -1,4 +1,5 @@
 import { Observable } from '../..'
+import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { defer } from '../defer'
 
 describe('(Observable) defer', () => {
@@ -21,11 +22,7 @@ describe('(Observable) defer', () => {
   })
 
   it('should emit the returned value of the action then complete', async () => {
-    const observer = {
-      next: jest.fn(),
-      complete: jest.fn()
-    }
-
+    const observer = getTestObserver()
     defer(() => Promise.resolve('value')).subscribe(observer)
 
     await null
