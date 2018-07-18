@@ -1,9 +1,7 @@
 # Light Observable
 [![Build Status](https://travis-ci.org/dmitry-korolev/light-observable.svg?branch=master)](https://travis-ci.org/dmitry-korolev/light-observable) [![Coverage Status](https://coveralls.io/repos/github/dmitry-korolev/light-observable/badge.svg?branch=master)](https://coveralls.io/github/dmitry-korolev/light-observable?branch=master) [![Written in typescript](https://img.shields.io/badge/written_in-typescript-blue.svg)](https://www.typescriptlang.org/) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![npm](https://img.shields.io/npm/v/light-observable.svg)](https://www.npmjs.com/package/light-observable) [![Greenkeeper badge](https://badges.greenkeeper.io/dmitry-korolev/light-observable.svg)](https://greenkeeper.io/)
 
-An implementation of Observables for JavaScript. Requires a Promise polyfill.
-
-This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable). Some of extras are inspired by [observable-operators](https://github.com/nmuldavin/ObservableOperators).
+Standard implementation of Observables for JavaScript. Requires a Promise polyfill.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -23,7 +21,7 @@ This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Features:
+## Features
 * **Standard**: fully compatible with the [Observable Proposal](https://github.com/tc39/proposal-observable).
 * **Tiny**: Observable itself is less than [1 kilobyte in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
 * **Type-safe**: written in typescript.
@@ -105,6 +103,9 @@ Because sometimes you just don't need all these tons of classes, dozens of sched
 RxJS 6 doesn't use 'symbol-observable' polyfill. This may cause some weird issues with interop depending on the import order. It is recommended to install and import `symbol-observable` polyfill before RxJS.
 
 See the [issue](https://github.com/benlesh/symbol-observable/issues/38) for details.
+
+## Credits
+Originally this was forked from [zen-observable](https://github.com/zenparsing/zen-observable). Some of extras are inspired by [observable-operators](https://github.com/nmuldavin/ObservableOperators).
 
 ## License
 ```
