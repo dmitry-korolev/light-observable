@@ -7,7 +7,7 @@ Standard implementation of Observables for JavaScript. Requires a Promise polyfi
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [Features:](#features)
+- [Features](#features)
 - [Differences from zen-observable](#differences-from-zen-observable)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -17,6 +17,7 @@ Standard implementation of Observables for JavaScript. Requires a Promise polyfi
   - [Combining](#combining)
 - [Why](#why)
 - [Notice on interoperability](#notice-on-interoperability)
+- [Credits](#credits)
 - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
