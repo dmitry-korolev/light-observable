@@ -1,13 +1,10 @@
+import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { EMPTY } from '../empty'
 
 describe('(Observable) empty', () => {
   it('should return empty observable', () => {
     const o = EMPTY
-    const observer = {
-      next: jest.fn(),
-      error: jest.fn(),
-      complete: jest.fn()
-    }
+    const observer = getTestObserver()
 
     o.subscribe(observer)
 
