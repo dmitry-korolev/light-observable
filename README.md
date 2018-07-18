@@ -5,9 +5,27 @@ An implementation of Observables for JavaScript. Requires a Promise polyfill.
 
 This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable). Some of extras are inspired by [observable-operators](https://github.com/nmuldavin/ObservableOperators).
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Features:](#features)
+- [Differences from zen-observable](#differences-from-zen-observable)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Extras](#extras)
+  - [Creation](#creation)
+  - [Transforming](#transforming)
+  - [Combining](#combining)
+- [Why](#why)
+- [Notice on interoperability](#notice-on-interoperability)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Features:
 * **Standard**: fully compatible with the [Observable Proposal](https://github.com/tc39/proposal-observable).
-* **Tiny**: Observable itself is only [973 bytes in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
+* **Tiny**: Observable itself is less than [1 kilobyte in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
 * **Type-safe**: written in typescript.
 * **Reliable**: 100% code coverage.
 * **Moderate**: only standard methods are included to the Observable and Observable prototype + special `Observable.prototype.pipe` method that allows usage of pipeable operators.
@@ -17,33 +35,7 @@ This is a fork of [zen-observable](https://github.com/zenparsing/zen-observable)
 * Subscribing and iterating over arrays in `.of` and `.from` methods are synchronous.
 * `PartitialObserver` allows a `start` method, which will receive a subscription before calling the source.
 
-### Extras
-* `pipe`: an utility to pipe functions together
-    ```js
-    import { pipe } from 'light-observable'
-    import { from } from 'rxjs'
-    import { mergeMap } from 'rxjs/operators'
-  
-    import myStream from './myStream'
-  
-    const RxStream = pipe(
-      from,
-      mergeMap(...)
-    )(myStream)
-    ```
-* `createSubject`: an utility that returns a tuple of an observable stream and a controller sink.
-    ```js
-    import { createSubject } from 'light-observable'
-    const [stream, sink] = createSubject()
-  
-    stream.subscribe(console.log)
-    sink.next(1) // > 1
-    sink.next(2) // > 2
-    ```
-* `EMPTY`: represents an empty Observable, which completes right after subscribing
-* Bunch of pipeable operators: `filter`, `map`, `forEach`, `merge`, `tap`, `throttle` etc.
-
-## Install
+## Installation
 ```bash
 npm install light-observable
 ```
@@ -62,6 +54,49 @@ o.subscribe(console.log)
 // > 1
 // > 2
 ```
+
+## Extras
+#### `Observable.prototype.pipe`
+`light-observable` has a special `pipe` method, which is similar to any other pipe implementation. It applies provided functions from left to right. It allows usage of any function, including pipeable RxJS operators (although you **have to** pass RxJS `from` method first). This is the only non-standard method in `light-observable` Observable implementation.
+```js
+import { of } from 'light-observable/observable'
+import { from } from 'rxjs'
+import { filter, map } from 'rxjs/operators'
+
+of(1, 2, 3, 4)
+    .pipe(
+      from,
+      filter(x => x > 2),
+      map(x => x * 2)
+    )
+    .subscribe(console.log)
+
+// => 6, 8
+```
+
+### Creation
+#### `EMPTY`
+Represents an empty Observable, which completes right after subscribing.
+
+#### `createSubject`:
+Returns a tuple of an observable stream and a controller sink.
+```js
+import { createSubject } from 'light-observable/observable'
+const [stream, sink] = createSubject()
+
+stream.subscribe(console.log)
+sink.next(1) // > 1
+sink.next(2) // > 2
+```
+
+### Transforming
+#### `filter`
+#### `map`
+#### `forEach`
+
+### Combining
+#### `concat`
+#### `merge`
 
 ## Why
 Because sometimes you just don't need all these tons of classes, dozens of schedulers and countless operators. Only some of them. Someday.
