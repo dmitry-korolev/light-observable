@@ -5,7 +5,7 @@ const drain = (o: Observable<any>) => {
   const result: any[] = []
   return forEach((x) => result.push(x), o).then(() => result)
 }
-export const commonTest = (observable: any, curried: any) => {
+export const commonTest = (observable: any, curried?: any) => {
   it('should return Observable', () => {
     expect(observable).toBeInstanceOf(Observable)
 
