@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "lib": ["es2015", "es2016", "es2017", "dom"],
     "strict": true,
@@ -12,8 +12,8 @@
     "esModuleInterop": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "declarationDir": "./",
-    "outDir": "./",
+    "declarationDir": "./es6/",
+    "outDir": "./es6/",
     "skipLibCheck": true,
     "importHelpers": false,
     "typeRoots": [
