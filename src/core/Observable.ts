@@ -42,6 +42,11 @@ function cleanupSubscription(subscription: ObservableSubscription<any>) {
   }
 }
 
+function closeSubscription(subscription: ObservableSubscription<any>) {
+  subscription._observer = undefined
+  subscription._closed = true
+}
+
 function notifySubscription<T>(
   subscription: ObservableSubscription<T>,
   type: SignalType,
@@ -67,8 +72,7 @@ function notifySubscription<T>(
       break
 
     case SignalType.error:
-      subscription._observer = undefined
-      subscription._closed = true
+      closeSubscription(subscription)
       if (observer.error) {
         observer.error(value)
       } else {
@@ -78,8 +82,7 @@ function notifySubscription<T>(
       break
 
     case SignalType.complete:
-      subscription._observer = undefined
-      subscription._closed = true
+      closeSubscription(subscription)
       if (observer.complete) {
         observer.complete()
       }
@@ -121,8 +124,7 @@ class ObservableSubscription<T> implements Subscription {
       return
     }
 
-    this._observer = undefined
-    this._closed = true
+    closeSubscription(this)
     cleanupSubscription(this)
   }
 }
