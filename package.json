@@ -12,16 +12,15 @@
     "url": "https://github.com/dmitry-korolev/light-observable/issues"
   },
   "scripts": {
-    "build": "npm run build:es6",
-    "build:es6": "tsc -p ./tsconfig.json",
+    "build": "tsc -p ./tsconfig.json",
     "prebuild": "rimraf index.js && rimraf index.d.ts && rimraf core && rimraf helpers && rimraf operators && rimraf observable",
     "docs": "npm run docs:toc",
     "docs:toc": "doctoc README.md --notitle --github --maxlevel 3",
     "test": "npm run test:lint && npm run test:jest && npm run test:size",
     "test:size": "npm run build && size-limit",
     "test:lint": "tslint -t verbose './src/**/*.ts' './src/**/*.tsx' -p ./tsconfig.json -c ./tslint.json",
-    "test:jest": "jest",
-    "test:jest:ci": "jest --runInBand --coverage --coverageReporters=text-lcov | coveralls",
+    "test:jest": "jest --config ./jest.config.json",
+    "test:jest:ci": "jest --config ./jest.config.json --runInBand --coverage --coverageReporters=text-lcov | coveralls",
     "test:ci": "npm run test:lint && npm run test:jest:ci && npm run test:size",
     "pretest": "rimraf coverage",
     "precommit": "lint-staged",
@@ -43,44 +42,6 @@
   ],
   "author": "Dmitry Korolev <dmitry@korolev.dk> (https://korolev.dk)",
   "license": "Apache-2.0",
-  "jest": {
-    "transform": {
-      ".(ts|tsx|js|jsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "modulePaths": [
-      "<rootDir>"
-    ],
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/test|spec/",
-      "/examples/"
-    ],
-    "transformIgnorePatterns": [
-      "/node_modules/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "collectCoverage": true,
-    "coverageReporters": [
-      "json",
-      "lcov"
-    ],
-    "globals": {
-      "process.env.NODE_ENV": "test"
-    }
-  },
   "devDependencies": {
     "@types/jest": "^23.1.0",
     "@types/node": "^10.3.3",
