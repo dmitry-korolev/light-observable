@@ -4,15 +4,17 @@ import { getSpecies } from './getSpecies'
 
 export const transform = <T, R = T>(
   stream: Subscribable<T>,
-  fn: (observer: Observer<R>, value: T) => void
+  fn: (observer: Observer<R>, value: T, index: number) => void
 ): Observable<R> => {
   const C = getSpecies(stream)
 
-  return new C<R>((observer) =>
-    stream.subscribe({
+  return new C<R>((observer) => {
+    let index = 0
+    return stream.subscribe({
       next(value) {
         try {
-          fn(observer, value)
+          fn(observer, value, index)
+          index += 1
         } catch (e) {
           observer.error(e)
         }
@@ -24,5 +26,5 @@ export const transform = <T, R = T>(
         observer.complete()
       }
     })
-  )
+  })
 }

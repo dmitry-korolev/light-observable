@@ -7,7 +7,7 @@ import { of } from '../of'
 
 jest.useFakeTimers()
 
-describe('(Operator) auditTime', () => {
+describe('(Operator) debounceTime', () => {
   commonTest(debounceTime(100, of(1, 2, 3)), debounceTimeOperator(100)(of(1, 2, 3)))
 
   it('should throttle the source stream', () => {

@@ -1,5 +1,7 @@
 import { Observable } from '../../core/Observable'
-import { transform } from '../../helpers/transform'
+import { createSubject } from '../../observable'
+import { getTestObserver } from '../testHelpers/getTestObserver'
+import { transform } from '../transform'
 
 describe('(Operator) transform', () => {
   it('returns a new observable', () => {
@@ -68,5 +70,20 @@ describe('(Operator) transform', () => {
     } catch (e) {}
 
     expect(errorHandler).toHaveBeenCalledWith(error)
+  })
+
+  it('provides index to transformer function', () => {
+    const [stream, sink] = createSubject()
+    const observer = getTestObserver()
+
+    transform(stream, (o, value, index) => {
+      o.next([value, index])
+    }).subscribe(observer)
+
+    sink.next('a')
+    sink.next('b')
+    sink.next('c')
+
+    expect(observer.next.mock.calls).toEqual([[['a', 0]], [['b', 1]], [['c', 2]]])
   })
 })
