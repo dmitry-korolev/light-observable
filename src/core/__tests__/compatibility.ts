@@ -1,5 +1,4 @@
 import 'symbol-observable'
-import { filter } from 'rxjs/operators'
 
 function permute(arr: any[]): any[][] {
   if (arr.length === 2) {

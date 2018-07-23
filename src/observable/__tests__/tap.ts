@@ -1,12 +1,11 @@
 import { Observable } from '../../core/Observable'
-import { pipe } from '../../helpers/pipe'
 import { tap } from '../../operators/tap'
 
 describe('(Operator) tap', () => {
   it('should perform side effect', () => {
     const resultA: any[] = []
     const resultB: any[] = []
-    const o = pipe(tap<number>((x) => resultA.push(x * 2)))(Observable.of(1, 2))
+    const o = Observable.of(1, 2).pipe(tap<number>((x) => resultA.push(x * 2)))
 
     expect(resultA.length).toBe(0)
     expect(resultB.length).toBe(0)
@@ -20,7 +19,7 @@ describe('(Operator) tap', () => {
   it('should ignore return value', () => {
     const resultA: any[] = []
     const resultB: any[] = []
-    const o = pipe(tap<number>((x) => x * 2))(Observable.of(1, 2))
+    const o = Observable.of(1, 2).pipe(tap<number>((x) => x * 2))
 
     expect(resultA.length).toBe(0)
     expect(resultB.length).toBe(0)

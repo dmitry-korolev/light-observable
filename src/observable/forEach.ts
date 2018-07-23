@@ -1,7 +1,7 @@
 import { Subscribable } from '../core/types.h'
 
 // tslint:disable-next-line no-empty
-const noop = (...a: any[]) => {}
+const noop = () => {}
 
 export const forEach = <S>(
   fn: (value: S) => void = noop,

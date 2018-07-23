@@ -1,6 +1,5 @@
 import { Observable } from '../core/Observable'
-import { Subscribable } from '../core/types.h'
-import { Unary } from '../helpers/pipe'
+import { Subscribable, Unary } from '../core/types.h'
 import { merge as mergeObservable } from '../observable/merge'
 
 export function merge<T>(): Unary<Subscribable<T>, Subscribable<T>>

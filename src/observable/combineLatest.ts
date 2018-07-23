@@ -19,12 +19,13 @@ export function combineLatest<A, B, C, D>(
   sC: Observable<C>,
   sD: Observable<D>
 ): Observable<[A, B, C, D]>
-export function combineLatest(...streams: Array<Subscribable<any>>): Observable<any> {
-  if (streams.length < 1) {
+export function combineLatest(): Observable<any> {
+  if (arguments.length < 1) {
     return EMPTY
   }
 
-  const size = streams.length
+  const size = arguments.length
+  const streams: Array<Subscribable<any>> = Array.prototype.slice.call(arguments)
   const flags = streams.map((_, i) => 2 ** i)
   // Here we get a final mask matching every flag for every stream
   // Later we gonna start from zero back again and perform OR operation with every

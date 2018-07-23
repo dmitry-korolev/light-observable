@@ -1,6 +1,5 @@
 import { Observable } from '../core/Observable'
-import { Subscribable } from '../core/types.h'
-import { Unary } from '../helpers/pipe'
+import { Subscribable, Unary } from '../core/types.h'
 import { concat as concatObservable } from '../observable/concat'
 
 export function concat<T>(): Unary<Subscribable<T>, Subscribable<T>>

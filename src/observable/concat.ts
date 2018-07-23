@@ -55,7 +55,8 @@ export function concat<A, B, C, D, E, F>(
   arg5: Subscribable<E>,
   arg6: Subscribable<F>
 ): Observable<A | B | C | D | E | F>
-export function concat(...streams: Array<Subscribable<any>>): Observable<any> {
+export function concat(): Observable<any> {
+  const streams: Array<Subscribable<any>> = Array.prototype.slice.call(arguments)
   const C = getSpecies(streams[0])
 
   return new C((observer) => {

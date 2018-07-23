@@ -1,7 +1,16 @@
+// tslint:disable max-classes-per-file no-use-before-declare
 import $$observable from 'symbol-observable'
-import { pipe, Unary } from '../helpers/pipe'
-import { ObservableSubscription } from './ObservableSubscription'
-import { FromInput, PartialObserver, Subscribable, Subscriber } from './types.h'
+import {
+  Disposer,
+  FromInput,
+  Observer,
+  PartialObserver,
+  SignalType,
+  Subscribable,
+  Subscriber,
+  Subscription,
+  Unary
+} from './types.h'
 
 const fromArray = <T>(arrayLike: ArrayLike<T>): Subscriber<T> => {
   return (observer) => {
@@ -16,6 +25,132 @@ const fromArray = <T>(arrayLike: ArrayLike<T>): Subscriber<T> => {
   }
 }
 
+function cleanupSubscription(subscription: ObservableSubscription<any>) {
+  const disposer = subscription._disposer
+  if (!disposer) {
+    return
+  }
+
+  subscription._disposer = undefined
+
+  if (typeof disposer === 'function') {
+    disposer()
+  } else {
+    if (disposer.unsubscribe) {
+      disposer.unsubscribe()
+    }
+  }
+}
+
+function notifySubscription<T>(
+  subscription: ObservableSubscription<T>,
+  type: SignalType,
+  value: any
+) {
+  if (subscription.closed) {
+    return
+  }
+
+  const observer = subscription._observer
+
+  /* istanbul ignore next */
+  if (!observer) {
+    return
+  }
+
+  switch (type) {
+    case SignalType.next:
+      if (observer.next) {
+        observer.next(value)
+      }
+
+      break
+
+    case SignalType.error:
+      subscription._observer = undefined
+      subscription._closed = true
+      if (observer.error) {
+        observer.error(value)
+      } else {
+        cleanupSubscription(subscription)
+        throw value
+      }
+      break
+
+    case SignalType.complete:
+      subscription._observer = undefined
+      subscription._closed = true
+      if (observer.complete) {
+        observer.complete()
+      }
+      break
+  }
+
+  if (subscription.closed) {
+    cleanupSubscription(subscription)
+  }
+}
+
+class ObservableSubscription<T> implements Subscription {
+  _disposer: Disposer | undefined
+  _observer: PartialObserver<T> | undefined
+  _closed: boolean = false
+
+  constructor(observer: PartialObserver<T>, source: Subscriber<T>) {
+    this._observer = observer
+
+    if (observer.start) {
+      observer.start(this)
+    }
+
+    const subscriptionObserver = new SubscriptionObserver(this)
+
+    try {
+      this._disposer = source(subscriptionObserver)
+    } catch (error) {
+      subscriptionObserver.error(error)
+    }
+  }
+
+  get closed() {
+    return this._closed
+  }
+
+  unsubscribe() {
+    if (this.closed) {
+      return
+    }
+
+    this._observer = undefined
+    this._closed = true
+    cleanupSubscription(this)
+  }
+}
+
+class SubscriptionObserver<T> implements Observer<T> {
+  _subscription: ObservableSubscription<T>
+
+  constructor(subscription: ObservableSubscription<T>) {
+    this._subscription = subscription
+  }
+
+  get closed() {
+    return this._subscription.closed
+  }
+
+  next(value: T) {
+    notifySubscription(this._subscription, SignalType.next, value)
+  }
+
+  error(reason: any) {
+    notifySubscription(this._subscription, SignalType.error, reason)
+  }
+
+  complete() {
+    notifySubscription(this._subscription, SignalType.complete, undefined)
+  }
+}
+
 export class Observable<T> implements Subscribable<T> {
   static of(): Observable<any>
   static of<A>(a: A): Observable<A>
@@ -23,10 +158,9 @@ export class Observable<T> implements Subscribable<T> {
   static of<A, B, C>(a: A, b: B, c: C): Observable<A | B | C>
   static of<A, B, C, D>(a: A, b: B, c: C, d: D): Observable<A | B | C | D>
   static of<A, B, C, D, E>(a: A, b: B, c: C, d: D, e: E): Observable<A | B | C | D | E>
-  static of(...items: any[]) {
+  static of() {
     const C = typeof this === 'function' ? this : Observable
-
-    return new C(fromArray(items))
+    return new C(fromArray(arguments))
   }
 
   static from<A>(ish: FromInput<A>) {
@@ -44,7 +178,7 @@ export class Observable<T> implements Subscribable<T> {
         throw new TypeError(error)
       }
 
-      if (isObservable(observable) && observable.constructor === C) {
+      if (observable instanceof Observable && observable.constructor === C) {
         return observable as Observable<A>
       }
 
@@ -61,23 +195,23 @@ export class Observable<T> implements Subscribable<T> {
       return new C<A>(fromArray(ish))
     }
 
-    throw new TypeError(ish + ' is not observable')
+    throw new TypeError(error)
   }
 
-  private _source: Subscriber<T>
+  private _subscribe: Subscriber<T>
 
-  constructor(source: Subscriber<T>) {
+  constructor(_subscribe: Subscriber<T>) {
     // This check should stay in case if the ES6->ES5 transpiling is enabled.
     /* istanbul ignore next */
-    if (!isObservable(this)) {
+    if (!(this instanceof Observable)) {
       throw new TypeError('Observable cannot be called as a function')
     }
 
-    if (typeof source !== 'function') {
+    if (typeof _subscribe !== 'function') {
       throw new TypeError('Observable initializer must be a function')
     }
 
-    this._source = source
+    this._subscribe = _subscribe
   }
 
   subscribe(
@@ -96,7 +230,7 @@ export class Observable<T> implements Subscribable<T> {
       observer = next
     }
 
-    return new ObservableSubscription(observer, this._source)
+    return new ObservableSubscription(observer, this._subscribe)
   }
 
   pipe(): Observable<T>
@@ -154,15 +288,21 @@ export class Observable<T> implements Subscribable<T> {
     op8: Unary<G, H>,
     op9: Unary<H, I>
   ): I
-  pipe(...operators: Array<Unary<any, any>>): any {
-    return pipe.apply(null, operators)(this)
+  pipe(): any {
+    if (!arguments.length) {
+      return this
+    }
+
+    // tslint:disable-next-line no-this-assignment
+    let result: any = this
+    for (let i = 0; i < arguments.length; i += 1) {
+      result = arguments[i](result)
+    }
+
+    return result
   }
 
   [$$observable]() {
     return this
   }
-}
-
-function isObservable(x: any): x is Observable<any> {
-  return x instanceof Observable
 }

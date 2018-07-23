@@ -1,5 +1,4 @@
 import { Observable } from '../../core/Observable'
-import { pipe } from '../../helpers/pipe'
 import { catchError } from '../../operators/catchError'
 import { of } from '../of'
 import { createSubject } from '../subject'
@@ -78,7 +77,7 @@ describe('(Operator) catchError', () => {
     const [streamA, sinkA] = createSubject()
     const [streamB, sinkB] = createSubject()
     const result: any[] = []
-    const o = pipe(catchError(() => streamB))(streamA)
+    const o = streamA.pipe(catchError(() => streamB))
 
     const subscriber = {
       next: (x: any) => result.push(x),

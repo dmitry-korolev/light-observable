@@ -1,6 +1,5 @@
 import { Observable } from '../core/Observable'
-import { Subscribable } from '../core/types.h'
-import { Unary } from '../helpers/pipe'
+import { Subscribable, Unary } from '../core/types.h'
 import { combineLatest as combineLatestObservable } from '../observable/combineLatest'
 
 export function combineLatest<A>(): Unary<Subscribable<A>, Observable<[A]>>
