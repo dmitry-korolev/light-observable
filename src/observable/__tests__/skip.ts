@@ -5,7 +5,7 @@ import { of } from '../of'
 import { skip } from '../skip'
 import { createSubject } from '../subject'
 
-describe('skip', () => {
+describe('(Extra) skip', () => {
   commonTest(skip(2, of(1, 2, 3, 4)), skipOperator(2)(of(1, 2, 3, 4)), [3, 4])
 
   it('should skip n values', () => {
