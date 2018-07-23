@@ -1,19 +1,25 @@
+// tslint:disable no-floating-promises await-promise
 import { Observable } from '../../core/Observable'
 import { of } from '../../observable/of'
 import { catchError, forEach, timeout } from '../../operators'
 
-const drain = (o: Observable<any>) => {
+const drain = async (o: Observable<any>) => {
   const result: any[] = []
-  return o
-    .pipe(
-      timeout(100),
-      catchError((e) => of(e)),
-      forEach((x) => result.push(x))
-    )
-    .then(() => result)
+  o.pipe(
+    timeout(100),
+    catchError((e) => of(e)),
+    forEach((x) => result.push(x))
+  )
+
+  // Angry time hacks
+  await null
+  jest.runTimersToTime(100)
+  await null
+
+  return result
 }
 
-export const commonTest = (observable: any, curried: any = observable, ...args: any[]) => {
+export const commonTest = (observable: any, curried: any = observable, args?: any[]) => {
   it('should return Observable', () => {
     expect(observable).toBeInstanceOf(Observable)
 
@@ -23,18 +29,14 @@ export const commonTest = (observable: any, curried: any = observable, ...args: 
   })
 
   it('should produce same results', async () => {
-    const _resultA = drain(observable)
-    jest.runAllTimers()
-    const resultA = await _resultA
+    const resultA = await drain(observable)
 
     if (observable !== curried) {
-      const _resultB = drain(curried)
-      jest.runAllTimers()
-      const resultB = await _resultB
+      const resultB = await drain(curried)
       expect(resultA).toEqual(resultB)
     }
 
-    if (args.length > 0) {
+    if (args) {
       expect(resultA).toEqual(args)
     }
   })

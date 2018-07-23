@@ -1,12 +1,12 @@
 import { Observable } from '../../core/Observable'
 import { createSubject } from '../../observable'
+import { of } from '../../observable/of'
+import { commonTest } from '../testHelpers/commonTest'
 import { getTestObserver } from '../testHelpers/getTestObserver'
 import { transform } from '../transform'
 
-describe('(Operator) transform', () => {
-  it('returns a new observable', () => {
-    expect(transform(Observable.of(1), () => null)).toBeInstanceOf(Observable)
-  })
+describe('(Util) transform', () => {
+  commonTest(transform(of(1), () => null))
 
   it('calls the provided operation function once for each observed value', async () => {
     const operation = jest.fn()

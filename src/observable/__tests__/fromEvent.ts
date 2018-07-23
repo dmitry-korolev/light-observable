@@ -4,8 +4,6 @@ import { FakeEventTarget } from '../../helpers/testHelpers/fakeEventTarget'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { fromEvent } from '../fromEvent'
 
-jest.useFakeTimers()
-
 describe('(Extra) fromEvent', () => {
   describe('given an EventTarget', () => {
     commonTest(fromEvent(new FakeEventTarget(), 'test', false))

@@ -5,10 +5,8 @@ import { of } from '../of'
 import { createSubject } from '../subject'
 import { take } from '../take'
 
-jest.useFakeTimers()
-
 describe('(Extra) take', () => {
-  commonTest(take(2, of(1, 2, 3)), takeOperator(2)(of(1, 2, 3)))
+  commonTest(take(2, of(1, 2, 3)), takeOperator(2)(of(1, 2, 3)), [1, 2])
 
   it('should take only n values', () => {
     const [stream, sink] = createSubject()

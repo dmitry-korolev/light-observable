@@ -1,11 +1,9 @@
-import { Observable } from '../..'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { defer } from '../defer'
 
 describe('(Observable) defer', () => {
-  it('should return an instance of the global Observable by default', () => {
-    expect(defer(() => null)).toBeInstanceOf(Observable)
-  })
+  commonTest(defer(() => 1), undefined, [1])
 
   it('should not execute deferred action before subscription', () => {
     const action = jest.fn()

@@ -1,26 +1,22 @@
 import { Observable } from '../../core/Observable'
-import { merge } from '../../operators/merge'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { merge as mergeOperator } from '../../operators/merge'
+import { merge } from '../merge'
+import { of } from '../of'
 import { createSubject } from '../subject'
 
-describe('(Operator) merge', () => {
-  it('returns a new Observable', () => {
-    expect(merge(Observable.of(1))(Observable.of(1))).toBeInstanceOf(Observable)
-  })
-
-  it('emits all values from all input observables', async () => {
-    const outputValues: any[] = []
-
-    await new Promise((resolve) =>
-      merge(Observable.of(4, 5, 6), Observable.of(7, 8, 9))(Observable.of(1, 2, 3)).subscribe({
-        next(value) {
-          outputValues.push(value)
-        },
-        complete: resolve
-      })
-    )
-
-    expect(outputValues).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9])
-  })
+describe('(Extra) merge', () => {
+  const streamA = of(1, 2)
+  const streamB = of(3, 4)
+  const streamC = of(5, 6)
+  commonTest(merge(streamA, streamB, streamC), mergeOperator(streamB, streamC)(streamA), [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ])
 
   it('propagates errors from all inputs', async () => {
     const errorObservable = new Observable((observer) => observer.error('error'))
@@ -28,7 +24,7 @@ describe('(Operator) merge', () => {
     const errorHandler2 = jest.fn()
 
     await new Promise((resolve) =>
-      merge(Observable.of(1))(errorObservable).subscribe({
+      merge(Observable.of(1), errorObservable).subscribe({
         error(e) {
           errorHandler1(e)
           resolve()
@@ -39,7 +35,7 @@ describe('(Operator) merge', () => {
     expect(errorHandler1).toHaveBeenCalledWith('error')
 
     await new Promise((resolve) =>
-      merge(errorObservable)(Observable.of(1)).subscribe({
+      merge(errorObservable, Observable.of(1)).subscribe({
         error(e) {
           errorHandler2(e)
           resolve()
@@ -52,7 +48,7 @@ describe('(Operator) merge', () => {
 
   it('unsubscribes', () => {
     const [stream, sink] = createSubject()
-    const o = merge(stream)(Observable.of(1))
+    const o = merge(stream, Observable.of(1))
     const results: any[] = []
 
     const sub = o.subscribe((x: any) => results.push(x))

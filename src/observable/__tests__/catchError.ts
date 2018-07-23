@@ -1,18 +1,21 @@
 import { Observable } from '../../core/Observable'
-import { catchError } from '../../operators/catchError'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { catchError as catchErrorOperator } from '../../operators'
+import { catchError } from '../catchError'
+
 import { of } from '../of'
 import { createSubject } from '../subject'
 
-describe('(Operator) catchError', () => {
-  it('returns a new Observable', () => {
-    expect(catchError(() => of(1))(of(2))).toBeInstanceOf(Observable)
-  })
+describe('(Extra) catchError', () => {
+  commonTest(catchError(() => of(1, 2, 3), of(2)), catchErrorOperator(() => of(1, 2, 3))(of(2)), [
+    2
+  ])
 
   it('does not propagate errors from original stream', async () => {
     const errorHandler = jest.fn()
 
     await new Promise((resolve) =>
-      catchError(() => of(1))(new Observable((observer) => observer.error(new Error()))).subscribe({
+      catchError(() => of(1), new Observable((observer) => observer.error(new Error()))).subscribe({
         error: errorHandler,
         complete: resolve
       })
@@ -31,7 +34,7 @@ describe('(Operator) catchError', () => {
     const outputValues: any[] = []
 
     await new Promise((resolve) =>
-      catchError(() => of(3, 4, 5))(source).subscribe({
+      catchError(() => of(3, 4, 5), source).subscribe({
         next: (value) => {
           outputValues.push(value)
         },
@@ -48,7 +51,7 @@ describe('(Operator) catchError', () => {
     const map = jest.fn(() => of(1))
 
     await new Promise((resolve) =>
-      catchError(map)(source).subscribe({
+      catchError(map, source).subscribe({
         complete: resolve
       })
     )
@@ -62,7 +65,7 @@ describe('(Operator) catchError', () => {
     const outputValues: any[] = []
 
     await new Promise((resolve) =>
-      catchError(() => of(3, 4, 5))(source).subscribe({
+      catchError(() => of(3, 4, 5), source).subscribe({
         next: (value) => {
           outputValues.push(value)
         },
@@ -77,7 +80,7 @@ describe('(Operator) catchError', () => {
     const [streamA, sinkA] = createSubject()
     const [streamB, sinkB] = createSubject()
     const result: any[] = []
-    const o = streamA.pipe(catchError(() => streamB))
+    const o = catchError(() => streamB, streamA)
 
     const subscriber = {
       next: (x: any) => result.push(x),

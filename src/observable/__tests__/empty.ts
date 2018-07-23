@@ -1,7 +1,10 @@
+import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { EMPTY } from '../empty'
 
-describe('(Observable) empty', () => {
+describe('(Extra) empty', () => {
+  commonTest(EMPTY)
+
   it('should return empty observable', () => {
     const o = EMPTY
     const observer = getTestObserver()

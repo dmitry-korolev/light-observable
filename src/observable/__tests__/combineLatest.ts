@@ -1,4 +1,5 @@
 import { Observable } from '../../core/Observable'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { combineLatest as combineLatestCurried } from '../../operators/combineLatest'
 import { combineLatest } from '../combineLatest'
@@ -6,11 +7,8 @@ import { forEach } from '../forEach'
 import { of } from '../of'
 import { createSubject } from '../subject'
 
-describe('(Observable) combineLatest', () => {
-  it('returns a new Observable', () => {
-    expect(combineLatest(of(1, of(2)))).toBeInstanceOf(Observable)
-    expect(combineLatestCurried(of(1))(of(2))).toBeInstanceOf(Observable)
-  })
+describe('(Extra) combineLatest', () => {
+  commonTest(combineLatest(of(1), of(2)), combineLatestCurried(of(2))(of(1)), [[1, 2]])
 
   it('combines streams', () => {
     const [streamA, sinkA] = createSubject()

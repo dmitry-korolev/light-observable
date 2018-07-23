@@ -1,11 +1,9 @@
-import { Observable } from '../..'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { fromPromise } from '../fromPromise'
 
-describe('(Observable) fromPromise', () => {
-  it('should return an Observable', () => {
-    expect(fromPromise(Promise.resolve())).toBeInstanceOf(Observable)
-  })
+describe('(Extra) fromPromise', () => {
+  commonTest(fromPromise(Promise.resolve(1)), undefined, [1])
 
   it('should emit the resolved value and complete upon promise resolution', async () => {
     const observer = getTestObserver()

@@ -1,7 +1,7 @@
 import { Observable } from '../../core/Observable'
 import { createSubject } from '../subject'
 
-describe('(Observable) subject', () => {
+describe('(Extra) subject', () => {
   it('should return a tuple of an observable and a sink', () => {
     const [stream, sink] = createSubject()
 

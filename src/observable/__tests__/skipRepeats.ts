@@ -1,31 +1,20 @@
-import { skipRepeats } from '../../operators/skipRepeats'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { skipRepeats as skipRepeatsOperator } from '../../operators/skipRepeats'
+import { of } from '../of'
+import { skipRepeats } from '../skipRepeats'
 import { createSubject } from '../subject'
 
-describe('(Observable) skipRepeats', () => {
-  it('filters same values', () => {
-    const [stream, sink] = createSubject()
-    const o = stream.pipe(skipRepeats())
-    const result: any[] = []
-    o.subscribe((x) => result.push(x))
+describe('(Extra) skipRepeats', () => {
+  commonTest(skipRepeats(undefined, of(1, 1, 2, 2, 3)), skipRepeatsOperator()(of(1, 1, 2, 2, 3)), [
+    1,
+    2,
+    3
+  ])
 
-    sink.next(1)
-    sink.next(1)
-    sink.next(1)
-
-    expect(result).toEqual([1])
-
-    sink.next(2)
-    sink.next(2)
-    sink.next(3)
-    sink.next(3)
-
-    expect(result).toEqual([1, 2, 3])
-  })
-
-  describe('providing compare function', () => {
+  describe('given compare function', () => {
     test('always equals', () => {
       const [stream, sink] = createSubject()
-      const o = stream.pipe(skipRepeats(() => true))
+      const o = stream.pipe(skipRepeatsOperator(() => true))
       const result: any[] = []
       o.subscribe((x) => result.push(x))
 
@@ -41,7 +30,7 @@ describe('(Observable) skipRepeats', () => {
 
     test('never equals', () => {
       const [stream, sink] = createSubject()
-      const o = stream.pipe(skipRepeats(() => false))
+      const o = stream.pipe(skipRepeatsOperator(() => false))
       const result: any[] = []
       o.subscribe((x) => result.push(x))
 
@@ -58,7 +47,7 @@ describe('(Observable) skipRepeats', () => {
     test('deep compare', () => {
       const [stream, sink] = createSubject()
       const o = stream.pipe(
-        skipRepeats<any>((a, b) => {
+        skipRepeatsOperator<any>((a, b) => {
           const keysA = Object.keys(a)
           const keysB = Object.keys(b)
 

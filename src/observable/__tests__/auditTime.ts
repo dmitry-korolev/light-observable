@@ -1,21 +1,16 @@
-import { Observable } from '../../core/Observable'
-import { auditTime } from '../../operators/auditTime'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { auditTime as auditTimeOperator } from '../../operators/auditTime'
+import { auditTime } from '../auditTime'
 import { createSubject } from '../index'
 import { of } from '../of'
 
-jest.useFakeTimers()
-
-describe('(Operator) auditTime', () => {
-  it('should return Observable', () => {
-    const o = auditTime(100)(of(1))
-
-    expect(o).toBeInstanceOf(Observable)
-  })
+describe('(Extra) auditTime', () => {
+  commonTest(auditTime(10, of(1)), auditTimeOperator(10)(of(1)), [])
 
   it('should throttle the source stream', () => {
     const [stream, sink] = createSubject()
     const result: any[] = []
-    const throttledStream = stream.pipe(auditTime(100))
+    const throttledStream = auditTime(100, stream)
 
     throttledStream.subscribe((x) => result.push(x))
 

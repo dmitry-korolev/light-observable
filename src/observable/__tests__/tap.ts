@@ -1,11 +1,15 @@
 import { Observable } from '../../core/Observable'
-import { tap } from '../../operators/tap'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { tap as tapOperator } from '../../operators/tap'
+import { of } from '../of'
+import { tap } from '../tap'
 
-describe('(Operator) tap', () => {
+describe('(Extra) tap', () => {
+  commonTest(tap(() => undefined, of(1, 2)), tapOperator(() => undefined)(of(1, 2)), [1, 2])
   it('should perform side effect', () => {
     const resultA: any[] = []
     const resultB: any[] = []
-    const o = Observable.of(1, 2).pipe(tap<number>((x) => resultA.push(x * 2)))
+    const o = Observable.of(1, 2).pipe(tapOperator((x) => resultA.push(x * 2)))
 
     expect(resultA.length).toBe(0)
     expect(resultB.length).toBe(0)
@@ -19,7 +23,7 @@ describe('(Operator) tap', () => {
   it('should ignore return value', () => {
     const resultA: any[] = []
     const resultB: any[] = []
-    const o = Observable.of(1, 2).pipe(tap<number>((x) => x * 2))
+    const o = Observable.of(1, 2).pipe(tapOperator((x) => x * 2))
 
     expect(resultA.length).toBe(0)
     expect(resultB.length).toBe(0)

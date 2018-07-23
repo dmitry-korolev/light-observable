@@ -1,8 +1,6 @@
 import { throttleEnd } from '../throttleEnd'
 
-jest.useFakeTimers()
-
-describe('utils/function/throttleEnd', () => {
+describe('(Util) throttle', () => {
   it('should call function at most once after "wait" ms at "wait" ms period', () => {
     let context
     const f = jest.fn(function(this: any) {
