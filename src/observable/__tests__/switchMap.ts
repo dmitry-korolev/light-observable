@@ -1,17 +1,14 @@
 import { Observable } from '../../core/Observable'
-import { Observer } from '../../core/types.h'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { emitAfterTime } from '../../helpers/testHelpers/emitAfterTime'
 import { switchMap as switchMapOperator } from '../../operators/switchMap'
+import { of } from '../of'
 import { switchMap } from '../switchMap'
 
-jest.useFakeTimers()
-
-const emitAfterTime = <T>(observer: Observer<T>, ms: number, value: T) =>
-  setTimeout(() => observer.next(value), ms)
-
-describe('(Operator) switchMap', () => {
-  it('returns a new Observable', () => {
-    expect(switchMap((x) => x, Observable.of())).toBeInstanceOf(Observable)
-  })
+describe('(Extra) switchMap', () => {
+  const fn = (x: number) => of(x * 2, x * 3)
+  const stream = of(1, 2, 3)
+  commonTest(switchMap(fn, stream), switchMapOperator(fn)(stream), [2, 3, 4, 6, 6, 9])
 
   it('should apply mapping function with each value', () => {
     const map = jest.fn((x) => Observable.of(x))

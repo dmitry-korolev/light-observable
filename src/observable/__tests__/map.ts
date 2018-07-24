@@ -1,23 +1,11 @@
-import { Observable } from '../../core/Observable'
-import { map } from '../../operators/map'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { map as mapOperator } from '../../operators/map'
+import { map } from '../map'
+import { of } from '../of'
 
-describe('(Operator) map', () => {
-  it('returns a new Observable', () => {
-    expect(map((x) => x)(Observable.of(1))).toBeInstanceOf(Observable)
-  })
+describe('(Extra) map', () => {
+  const fn = (x: number) => x * 2
+  const stream = of(1, 2, 3)
 
-  it('emits the result of the operation applied to each input element', async () => {
-    const outputValues: any[] = []
-
-    await new Promise((resolve) => {
-      map((x: number) => x * 2)(Observable.of(1, 2, 3)).subscribe({
-        next(value) {
-          outputValues.push(value)
-        },
-        complete: resolve
-      })
-    })
-
-    expect(outputValues).toEqual([2, 4, 6])
-  })
+  commonTest(map(fn, stream), mapOperator(fn)(stream), [2, 4, 6])
 })

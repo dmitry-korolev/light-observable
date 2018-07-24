@@ -1,29 +1,22 @@
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { Observable } from '../../index'
-import { timeout } from '../../operators/timeout'
+import { timeout as timeoutOperator } from '../../operators/timeout'
 import { of } from '../of'
+import { timeout } from '../timeout'
 
-jest.useFakeTimers()
-
-describe('(Operator) timeout', () => {
-  it('should return Observable', () => {
-    const o = timeout(100)(of(1))
-
-    expect(o).toBeInstanceOf(Observable)
-  })
+describe('(Extra) timeout', () => {
+  commonTest(timeout(50, of(1)), timeoutOperator(50)(of(1)), [1])
 
   it('should forward argument on next', () => {
-    const o = timeout(100)(of(1, 2))
-    const result: any[] = []
-    const observer = {
-      next: (x: any) => result.push(x),
-      error: jest.fn()
-    }
+    const o = timeout(100, of(1, 2))
+    const observer = getTestObserver()
 
     o.subscribe(observer)
 
     jest.runTimersToTime(150)
 
-    expect(result).toEqual([1, 2])
+    expect(observer.next.mock.calls).toEqual([[1], [2]])
     expect(observer.error).not.toBeCalled()
   })
 
@@ -34,7 +27,7 @@ describe('(Operator) timeout', () => {
         observer.next(1)
         observer.complete()
       }, 200)
-    }).pipe(timeout(100))
+    }).pipe(timeoutOperator(100))
 
     o.subscribe({
       error(reason) {
@@ -51,7 +44,7 @@ describe('(Operator) timeout', () => {
       setTimeout(() => {
         observer.complete()
       }, 100)
-    }).pipe(timeout(200))
+    }).pipe(timeoutOperator(200))
 
     const obs = {
       complete: jest.fn(),
@@ -71,7 +64,7 @@ describe('(Operator) timeout', () => {
       setTimeout(() => {
         observer.error(new Error('Error from stream'))
       }, 100)
-    }).pipe(timeout(200))
+    }).pipe(timeoutOperator(200))
 
     let error: any
 

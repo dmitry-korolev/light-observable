@@ -11,7 +11,7 @@ export const catchError = <T>(
   return new C<T>((observer) => {
     let subscription: Subscription
 
-    stream.subscribe({
+    subscription = stream.subscribe({
       start(s) {
         subscription = s
       },
@@ -22,7 +22,7 @@ export const catchError = <T>(
         observer.complete()
       },
       error(reason) {
-        fn(reason).subscribe({
+        subscription = fn(reason).subscribe({
           start(s) {
             subscription = s
           },

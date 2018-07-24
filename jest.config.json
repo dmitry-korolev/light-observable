@@ -32,6 +32,7 @@
     "json",
     "lcov"
   ],
+  "timers": "fake",
   "globals": {
     "process.env.NODE_ENV": "test",
     "ts-jest": {

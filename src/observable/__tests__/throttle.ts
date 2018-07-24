@@ -1,12 +1,15 @@
-import { throttleTime } from '../../operators/throttleTime'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { throttleTime as throttleTimeOperator } from '../../operators/throttleTime'
+import { of } from '../of'
 import { createSubject } from '../subject'
+import { throttleTime } from '../throttleTime'
 
-jest.useFakeTimers()
+describe('(Extra) throttle', () => {
+  commonTest(throttleTime(50, of(1, 2, 3)), throttleTimeOperator(50)(of(1, 2, 3)), [1])
 
-describe('(Operator) throttle', () => {
   it('throttles function', () => {
     const [stream, sink] = createSubject()
-    const throttledStream = throttleTime(1000)(stream)
+    const throttledStream = throttleTime(1000, stream)
     const fn = jest.fn()
 
     throttledStream.subscribe(fn)
@@ -32,7 +35,7 @@ describe('(Operator) throttle', () => {
 
   it('passes disposer', () => {
     const [stream, sink] = createSubject()
-    const throttledStream = throttleTime(10)(stream)
+    const throttledStream = throttleTime(10, stream)
     const fn = jest.fn()
     const disposer = throttledStream.subscribe(fn)
 

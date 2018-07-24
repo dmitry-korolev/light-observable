@@ -1,24 +1,11 @@
-import { Observable } from '../../core/Observable'
-import { filter } from '../../operators/filter'
+import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { filter as filterOperator } from '../../operators/filter'
+import { filter } from '../filter'
 import { of } from '../of'
 
-describe('(Operator) filter', () => {
-  it('returns a new Observable', () => {
-    expect(filter(() => true)(of(1))).toBeInstanceOf(Observable)
-  })
+describe('(Extra) filter', () => {
+  const fn = (x: number) => x % 2 === 0
+  const source = of(1, 2, 3, 4, 5)
 
-  it('emits only the input values for which the filtering operation returns truthy', async () => {
-    const outputValues: any[] = []
-
-    await new Promise((resolve) => {
-      filter((x: number) => x % 2 === 0)(of(1, 2, 3, 4)).subscribe({
-        next(value) {
-          outputValues.push(value)
-        },
-        complete: resolve
-      })
-    })
-
-    expect(outputValues).toEqual([2, 4])
-  })
+  commonTest(filter(fn, source), filterOperator(fn)(source), [2, 4])
 })

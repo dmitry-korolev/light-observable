@@ -5,10 +5,8 @@ import { of } from '../of'
 import { sample } from '../sample'
 import { createSubject } from '../subject'
 
-jest.useFakeTimers()
-
-describe('(Observable) sample', () => {
-  commonTest(sample(of(1), of(2)), sampleOperator(of(1))(of(2)))
+describe('(Extra) sample', () => {
+  commonTest(sample(of(1), of(2)), sampleOperator(of(1))(of(2)), [])
 
   it('should emit on signal emit', () => {
     const [streamA, sinkA] = createSubject()
