@@ -1,5 +1,4 @@
 import { Observable } from '../../core/Observable'
-import { Observer } from '../../core/types.h'
 import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { emitAfterTime } from '../../helpers/testHelpers/emitAfterTime'
 import { switchMap as switchMapOperator } from '../../operators/switchMap'

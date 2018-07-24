@@ -8,7 +8,7 @@ import { switchMapTo } from '../switchMapTo'
 const emitAfterTime = <T>(observer: Observer<T>, ms: number, value: T) =>
   setTimeout(() => observer.next(value), ms)
 
-describe('(Extra) switchMap', () => {
+describe('(Extra) switchMapTo', () => {
   commonTest(switchMapTo(of(1, 2), of(3, 4)), switchMapToOperator(of(1, 2))(of(3, 4)), [1, 2, 1, 2])
 
   it('should use provided value', async () => {
