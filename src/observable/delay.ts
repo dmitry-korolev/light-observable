@@ -15,7 +15,7 @@ export const delay = <T>(wait: number, stream: Subscribable<T>): Observable<T> =
     const timers: { [K: number]: ReturnType<typeof setTimeout> } = {}
     let subscription: Subscription
 
-    stream.subscribe({
+    subscription = stream.subscribe({
       start(s) {
         subscription = s
       },
