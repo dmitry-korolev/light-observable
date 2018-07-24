@@ -1,13 +1,10 @@
-import { Observable } from '../..'
-import { Observer } from '../../core/types.h'
+import { Observable } from '../../core/Observable'
 import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { emitAfterTime } from '../../helpers/testHelpers/emitAfterTime'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { delay as delayOperator } from '../../operators/delay'
 import { delay } from '../delay'
 import { of } from '../of'
-
-const emitAfterTime = <T>(observer: Observer<T>, ms: number, value: T) =>
-  setTimeout(() => observer.next(value), ms)
 
 describe('(Extra) delay', () => {
   commonTest(delay(10, of(1, 2, 3)), delayOperator(10)(of(1, 2, 3)), [1, 2, 3])
