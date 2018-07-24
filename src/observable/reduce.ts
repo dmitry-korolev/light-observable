@@ -7,7 +7,7 @@ export const reduce = <T, R>(
   initial: R,
   stream: Subscribable<T>
 ): Promise<R> => {
-  let result: R
+  let result: R = initial
 
   return forEach((x) => (result = x), scan(fn, initial, stream)).then(() => result)
 }

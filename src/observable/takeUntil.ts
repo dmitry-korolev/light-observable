@@ -6,7 +6,6 @@ export const takeUntil = <T>(signal: Subscribable<any>, stream: Subscribable<T>)
   const C = getSpecies(stream)
 
   return new C((observer) => {
-    const streamSubscription = stream.subscribe(observer)
     const signalSubscription = signal.subscribe({
       next() {
         observer.complete()
@@ -15,6 +14,12 @@ export const takeUntil = <T>(signal: Subscribable<any>, stream: Subscribable<T>)
         observer.error(reason)
       }
     })
+
+    if (observer.closed) {
+      return undefined
+    }
+
+    const streamSubscription = stream.subscribe(observer)
 
     return () => {
       streamSubscription.unsubscribe()

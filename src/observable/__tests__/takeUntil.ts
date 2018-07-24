@@ -5,6 +5,7 @@ import { emitAfterTime } from '../../helpers/testHelpers/emitAfterTime'
 import { errorAfterTime } from '../../helpers/testHelpers/errorAfterTime'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { takeUntil as takeUntilOperator } from '../../operators/takeUntil'
+import { of } from '../of'
 import { takeUntil } from '../takeUntil'
 
 describe('(Extra) takeUntil', () => {
@@ -21,6 +22,14 @@ describe('(Extra) takeUntil', () => {
   })
 
   commonTest(takeUntil(signal, stream), takeUntilOperator(signal)(stream), [1, 2, 3])
+
+  it('returns empty observable of signal emitted before source', () => {
+    const observer = getTestObserver()
+    takeUntil(of(1), of(1, 2, 3)).subscribe(observer)
+
+    expect(observer.next).not.toBeCalled()
+    expect(observer.complete).toBeCalled()
+  })
 
   it('should propagate error from signal stream', () => {
     const errorSource = new Observable(errorAfterTime(50, 'error'))
