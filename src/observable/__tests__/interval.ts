@@ -1,6 +1,6 @@
 import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
-import { take } from '../../operators'
+import { take } from '../../operators/take'
 import { interval } from '../interval'
 
 describe('(Extra) interval', () => {

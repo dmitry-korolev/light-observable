@@ -1,7 +1,7 @@
 import { Observable } from '../../core/Observable'
 import { commonTest } from '../../helpers/testHelpers/commonTest'
-import { startWith } from '../../operators'
 import { concat as concatOperator } from '../../operators/concat'
+import { startWith } from '../../operators/startWith'
 import { concat } from '../concat'
 import { of } from '../of'
 

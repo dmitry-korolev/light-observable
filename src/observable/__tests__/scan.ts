@@ -1,6 +1,6 @@
 import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
-import { scan as scanOperator } from '../../operators'
+import { scan as scanOperator } from '../../operators/scan'
 import { of } from '../of'
 import { scan } from '../scan'
 

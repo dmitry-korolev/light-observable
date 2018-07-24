@@ -1,6 +1,6 @@
 import { Observable } from '../../core/Observable'
 import { commonTest } from '../../helpers/testHelpers/commonTest'
-import { catchError as catchErrorOperator } from '../../operators'
+import { catchError as catchErrorOperator } from '../../operators/catchError'
 import { catchError } from '../catchError'
 
 import { of } from '../of'

@@ -1,5 +1,5 @@
 import { Observable } from '../../core/Observable'
-import { forEach as forEachOperator } from '../../operators'
+import { forEach as forEachOperator } from '../../operators/forEach'
 import { forEach } from '../forEach'
 import { of } from '../of'
 

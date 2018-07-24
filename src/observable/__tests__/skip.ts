@@ -1,6 +1,6 @@
 import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
-import { skip as skipOperator } from '../../operators'
+import { skip as skipOperator } from '../../operators/skip'
 import { of } from '../of'
 import { skip } from '../skip'
 import { createSubject } from '../subject'

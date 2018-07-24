@@ -1,5 +1,5 @@
 import { commonTest } from '../../helpers/testHelpers/commonTest'
-import { filter as filterOperator } from '../../operators'
+import { filter as filterOperator } from '../../operators/filter'
 import { filter } from '../filter'
 import { of } from '../of'
 

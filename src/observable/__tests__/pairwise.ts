@@ -1,5 +1,5 @@
 import { commonTest } from '../../helpers/testHelpers/commonTest'
-import { pairwise as pairwiseOperator } from '../../operators'
+import { pairwise as pairwiseOperator } from '../../operators/pairwise'
 import { of } from '../of'
 import { pairwise } from '../pairwise'
 

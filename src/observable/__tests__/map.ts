@@ -1,5 +1,5 @@
 import { commonTest } from '../../helpers/testHelpers/commonTest'
-import { map as mapOperator } from '../../operators'
+import { map as mapOperator } from '../../operators/map'
 import { map } from '../map'
 import { of } from '../of'
 

@@ -1,6 +1,6 @@
 import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
-import { mergeMapTo as mergeMapToOperator } from '../../operators'
+import { mergeMapTo as mergeMapToOperator } from '../../operators/mergeMapTo'
 import { mergeMapTo } from '../mergeMapTo'
 import { of } from '../of'
 
