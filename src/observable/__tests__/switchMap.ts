@@ -1,12 +1,10 @@
 import { Observable } from '../../core/Observable'
 import { Observer } from '../../core/types.h'
 import { commonTest } from '../../helpers/testHelpers/commonTest'
+import { emitAfterTime } from '../../helpers/testHelpers/emitAfterTime'
 import { switchMap as switchMapOperator } from '../../operators/switchMap'
 import { of } from '../of'
 import { switchMap } from '../switchMap'
-
-const emitAfterTime = <T>(observer: Observer<T>, ms: number, value: T) =>
-  setTimeout(() => observer.next(value), ms)
 
 describe('(Extra) switchMap', () => {
   const fn = (x: number) => of(x * 2, x * 3)

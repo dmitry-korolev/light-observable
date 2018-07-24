@@ -1,7 +1,10 @@
-import { Observable } from '..'
+import { Observable } from '../core/Observable'
 import { FromInput, Subscribable } from '../core/types.h'
-import { switchMap as switchMapObservable } from '../observable'
+import { map } from '../observable/map'
+import { switchAll } from '../observable/switchAll'
 
 export const switchMap = <T, R>(fn: (value: T) => FromInput<R>) => (
   stream: Subscribable<T>
-): Observable<R> => switchMapObservable(fn, stream)
+): Observable<R> => {
+  return switchAll(map(fn, stream))
+}
