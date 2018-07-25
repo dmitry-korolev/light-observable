@@ -48,3 +48,6 @@ compiled
 # Private data
 .npmrc
 /index.d.ts
+
+# other
+/docs/README.md
