@@ -20,10 +20,11 @@ Standard implementation of Observables for JavaScript. Requires a Promise polyfi
 
 ## Features
 * **Standard**: fully compatible with the [Observable Proposal](https://github.com/tc39/proposal-observable).
-* **Tiny**: Observable itself is ~[1 kilobyte in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
+* **Tiny**: Observable itself is ~[1 kilobyte in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package). **The whole library including ~80 operators and observable utilities is less than 6kb in gzip.**
 * **Type-safe**: written in typescript.
-* **Reliable**: 100% code coverage.
+* **Reliable**: 100% unit test coverage.
 * **Moderate**: only standard methods are included to the Observable and Observable prototype + special `Observable.prototype.pipe` method that allows usage of pipeable operators.
+* **Documented**: [see the docs](https://dmitry-korolev.github.io/light-observable/)!
 
 ## Installation
 ```bash
@@ -45,27 +46,50 @@ o.subscribe(console.log)
 // > 2
 ```
 
-## Extras
-#### `Observable.prototype.pipe`
-`light-observable` has a special `pipe` method, which is similar to any other pipe implementation. It applies provided functions from left to right. It allows usage of any function, including pipeable RxJS operators (although you **have to** pass RxJS `from` method first). This is the only non-standard method in `light-observable` Observable implementation.
-```js
-import { of } from 'light-observable/observable'
-import { from } from 'rxjs'
-import { filter, map } from 'rxjs/operators'
-
-of(1, 2, 3, 4)
-    .pipe(
-      from,
-      filter(x => x > 2),
-      map(x => x * 2)
-    )
-    .subscribe(console.log)
-
-// => 6, 8
-```
+See [Observable proposal](https://github.com/tc39/proposal-observable) for other examples.
 
 ## Motivation
 Because sometimes you just don't need all these tons of classes, dozens of schedulers and countless operators. Only some of them. Someday.
+
+## Extras
+[See the docs](https://dmitry-korolev.github.io/light-observable/) to learn about ~80 operators and observable utilities included in this library.
+
+### Consume
+* [forEach](https://dmitry-korolev.github.io/light-observable/consume/forEach.html)
+  
+### Create
+* [of](https://dmitry-korolev.github.io/light-observable/create/of.html)
+* [from](https://dmitry-korolev.github.io/light-observable/create/from.html)
+* [fromEvent](https://dmitry-korolev.github.io/light-observable/create/fromEvent.html)
+* [fromPromise](https://dmitry-korolev.github.io/light-observable/create/fromPromise.html)
+* [interval](https://dmitry-korolev.github.io/light-observable/create/interval.html)
+* [defer](https://dmitry-korolev.github.io/light-observable/create/defer.html)
+* [empty](https://dmitry-korolev.github.io/light-observable/create/empty.html)
+
+### Transform
+* [map](https://dmitry-korolev.github.io/light-observable/transform/map.html)
+* [mapTo](https://dmitry-korolev.github.io/light-observable/transform/mapTo.html)
+
+### Filter
+* [filter](https://dmitry-korolev.github.io/light-observable/filter/filter.html)
+
+### Combine
+* [concat](https://dmitry-korolev.github.io/light-observable/combine/concat.html)
+* [combineLatest](https://dmitry-korolev.github.io/light-observable/combine/combineLatest.html)
+* [merge](https://dmitry-korolev.github.io/light-observable/combine/merge.html)
+
+### Combine higher-order streams
+* [mergeAll](https://dmitry-korolev.github.io/light-observable/hos/mergeAll.html)
+
+### Handle errors
+* [catchError](https://dmitry-korolev.github.io/light-observable/errors/catchError.html)
+
+### Rate limit
+* [auditTime](https://dmitry-korolev.github.io/light-observable/limiting/auditTime.html)
+* [debounceTime](https://dmitry-korolev.github.io/light-observable/limiting/debounceTime.html)
+
+### Delay
+* [delay](https://dmitry-korolev.github.io/light-observable/delay/delay.html)
 
 ## Notice on interoperability
 RxJS 6 doesn't use 'symbol-observable' polyfill. This may cause some weird issues with interop depending on the import order. It is recommended to install and import `symbol-observable` polyfill before RxJS.
