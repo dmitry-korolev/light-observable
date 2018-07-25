@@ -494,10 +494,11 @@
 <h2 id="features">Features</h2>
 <ul>
 <li><strong>Standard</strong>: fully compatible with the <a href="https://github.com/tc39/proposal-observable" target="_blank">Observable Proposal</a>.</li>
-<li><strong>Tiny</strong>: Observable itself is ~<a href=".size-limit.js">1 kilobyte in gzip</a> (including <a href="https://github.com/benlesh/symbol-observable" target="_blank">symbol-observable</a> package).</li>
+<li><strong>Tiny</strong>: Observable itself is ~<a href=".size-limit.js">1 kilobyte in gzip</a> (including <a href="https://github.com/benlesh/symbol-observable" target="_blank">symbol-observable</a> package). <strong>The whole library including ~80 operators and observable utilities is less than 6kb in gzip.</strong></li>
 <li><strong>Type-safe</strong>: written in typescript.</li>
-<li><strong>Reliable</strong>: 100% code coverage.</li>
+<li><strong>Reliable</strong>: 100% unit test coverage.</li>
 <li><strong>Moderate</strong>: only standard methods are included to the Observable and Observable prototype + special <code>Observable.prototype.pipe</code> method that allows usage of pipeable operators.</li>
+<li><strong>Documented</strong>: <a href="https://dmitry-korolev.github.io/light-observable/" target="_blank">see the docs</a>!</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <pre><code class="lang-bash">npm install light-observable
@@ -515,25 +516,57 @@ o.subscribe(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">// &gt; 1</span>
 <span class="hljs-comment">// &gt; 2</span>
 </code></pre>
-<h2 id="extras">Extras</h2>
-<h4 id="observableprototypepipe"><code>Observable.prototype.pipe</code></h4>
-<p><code>light-observable</code> has a special <code>pipe</code> method, which is similar to any other pipe implementation. It applies provided functions from left to right. It allows usage of any function, including pipeable RxJS operators (although you <strong>have to</strong> pass RxJS <code>from</code> method first). This is the only non-standard method in <code>light-observable</code> Observable implementation.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">import</span> { <span class="hljs-keyword">of</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;light-observable/observable&apos;</span>
-<span class="hljs-keyword">import</span> { <span class="hljs-keyword">from</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;rxjs&apos;</span>
-<span class="hljs-keyword">import</span> { filter, map } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;rxjs/operators&apos;</span>
-
-<span class="hljs-keyword">of</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)
-    .pipe(
-      <span class="hljs-keyword">from</span>,
-      filter(x =&gt; x &gt; <span class="hljs-number">2</span>),
-      map(x =&gt; x * <span class="hljs-number">2</span>)
-    )
-    .subscribe(<span class="hljs-built_in">console</span>.log)
-
-<span class="hljs-comment">// =&gt; 6, 8</span>
-</code></pre>
+<p>See <a href="https://github.com/tc39/proposal-observable" target="_blank">Observable proposal</a> for other examples.</p>
 <h2 id="motivation">Motivation</h2>
 <p>Because sometimes you just don&apos;t need all these tons of classes, dozens of schedulers and countless operators. Only some of them. Someday.</p>
+<h2 id="extras">Extras</h2>
+<p><a href="https://dmitry-korolev.github.io/light-observable/" target="_blank">See the docs</a> to learn about ~80 operators and observable utilities included in this library.</p>
+<h3 id="consume">Consume</h3>
+<ul>
+<li><a href="https://dmitry-korolev.github.io/light-observable/consume/forEach.html" target="_blank">forEach</a></li>
+</ul>
+<h3 id="create">Create</h3>
+<ul>
+<li><a href="https://dmitry-korolev.github.io/light-observable/create/of.html" target="_blank">of</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/create/from.html" target="_blank">from</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/create/fromEvent.html" target="_blank">fromEvent</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/create/fromPromise.html" target="_blank">fromPromise</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/create/interval.html" target="_blank">interval</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/create/defer.html" target="_blank">defer</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/create/empty.html" target="_blank">empty</a></li>
+</ul>
+<h3 id="transform">Transform</h3>
+<ul>
+<li><a href="https://dmitry-korolev.github.io/light-observable/transform/map.html" target="_blank">map</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/transform/mapTo.html" target="_blank">mapTo</a></li>
+</ul>
+<h3 id="filter">Filter</h3>
+<ul>
+<li><a href="https://dmitry-korolev.github.io/light-observable/filter/filter.html" target="_blank">filter</a></li>
+</ul>
+<h3 id="combine">Combine</h3>
+<ul>
+<li><a href="https://dmitry-korolev.github.io/light-observable/combine/concat.html" target="_blank">concat</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/combine/combineLatest.html" target="_blank">combineLatest</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/combine/merge.html" target="_blank">merge</a></li>
+</ul>
+<h3 id="combine-higher-order-streams">Combine higher-order streams</h3>
+<ul>
+<li><a href="https://dmitry-korolev.github.io/light-observable/hos/mergeAll.html" target="_blank">mergeAll</a></li>
+</ul>
+<h3 id="handle-errors">Handle errors</h3>
+<ul>
+<li><a href="https://dmitry-korolev.github.io/light-observable/errors/catchError.html" target="_blank">catchError</a></li>
+</ul>
+<h3 id="rate-limit">Rate limit</h3>
+<ul>
+<li><a href="https://dmitry-korolev.github.io/light-observable/limiting/auditTime.html" target="_blank">auditTime</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/limiting/debounceTime.html" target="_blank">debounceTime</a></li>
+</ul>
+<h3 id="delay">Delay</h3>
+<ul>
+<li><a href="https://dmitry-korolev.github.io/light-observable/delay/delay.html" target="_blank">delay</a></li>
+</ul>
 <h2 id="notice-on-interoperability">Notice on interoperability</h2>
 <p>RxJS 6 doesn&apos;t use &apos;symbol-observable&apos; polyfill. This may cause some weird issues with interop depending on the import order. It is recommended to install and import <code>symbol-observable</code> polyfill before RxJS.</p>
 <p>See the <a href="https://github.com/benlesh/symbol-observable/issues/38" target="_blank">issue</a> for details.</p>
@@ -592,7 +625,7 @@ limitations under the License.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2018-07-25T14:33:26.792Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-25T14:33:28.063Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2018-07-25T14:54:03.870Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-25T14:54:05.250Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -600,6 +633,10 @@ limitations under the License.
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
