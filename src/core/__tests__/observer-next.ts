@@ -1,5 +1,5 @@
 import { Observable } from '../Observable'
-import { Observer } from '../types.h'
+import { SubscriptionObserver } from '../types.h'
 import { getObserver, testMethodProperty } from './utils'
 
 describe('(Core) observer.next', () => {
@@ -47,7 +47,7 @@ describe('(Core) observer.next', () => {
 
   it('does not forward when the subscription is cancelled', () => {
     let count = 0
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     const subscription = new Observable((x) => {
       observer = x
     }).subscribe({
@@ -61,7 +61,7 @@ describe('(Core) observer.next', () => {
   })
 
   it('remains closed if the subscription is cancelled from "next"', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     const subscription = new Observable((x) => {
       observer = x
     }).subscribe({
@@ -75,7 +75,7 @@ describe('(Core) observer.next', () => {
 
   it('forwards arguments', async () => {
     const values: number[] = []
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     new Observable<number>((x) => {
       observer = x
       x.next(1)
@@ -92,7 +92,7 @@ describe('(Core) observer.next', () => {
   })
 
   it('queues if the observer is running', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     const values: number[] = []
     new Observable<number>((x) => {
       observer = x

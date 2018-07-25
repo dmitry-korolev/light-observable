@@ -1,8 +1,8 @@
 import { Observable } from '../core/Observable'
-import { Observer } from '../core/types.h'
+import { SubscriptionObserver } from '../core/types.h'
 
-export const createSubject = <T>(): [Observable<T>, Observer<T>] => {
-  const observers = new Set<Observer<T>>()
+export const createSubject = <T>(): [Observable<T>, SubscriptionObserver<T>] => {
+  const observers = new Set<SubscriptionObserver<T>>()
   let completed = false
 
   const observable = new Observable<T>((observer) => {

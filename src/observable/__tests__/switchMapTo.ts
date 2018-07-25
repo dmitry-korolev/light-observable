@@ -1,11 +1,11 @@
 import { Observable } from '../../core/Observable'
-import { Observer } from '../../core/types.h'
+import { SubscriptionObserver } from '../../core/types.h'
 import { commonTest } from '../../helpers/testHelpers/commonTest'
 import { switchMapTo as switchMapToOperator } from '../../operators/switchMapTo'
 import { of } from '../of'
 import { switchMapTo } from '../switchMapTo'
 
-const emitAfterTime = <T>(observer: Observer<T>, ms: number, value: T) =>
+const emitAfterTime = <T>(observer: SubscriptionObserver<T>, ms: number, value: T) =>
   setTimeout(() => observer.next(value), ms)
 
 describe('(Extra) switchMapTo', () => {

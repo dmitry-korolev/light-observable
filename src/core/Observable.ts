@@ -3,12 +3,12 @@ import $$observable from 'symbol-observable'
 import {
   Disposer,
   FromInput,
-  Observer,
   PartialObserver,
   SignalType,
   Subscribable,
   Subscriber,
   Subscription,
+  SubscriptionObserver,
   Unary
 } from './types.h'
 
@@ -106,7 +106,7 @@ class ObservableSubscription<T> implements Subscription {
       observer.start(this)
     }
 
-    const subscriptionObserver = new SubscriptionObserver(this)
+    const subscriptionObserver = new ConcreteObserver(this)
 
     try {
       this._disposer = source(subscriptionObserver)
@@ -129,7 +129,7 @@ class ObservableSubscription<T> implements Subscription {
   }
 }
 
-class SubscriptionObserver<T> implements Observer<T> {
+class ConcreteObserver<T> implements SubscriptionObserver<T> {
   _subscription: ObservableSubscription<T>
 
   constructor(subscription: ObservableSubscription<T>) {

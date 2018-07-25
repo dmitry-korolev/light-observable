@@ -1,11 +1,11 @@
 import { Observable } from '../core/Observable'
-import { Observer, Subscribable } from '../core/types.h'
+import { Subscribable, SubscriptionObserver } from '../core/types.h'
 import { transform } from '../helpers/transform'
 
 const scanFn = <T, R>(fn: (result: R, value: T) => R, initial: R) => {
   let result: R = initial
 
-  return (observer: Observer<R>, value: T) => {
+  return (observer: SubscriptionObserver<R>, value: T) => {
     result = fn(result, value)
     observer.next(result)
   }

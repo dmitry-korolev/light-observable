@@ -1,5 +1,5 @@
 import { Observable } from '../core/Observable'
-import { Observer, Subscribable } from '../core/types.h'
+import { Subscribable, SubscriptionObserver } from '../core/types.h'
 import { transform } from '../helpers/transform'
 
 const defaultEquals = <T>(a: T, b: T) => a === b
@@ -8,7 +8,7 @@ const skip = <T>(equals: (a: T, b: T) => boolean) => {
   let init = true
   let oldValue: T
 
-  return (observer: Observer<T>, value: T) => {
+  return (observer: SubscriptionObserver<T>, value: T) => {
     if (init) {
       init = false
       oldValue = value

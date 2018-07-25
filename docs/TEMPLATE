@@ -1,0 +1,25 @@
+# ``
+```typescript
+type 
+```
+
+```
+MARBLES EXAMPLE
+```
+
+DESCRIPTION
+```typescript
+import {  } from 'light-observable/observable'
+import {  } from 'light-observable/operators'
+
+const stream =  
+
+stream.subscribe(console.log)
+/*
+ -> 1
+*/
+```
+
+Also available as an Observable creator:
+```typescript
+```
