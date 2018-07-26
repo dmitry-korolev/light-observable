@@ -1,5 +1,5 @@
 import { Observable } from '../Observable'
-import { Observer, Subscription } from '../types.h'
+import { SubscriptionObserver, Subscription } from '../types.h'
 import { testMethodProperty } from './utils'
 
 describe('(Core) from', () => {
@@ -83,7 +83,7 @@ describe('(Core) from', () => {
     })
 
     it('returns an observable wrapping @@observable result', () => {
-      let observer: Observer<any>
+      let observer: SubscriptionObserver<any>
       let cleanupCalled = false
       const inner = {
         subscribe(x: any) {

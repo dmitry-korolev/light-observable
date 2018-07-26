@@ -1,10 +1,10 @@
-import { Observer } from '../../core/types.h'
+import { SubscriptionObserver } from '../../core/types.h'
 
-export function completeAfterTime(ms: number): (observer: Observer<any>) => void
-export function completeAfterTime(observer: Observer<any>, ms: number): void
-export function completeAfterTime(observerOrMs: Observer<any> | number, ms?: number) {
+export function completeAfterTime(ms: number): (observer: SubscriptionObserver<any>) => void
+export function completeAfterTime(observer: SubscriptionObserver<any>, ms: number): void
+export function completeAfterTime(observerOrMs: SubscriptionObserver<any> | number, ms?: number) {
   if (typeof observerOrMs === 'number') {
-    return (observer: Observer<any>) => {
+    return (observer: SubscriptionObserver<any>) => {
       setTimeout(() => observer.complete(), observerOrMs)
     }
   }

@@ -1,5 +1,5 @@
 import { Observable } from '../Observable'
-import { Observer } from '../types.h'
+import { SubscriptionObserver } from '../types.h'
 import { getObserver, testMethodProperty } from './utils'
 
 describe('(Core) observer.complete', () => {
@@ -48,7 +48,7 @@ describe('(Core) observer.complete', () => {
 
   it('does not forward when the subscription is cancelled', () => {
     let count = 0
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     const subscription = new Observable((x) => {
       observer = x
     }).subscribe({
@@ -74,7 +74,7 @@ describe('(Core) observer.complete', () => {
   })
 
   it('queues if the observer is running', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     let completed = false
     new Observable((x) => {
       observer = x
@@ -131,7 +131,7 @@ describe('(Core) observer.complete', () => {
 
   it('calls the cleanup method after "complete"', () => {
     const calls: string[] = []
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     new Observable((x) => {
       observer = x
       return () => {
@@ -148,7 +148,7 @@ describe('(Core) observer.complete', () => {
 
   it('calls the cleanup method if there is no "complete"', () => {
     const calls: string[] = []
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     new Observable((x) => {
       observer = x
       return () => {
@@ -163,7 +163,7 @@ describe('(Core) observer.complete', () => {
   it('throws error if the cleanup function throws', () => {
     expect.assertions(1)
     const error = {}
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     new Observable((x) => {
       observer = x
       return () => {

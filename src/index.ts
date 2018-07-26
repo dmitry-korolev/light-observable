@@ -1,2 +1,9 @@
 export { Observable } from './core/Observable'
-export { Observer, Disposer, Subscribable, Subscription, Unary } from './core/types.h'
+export {
+  Disposer,
+  Subscribable,
+  Subscription,
+  SubscriptionObserver,
+  Unary,
+  PartialObserver
+} from './core/types.h'

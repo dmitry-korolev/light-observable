@@ -6,7 +6,7 @@ describe('(Extra) empty', () => {
   commonTest(EMPTY, empty())
 
   describe('EMPTY', () => {
-    it('should return empty observable', () => {
+    it('should represent an empty observable', () => {
       const o = EMPTY
       const observer = getTestObserver()
 
@@ -19,7 +19,7 @@ describe('(Extra) empty', () => {
   })
 
   describe('empty', () => {
-    it('should return empty observable', () => {
+    it('should return an empty observable', () => {
       const o = empty()
       const observer = getTestObserver()
 

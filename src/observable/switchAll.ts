@@ -1,8 +1,8 @@
 import { Observable } from '../core/Observable'
-import { FromInput, Subscribable, Subscription } from '../core/types.h'
+import { Subscribable, Subscription } from '../core/types.h'
 import { getSpecies } from '../helpers/getSpecies'
 
-export const switchAll = <T>(stream: Subscribable<FromInput<T>>): Observable<T> => {
+export const switchAll = <T>(stream: Subscribable<Observable<T> | Iterable<T>>): Observable<T> => {
   const C = getSpecies(stream)
 
   return new C((observer) => {

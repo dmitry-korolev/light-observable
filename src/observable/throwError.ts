@@ -1,7 +1,7 @@
 import { Observable } from '../core/Observable'
 
-export const throwError = (reason: any): Observable<void> => {
+export const throwError = <T = any>(error: T): Observable<never> => {
   return new Observable((observer) => {
-    observer.error(reason)
+    observer.error(error)
   })
 }

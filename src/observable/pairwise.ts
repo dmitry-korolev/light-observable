@@ -1,12 +1,12 @@
 import { Observable } from '../core/Observable'
-import { Observer, Subscribable } from '../core/types.h'
+import { Subscribable, SubscriptionObserver } from '../core/types.h'
 import { transform } from '../helpers/transform'
 
 const pairwiseFn = <T>() => {
   let hasEmit = false
   let lastValue: T
 
-  return (observer: Observer<[T, T]>, value: T) => {
+  return (observer: SubscriptionObserver<[T, T]>, value: T) => {
     if (hasEmit) {
       observer.next([lastValue, value])
     }

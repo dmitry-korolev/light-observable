@@ -1,10 +1,10 @@
 import { Observable } from '../core/Observable'
-import { Observer, Subscribable, Subscription } from '../core/types.h'
+import { Subscribable, Subscription, SubscriptionObserver } from '../core/types.h'
 import { getSpecies } from '../helpers/getSpecies'
 
 const subscribe = (
   streams: Array<Subscribable<any>>,
-  observer: Observer<any>,
+  observer: SubscriptionObserver<any>,
   onSubscribe: (s: Subscription) => void
 ) => {
   return streams[0].subscribe({

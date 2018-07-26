@@ -1,5 +1,5 @@
 import { Observable } from '../Observable'
-import { Observer } from '../types.h'
+import { SubscriptionObserver } from '../types.h'
 import { testMethodProperty } from './utils'
 
 describe('(Core) observer.closed', () => {
@@ -25,7 +25,7 @@ describe('(Core) observer.closed', () => {
   })
 
   it('returns true when the subscription is completed', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     new Observable((x) => {
       observer = x
       // @ts-ignore
@@ -35,7 +35,7 @@ describe('(Core) observer.closed', () => {
   })
 
   it('returns true when the subscription is errored', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     new Observable((x) => {
       observer = x
       // @ts-ignore

@@ -16,18 +16,7 @@ describe('(Extra) switchMap', () => {
 
     const sub = switchMap(map, Observable.of(1, 2, 3)).subscribe({ complete })
 
-    expect(map.mock.calls).toEqual([[1], [2], [3]])
-    expect(sub.closed).toBe(true)
-    expect(complete).toHaveBeenCalled()
-  })
-
-  it('should work as an operator', () => {
-    const map = jest.fn((x) => Observable.of(x))
-    const complete = jest.fn()
-
-    const sub = switchMapOperator(map)(Observable.of(1, 2, 3)).subscribe({ complete })
-
-    expect(map.mock.calls).toEqual([[1], [2], [3]])
+    expect(map.mock.calls).toEqual([[1, 0], [2, 1], [3, 2]])
     expect(sub.closed).toBe(true)
     expect(complete).toHaveBeenCalled()
   })

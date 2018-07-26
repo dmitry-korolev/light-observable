@@ -1,5 +1,5 @@
 import { Observable } from '../Observable'
-import { Observer, PartialObserver } from '../types.h'
+import { SubscriptionObserver, PartialObserver } from '../types.h'
 
 export function testMethodProperty(object: any, key: string, options: any) {
   const desc = Object.getOwnPropertyDescriptor(object, key)
@@ -32,7 +32,7 @@ export function testMethodProperty(object: any, key: string, options: any) {
 }
 
 export function getObserver<T>(inner?: PartialObserver<T> | ((value: T) => void)) {
-  let observer: Observer<T>
+  let observer: SubscriptionObserver<T>
   new Observable((x) => {
     observer = x
     // @ts-ignore

@@ -1,6 +1,6 @@
 import { Observable } from '../../core/Observable'
-import { createSubject } from '../../observable'
 import { of } from '../../observable/of'
+import { createSubject } from '../../observable/subject'
 import { commonTest } from '../testHelpers/commonTest'
 import { getTestObserver } from '../testHelpers/getTestObserver'
 import { transform } from '../transform'

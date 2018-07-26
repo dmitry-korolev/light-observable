@@ -2,13 +2,12 @@
 import $$observable from 'symbol-observable'
 import {
   Disposer,
-  FromInput,
-  Observer,
   PartialObserver,
   SignalType,
   Subscribable,
   Subscriber,
   Subscription,
+  SubscriptionObserver,
   Unary
 } from './types.h'
 
@@ -106,7 +105,7 @@ class ObservableSubscription<T> implements Subscription {
       observer.start(this)
     }
 
-    const subscriptionObserver = new SubscriptionObserver(this)
+    const subscriptionObserver = new ConcreteObserver(this)
 
     try {
       this._disposer = source(subscriptionObserver)
@@ -129,7 +128,7 @@ class ObservableSubscription<T> implements Subscription {
   }
 }
 
-class SubscriptionObserver<T> implements Observer<T> {
+class ConcreteObserver<T> implements SubscriptionObserver<T> {
   _subscription: ObservableSubscription<T>
 
   constructor(subscription: ObservableSubscription<T>) {
@@ -165,7 +164,7 @@ export class Observable<T> implements Subscribable<T> {
     return new C(fromArray(arguments))
   }
 
-  static from<A>(ish: FromInput<A>) {
+  static from<A>(ish: Observable<A> | Iterable<A>) {
     const C = typeof this === 'function' ? this : Observable
     const error = `${ish} is not an object`
 

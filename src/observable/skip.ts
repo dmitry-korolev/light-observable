@@ -1,11 +1,11 @@
 import { Observable } from '../core/Observable'
 import { Subscribable } from '../core/types.h'
-import { transform } from '../helpers/transform'
+import { slice } from './slice'
 
 export const skip = <T>(count: number, stream: Subscribable<T>): Observable<T> => {
-  return transform(stream, (observer, value, index) => {
-    if (index >= count) {
-      observer.next(value)
-    }
-  })
+  if (count < 1) {
+    return stream as Observable<T>
+  }
+
+  return slice(count, Infinity, stream)
 }

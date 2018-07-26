@@ -8,14 +8,20 @@ Standard implementation of Observables for JavaScript. Requires a Promise polyfi
 
 
 - [Features](#features)
-- [Differences from zen-observable](#differences-from-zen-observable)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Motivation](#motivation)
 - [Extras](#extras)
-  - [Creation](#creation)
-  - [Transforming](#transforming)
-  - [Combining](#combining)
-- [Why](#why)
+  - [Consume](#consume)
+  - [Create](#create)
+  - [Transform](#transform)
+  - [Filter](#filter)
+  - [Combine](#combine)
+  - [Combine higher-order streams](#combine-higher-order-streams)
+  - [Slice](#slice)
+  - [Handle errors](#handle-errors)
+  - [Rate limit](#rate-limit)
+  - [Delay](#delay)
 - [Notice on interoperability](#notice-on-interoperability)
 - [Credits](#credits)
 - [License](#license)
@@ -24,15 +30,12 @@ Standard implementation of Observables for JavaScript. Requires a Promise polyfi
 
 ## Features
 * **Standard**: fully compatible with the [Observable Proposal](https://github.com/tc39/proposal-observable).
-* **Tiny**: Observable itself is ~[1 kilobyte in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package).
+* **Tiny**: Observable itself is ~[1 kilobyte in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package). **The whole library including ~80 operators and observable utilities is less than 6kb in gzip.**
 * **Type-safe**: written in typescript.
-* **Reliable**: 100% code coverage.
+* **Reliable**: 100% unit test coverage.
 * **Moderate**: only standard methods are included to the Observable and Observable prototype + special `Observable.prototype.pipe` method that allows usage of pipeable operators.
-
-## Differences from zen-observable
-* Uses `symbol-observable` polyfill instead of own implementation.
-* Subscribing and iterating over arrays in `.of` and `.from` methods are synchronous.
-* `PartitialObserver` allows a `start` method, which will receive a subscription before calling the source.
+* **Universal**: every observable operator is available as an observable creator function. Every observable utility is compatible with any standard observable implementation like RxJS, zen-observable, etc.
+* **Documented**: [see the docs](https://dmitry-korolev.github.io/light-observable/)!
 
 ## Installation
 ```bash
@@ -54,51 +57,80 @@ o.subscribe(console.log)
 // > 2
 ```
 
-## Extras
-#### `Observable.prototype.pipe`
-`light-observable` has a special `pipe` method, which is similar to any other pipe implementation. It applies provided functions from left to right. It allows usage of any function, including pipeable RxJS operators (although you **have to** pass RxJS `from` method first). This is the only non-standard method in `light-observable` Observable implementation.
-```js
-import { of } from 'light-observable/observable'
-import { from } from 'rxjs'
-import { filter, map } from 'rxjs/operators'
+See [Observable proposal](https://github.com/tc39/proposal-observable) for other examples.
 
-of(1, 2, 3, 4)
-    .pipe(
-      from,
-      filter(x => x > 2),
-      map(x => x * 2)
-    )
-    .subscribe(console.log)
-
-// => 6, 8
-```
-
-### Creation
-#### `EMPTY`
-Represents an empty Observable, which completes right after subscribing.
-
-#### `createSubject`:
-Returns a tuple of an observable stream and a controller sink.
-```js
-import { createSubject } from 'light-observable/observable'
-const [stream, sink] = createSubject()
-
-stream.subscribe(console.log)
-sink.next(1) // > 1
-sink.next(2) // > 2
-```
-
-### Transforming
-#### `filter`
-#### `map`
-#### `forEach`
-
-### Combining
-#### `concat`
-#### `merge`
-
-## Why
+## Motivation
 Because sometimes you just don't need all these tons of classes, dozens of schedulers and countless operators. Only some of them. Someday.
+
+## Extras
+[See the docs](https://dmitry-korolev.github.io/light-observable/) to learn about ~80 operators and observable utilities included in this library.
+
+Full list of extras:
+### Consume
+* [forEach](https://dmitry-korolev.github.io/light-observable/consume/forEach.html)
+* [drain](https://dmitry-korolev.github.io/light-observable/consume/drain.html)
+* [reduce](https://dmitry-korolev.github.io/light-observable/consume/reduce.html)
+* [toArray](https://dmitry-korolev.github.io/light-observable/consume/toArray.html)
+  
+### Create
+* [of](https://dmitry-korolev.github.io/light-observable/create/of.html)
+* [from](https://dmitry-korolev.github.io/light-observable/create/from.html)
+* [fromEvent](https://dmitry-korolev.github.io/light-observable/create/fromEvent.html)
+* [fromPromise](https://dmitry-korolev.github.io/light-observable/create/fromPromise.html)
+* [interval](https://dmitry-korolev.github.io/light-observable/create/interval.html)
+* [defer](https://dmitry-korolev.github.io/light-observable/create/defer.html)
+* [empty](https://dmitry-korolev.github.io/light-observable/create/empty.html)
+* [never](https://dmitry-korolev.github.io/light-observable/create/never.html)
+* [createSubject](https://dmitry-korolev.github.io/light-observable/create/subject.html)
+
+### Transform
+* [map](https://dmitry-korolev.github.io/light-observable/transform/map.html)
+* [mapTo](https://dmitry-korolev.github.io/light-observable/transform/mapTo.html)
+* [pairwise](https://dmitry-korolev.github.io/light-observable/transform/pairwise.html)
+* [scan](https://dmitry-korolev.github.io/light-observable/transform/scan.html)
+* [startWith](https://dmitry-korolev.github.io/light-observable/transform/startWith.html)
+* [tap](https://dmitry-korolev.github.io/light-observable/transform/tap.html)
+
+### Filter
+* [filter](https://dmitry-korolev.github.io/light-observable/filter/filter.html)
+* [reject](https://dmitry-korolev.github.io/light-observable/filter/reject.html)
+* [partition](https://dmitry-korolev.github.io/light-observable/filter/partition.html)
+* [skipRepeats](https://dmitry-korolev.github.io/light-observable/filter/skipRepeats.html)
+
+### Combine
+* [concat](https://dmitry-korolev.github.io/light-observable/combine/concat.html)
+* [combineLatest](https://dmitry-korolev.github.io/light-observable/combine/combineLatest.html)
+* [merge](https://dmitry-korolev.github.io/light-observable/combine/merge.html)
+* [sample](https://dmitry-korolev.github.io/light-observable/combine/sample.html)
+
+### Combine higher-order streams
+* [mergeAll](https://dmitry-korolev.github.io/light-observable/hos/mergeAll.html)
+* [mergeMap](https://dmitry-korolev.github.io/light-observable/hos/mergeMap.html)
+* [mergeMapTo](https://dmitry-korolev.github.io/light-observable/hos/mergeMapTo.html)
+* [switchAll](https://dmitry-korolev.github.io/light-observable/hos/switchAll.html)
+* [switchMap](https://dmitry-korolev.github.io/light-observable/hos/switchMap.html)
+* [switchMapTo](https://dmitry-korolev.github.io/light-observable/hos/switchMapTo.html)
+ 
+### Slice
+* [slice](https://dmitry-korolev.github.io/light-observable/slice/slice.html)
+* [skip](https://dmitry-korolev.github.io/light-observable/slice/skip.html)
+* [skipLast](https://dmitry-korolev.github.io/light-observable/slice/skipLast.html)
+* [skipUntil](https://dmitry-korolev.github.io/light-observable/slice/skipUntil.html)
+* [take](https://dmitry-korolev.github.io/light-observable/slice/take.html)
+* [takeLast](https://dmitry-korolev.github.io/light-observable/slice/skipUntil.html)
+
+### Handle errors
+* [catchError](https://dmitry-korolev.github.io/light-observable/errors/catchError.html)
+* [throwError](https://dmitry-korolev.github.io/light-observable/errors/throwError.html)
+* [timeout](https://dmitry-korolev.github.io/light-observable/errors/timeout.html)
+
+### Rate limit
+* [auditTime](https://dmitry-korolev.github.io/light-observable/limiting/auditTime.html)
+* [debounceTime](https://dmitry-korolev.github.io/light-observable/limiting/debounceTime.html)
+* [throttleTime](https://dmitry-korolev.github.io/light-observable/limiting/throttleTime.html)
+
+### Delay
+* [delay](https://dmitry-korolev.github.io/light-observable/delay/delay.html)
 
 ## Notice on interoperability
 RxJS 6 doesn't use 'symbol-observable' polyfill. This may cause some weird issues with interop depending on the import order. It is recommended to install and import `symbol-observable` polyfill before RxJS.

@@ -1,10 +1,10 @@
 import { Observable } from '../core/Observable'
-import { Observer, Subscribable } from '../core/types.h'
+import { Subscribable, SubscriptionObserver } from '../core/types.h'
 import { getSpecies } from './getSpecies'
 
 export const transform = <T, R = T>(
   stream: Subscribable<T>,
-  fn: (observer: Observer<R>, value: T, index: number) => void
+  fn: (observer: SubscriptionObserver<R>, value: T, index: number) => void
 ): Observable<R> => {
   const C = getSpecies(stream)
 

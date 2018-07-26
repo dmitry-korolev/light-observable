@@ -1,5 +1,5 @@
 import { Observable } from '../Observable'
-import { Observer } from '../types.h'
+import { SubscriptionObserver } from '../types.h'
 import { testMethodProperty } from './utils'
 
 describe('(Core) subscribe', () => {
@@ -12,7 +12,7 @@ describe('(Core) subscribe', () => {
   })
 
   it('accepts an observer argument', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     let nextValue
     new Observable((x) => {
       observer = x
@@ -27,7 +27,7 @@ describe('(Core) subscribe', () => {
   })
 
   it('accepts a next function argument', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     let nextValue
     new Observable((x) => {
       observer = x
@@ -38,7 +38,7 @@ describe('(Core) subscribe', () => {
   })
 
   it('accepts an error function argument', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     let errorValue
     const error = {}
     new Observable((x) => {
@@ -51,7 +51,7 @@ describe('(Core) subscribe', () => {
   })
 
   it('accepts a complete function argument', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     let completed = false
     new Observable((x) => {
       observer = x
@@ -62,7 +62,7 @@ describe('(Core) subscribe', () => {
   })
 
   it('uses function overload if first argument is null', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     let completed = false
     new Observable((x) => {
       observer = x
@@ -73,7 +73,7 @@ describe('(Core) subscribe', () => {
   })
 
   it('uses function overload if first argument is undefined', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     let completed = false
     new Observable((x) => {
       observer = x
@@ -84,7 +84,7 @@ describe('(Core) subscribe', () => {
   })
 
   it('uses function overload if first argument is a primative', () => {
-    let observer: Observer<any>
+    let observer: SubscriptionObserver<any>
     let completed = false
     new Observable((x) => {
       observer = x

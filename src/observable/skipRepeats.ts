@@ -1,14 +1,14 @@
 import { Observable } from '../core/Observable'
-import { Observer, Subscribable } from '../core/types.h'
+import { Subscribable, SubscriptionObserver } from '../core/types.h'
 import { transform } from '../helpers/transform'
 
 const defaultEquals = <T>(a: T, b: T) => a === b
 
-const skip = <T>(equals: (a: T, b: T) => boolean) => {
+const skip = <T>(equals: (a: T, b: T, index: number) => boolean) => {
   let init = true
   let oldValue: T
 
-  return (observer: Observer<T>, value: T) => {
+  return (observer: SubscriptionObserver<T>, value: T, index: number) => {
     if (init) {
       init = false
       oldValue = value
@@ -16,7 +16,7 @@ const skip = <T>(equals: (a: T, b: T) => boolean) => {
       return
     }
 
-    if (equals(oldValue, value)) {
+    if (equals(oldValue, value, index)) {
       return
     }
 
@@ -26,7 +26,7 @@ const skip = <T>(equals: (a: T, b: T) => boolean) => {
 }
 
 export const skipRepeats = <T>(
-  equals: (a: T, b: T) => boolean = defaultEquals,
+  equals: (a: T, b: T, index: number) => boolean = defaultEquals,
   stream: Subscribable<T>
 ): Observable<T> => {
   return transform(stream, skip(equals))

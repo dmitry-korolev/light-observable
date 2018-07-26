@@ -14,7 +14,7 @@ describe('(Extra) forEach', () => {
 
     await forEach(spy, of(1, 2, 3))
 
-    expect(spy.mock.calls).toEqual([[1], [2], [3]])
+    expect(spy.mock.calls).toEqual([[1, 0], [2, 1], [3, 2]])
   })
 
   it('should reject on an error in the input observable', async () => {
