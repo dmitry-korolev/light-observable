@@ -1,6 +1,8 @@
 # `mergeAll`
 ```typescript
-type mergeAll = () => <T>(stream: Observable<Observable<T> | Iterable<T>>) => Observable<T>
+type mergeAll = () => <T>(
+  stream: Observable<Observable<T> | Iterable<T>>
+) => Observable<T>
 ```
 
 ```
@@ -10,7 +12,7 @@ stream:             s---t-------->
 mergeAll()(stream): --a--bghc-jd->
 ```
 
-Given a higher-order stream, return a new stream that merges all the inner streams as they arrive.
+Given a higher-order `stream`, return a new stream that merges all the inner streams as they arrive.
 
 ```typescript
 import { interval, of } from 'light-observable/observable'

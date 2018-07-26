@@ -1,6 +1,8 @@
 # `partition`
 ```typescript
-type partition = <T>(predicate: (value: T) => boolean) => (stream: Observable<T>) => [Observable<T>, Observable<T>]
+type partition = <T>(
+  predicate: (value: T, index: number) => boolean
+) => (stream: Observable<T>) => [Observable<T>, Observable<T>]
 ```
 
 ```

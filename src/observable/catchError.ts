@@ -2,8 +2,8 @@ import { Observable } from '../core/Observable'
 import { Subscribable, Subscription } from '../core/types.h'
 import { getSpecies } from '../helpers/getSpecies'
 
-export const catchError = <T>(
-  fn: (reason: any) => Subscribable<T>,
+export const catchError = <T, R = any>(
+  fn: (reason: R) => Subscribable<T>,
   stream: Subscribable<T>
 ): Observable<T> => {
   const C = getSpecies(stream)

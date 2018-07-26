@@ -1,6 +1,8 @@
 # `mergeMapTo`
 ```typescript
-type mergeMapTo = <R>(value: Observable<R> | Iterable<R>) => (stream: Observable<any>) => Observable<R>
+type mergeMapTo = <R>(
+  value: Observable<R> | Iterable<R>
+) => (stream: Observable<any>) => Observable<R>
 ```
 
 ```

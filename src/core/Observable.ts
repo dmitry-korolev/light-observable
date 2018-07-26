@@ -2,7 +2,6 @@
 import $$observable from 'symbol-observable'
 import {
   Disposer,
-  FromInput,
   PartialObserver,
   SignalType,
   Subscribable,
@@ -165,7 +164,7 @@ export class Observable<T> implements Subscribable<T> {
     return new C(fromArray(arguments))
   }
 
-  static from<A>(ish: FromInput<A>) {
+  static from<A>(ish: Observable<A> | Iterable<A>) {
     const C = typeof this === 'function' ? this : Observable
     const error = `${ish} is not an object`
 

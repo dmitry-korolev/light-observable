@@ -13,6 +13,7 @@ See [Observable proposal](https://github.com/tc39/proposal-observable) to learn 
 - [API](#api)
   - [`Observable.of`](#observableof)
   - [`Observable.from`](#observablefrom)
+  - [`Observable.prototype.subscribe`](#observableprototypesubscribe)
   - [`Observable.prototype.pipe`](#observableprototypepipe)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -26,6 +27,11 @@ See usage examples on the [Observable proposal homepage](https://github.com/tc39
 
 ### `Observable.from`
 See usage examples on the [Observable proposal homepage](https://github.com/tc39/proposal-observable#observablefrom)
+
+### `Observable.prototype.subscribe`
+Starts consuming events from stream by providing an Observer object. Returns a Subscription object that can be used to unsubscribe from the stream of events.
+
+See usage examples on the [Observable proposal homepage](https://github.com/tc39/proposal-observable).
 
 ### `Observable.prototype.pipe`
 `light-observable` has a special `pipe` method, which is similar to any other pipe implementation. It applies provided functions from left to right. It allows usage of any function, including pipeable RxJS operators (although you **have to** pass RxJS `from` method first). This is the only non-standard method in `light-observable` Observable implementation.

@@ -1,6 +1,8 @@
 # `debounceTime`
 ```typescript
-type debounceTime = (dueTime: number) => <T>(stream: Observable<T>) => Observable<T>
+type debounceTime = (
+  dueTime: number
+) => <T>(stream: Observable<T>) => Observable<T>
 ```
 
 ```

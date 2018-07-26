@@ -1,6 +1,10 @@
 # `fromEvent`
 ```typescript
-type fromEvent = (eventSource: EventEmitter | EventTarget, eventName: string | symbol, capture?: boolean) => Observable<any>
+type fromEvent = (
+  eventSource: EventEmitter | EventTarget,
+  eventName: string | symbol,
+  capture?: boolean
+) => Observable<any>
 ```
 
 ```
@@ -8,12 +12,11 @@ source:                       -a--b--c----d->
 fromEvent(source, eventName): -a--b--c----d->
 ```
 
-Creates an Observable containing events from provided EventTarget (like a DOM element), or an EventEmitter (like a Node EventEmitter).
+Creates an Observable containing `eventName` events from provided `eventSource` (EventTarget like a DOM element, or an EventEmitter like a Node EventEmitter).
 
 When subscribing to an EventTarget, a third parameter, `capture`, may be provided. If not provided, will default to `false`.
 ```typescript
 import { fromEvent } from 'light-observable/observable'
-import {  } from 'light-observable/operators'
 
 const stream = fromEvent(document, 'click')
 

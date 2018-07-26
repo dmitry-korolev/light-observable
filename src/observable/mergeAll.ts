@@ -1,9 +1,9 @@
 import { Observable } from '../core/Observable'
-import { FromInput, Subscribable, Subscription } from '../core/types.h'
+import { Subscribable, Subscription } from '../core/types.h'
 import { getSpecies } from '../helpers/getSpecies'
 import { uniqueId } from '../helpers/uniqueId'
 
-export const mergeAll = <T>(stream: Subscribable<FromInput<T>>): Observable<T> => {
+export const mergeAll = <T>(stream: Subscribable<Observable<T> | Iterable<T>>): Observable<T> => {
   const C = getSpecies(stream)
 
   return new C((observer) => {

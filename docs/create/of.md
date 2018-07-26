@@ -1,13 +1,15 @@
 # `of`
 ```typescript
-type of = <TS extends Array<any>>(...args: TS) => Observable<TS extends Array<infer T> ? T : null>
+type of = <TS extends Array<any>>(
+  ...values: TS
+) => Observable<TS extends Array<infer T> ? T : null>
 ```
 
 ```
 of(a, b, c): abc|
 ```
 
-Creates an Observable of the values provided as arguments. The values are delivered synchronously when `subscribe` is called.
+Creates an Observable of the `values` provided as arguments. The values are delivered synchronously when `subscribe` is called.
 
 ```typescript
 import { of } from 'light-observable/observable'

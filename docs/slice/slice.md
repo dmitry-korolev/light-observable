@@ -1,6 +1,9 @@
 # `slice`
 ```typescript
-type slice = (from: number, to: number) => <T>(stream: Observable<T>) => Observable<T>
+type slice = (
+  from: number,
+  to: number
+) => <T>(stream: Observable<T>) => Observable<T>
 ```
 
 ```

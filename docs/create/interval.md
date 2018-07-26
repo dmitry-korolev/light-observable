@@ -8,7 +8,7 @@ interval(2): -0-1-2-3-4-5->
 interval(5): ----0----1----2->
 ```
 
-Creates an Observable that emits sequential numbers every specified interval of time.
+Creates an Observable that emits sequential numbers every specified `period` ms.
 
 ```typescript
 import { interval } from 'light-observable/observable'

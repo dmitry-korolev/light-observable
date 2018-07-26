@@ -1,6 +1,8 @@
 # `reject`
 ```typescript
-type reject = <T>(predicate: (value: T) => boolean) => (stream: Observable<T>) => Observable<T>
+type reject = <T>(
+  predicate: (value: T, index: number) => boolean
+) => (stream: Observable<T>) => Observable<T>
 ```
 
 ```

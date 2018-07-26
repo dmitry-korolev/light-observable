@@ -13,10 +13,6 @@ describe('(Extra) pairwise', () => {
 
     stream.subscribe(observer)
 
-    expect(observer.next.mock.calls).toEqual([
-      [[undefined, null]],
-      [[null, 0]],
-      [[0, false]]
-    ])
+    expect(observer.next.mock.calls).toEqual([[[undefined, null]], [[null, 0]], [[0, false]]])
   })
 })

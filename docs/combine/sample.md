@@ -1,6 +1,8 @@
 # `sample`
 ```typescript
-type sample = (signal: Observable<any>) => <T>(source: Observable<T>) => Observable<T>
+type sample = (
+  signal: Observable<any>
+) => <T>(stream: Observable<T>) => Observable<T>
 ```
 
 ```
@@ -9,7 +11,7 @@ signal:                 --x--x--x--x-->
 sample(signal)(source): --a--b--d----->
 ```
 
-Emits the most recently emitted value from the source Observable whenever another Observable, the `signal`, emits.
+Emits the most recently emitted value from the source `stream` whenever another Observable, the `signal`, emits.
 
 
 ```typescript

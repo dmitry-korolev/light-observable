@@ -1,6 +1,8 @@
 # `auditTime`
 ```typescript
-type auditTime = (duration: number) => <T>(stream: Observable<T>) => Observable<T>
+type auditTime = (
+  duration: number
+) => <T>(stream: Observable<T>) => Observable<T>
 ```
 
 ```

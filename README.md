@@ -18,6 +18,7 @@ Standard implementation of Observables for JavaScript. Requires a Promise polyfi
   - [Filter](#filter)
   - [Combine](#combine)
   - [Combine higher-order streams](#combine-higher-order-streams)
+  - [Slice](#slice)
   - [Handle errors](#handle-errors)
   - [Rate limit](#rate-limit)
   - [Delay](#delay)
@@ -64,8 +65,12 @@ Because sometimes you just don't need all these tons of classes, dozens of sched
 ## Extras
 [See the docs](https://dmitry-korolev.github.io/light-observable/) to learn about ~80 operators and observable utilities included in this library.
 
+Full list of extras:
 ### Consume
 * [forEach](https://dmitry-korolev.github.io/light-observable/consume/forEach.html)
+* [drain](https://dmitry-korolev.github.io/light-observable/consume/drain.html)
+* [reduce](https://dmitry-korolev.github.io/light-observable/consume/reduce.html)
+* [toArray](https://dmitry-korolev.github.io/light-observable/consume/toArray.html)
   
 ### Create
 * [of](https://dmitry-korolev.github.io/light-observable/create/of.html)
@@ -75,28 +80,54 @@ Because sometimes you just don't need all these tons of classes, dozens of sched
 * [interval](https://dmitry-korolev.github.io/light-observable/create/interval.html)
 * [defer](https://dmitry-korolev.github.io/light-observable/create/defer.html)
 * [empty](https://dmitry-korolev.github.io/light-observable/create/empty.html)
+* [never](https://dmitry-korolev.github.io/light-observable/create/never.html)
+* [createSubject](https://dmitry-korolev.github.io/light-observable/create/subject.html)
 
 ### Transform
 * [map](https://dmitry-korolev.github.io/light-observable/transform/map.html)
 * [mapTo](https://dmitry-korolev.github.io/light-observable/transform/mapTo.html)
+* [pairwise](https://dmitry-korolev.github.io/light-observable/transform/pairwise.html)
+* [scan](https://dmitry-korolev.github.io/light-observable/transform/scan.html)
+* [startWith](https://dmitry-korolev.github.io/light-observable/transform/startWith.html)
+* [tap](https://dmitry-korolev.github.io/light-observable/transform/tap.html)
 
 ### Filter
 * [filter](https://dmitry-korolev.github.io/light-observable/filter/filter.html)
+* [reject](https://dmitry-korolev.github.io/light-observable/filter/reject.html)
+* [partition](https://dmitry-korolev.github.io/light-observable/filter/partition.html)
+* [skipRepeats](https://dmitry-korolev.github.io/light-observable/filter/skipRepeats.html)
 
 ### Combine
 * [concat](https://dmitry-korolev.github.io/light-observable/combine/concat.html)
 * [combineLatest](https://dmitry-korolev.github.io/light-observable/combine/combineLatest.html)
 * [merge](https://dmitry-korolev.github.io/light-observable/combine/merge.html)
+* [sample](https://dmitry-korolev.github.io/light-observable/combine/sample.html)
 
 ### Combine higher-order streams
 * [mergeAll](https://dmitry-korolev.github.io/light-observable/hos/mergeAll.html)
+* [mergeMap](https://dmitry-korolev.github.io/light-observable/hos/mergeMap.html)
+* [mergeMapTo](https://dmitry-korolev.github.io/light-observable/hos/mergeMapTo.html)
+* [switchAll](https://dmitry-korolev.github.io/light-observable/hos/switchAll.html)
+* [switchMap](https://dmitry-korolev.github.io/light-observable/hos/switchMap.html)
+* [switchMapTo](https://dmitry-korolev.github.io/light-observable/hos/switchMapTo.html)
+ 
+### Slice
+* [slice](https://dmitry-korolev.github.io/light-observable/slice/slice.html)
+* [skip](https://dmitry-korolev.github.io/light-observable/slice/skip.html)
+* [skipLast](https://dmitry-korolev.github.io/light-observable/slice/skipLast.html)
+* [skipUntil](https://dmitry-korolev.github.io/light-observable/slice/skipUntil.html)
+* [take](https://dmitry-korolev.github.io/light-observable/slice/take.html)
+* [takeLast](https://dmitry-korolev.github.io/light-observable/slice/skipUntil.html)
 
 ### Handle errors
 * [catchError](https://dmitry-korolev.github.io/light-observable/errors/catchError.html)
+* [throwError](https://dmitry-korolev.github.io/light-observable/errors/throwError.html)
+* [timeout](https://dmitry-korolev.github.io/light-observable/errors/timeout.html)
 
 ### Rate limit
 * [auditTime](https://dmitry-korolev.github.io/light-observable/limiting/auditTime.html)
 * [debounceTime](https://dmitry-korolev.github.io/light-observable/limiting/debounceTime.html)
+* [throttleTime](https://dmitry-korolev.github.io/light-observable/limiting/throttleTime.html)
 
 ### Delay
 * [delay](https://dmitry-korolev.github.io/light-observable/delay/delay.html)

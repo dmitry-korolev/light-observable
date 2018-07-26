@@ -11,7 +11,7 @@ iterable:       abc
 from(iterable): abc|
 ```
 
-Converts its argument to an Observable. 
+Converts `ish` argument to an Observable. 
 
 If the argument has a Symbol.observable method, then it returns the result of invoking that method. If the resulting object is not an instance of Observable, then it is wrapped in an Observable which will delegate subscription.
 ```typescript

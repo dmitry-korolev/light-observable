@@ -1,6 +1,8 @@
 # `catchError`
 ```typescript
-type catchError = <T>(fn: (reason: any) => Observable<T>) => (stream: Observable<T>) => Observable<T>
+type catchError = <T, R = any>(
+  fn: (reason: R) => Observable<T>
+) => (stream: Observable<T>) => Observable<T>
 ```
 
 ```
@@ -8,6 +10,7 @@ errorStream:                -a-b-c-X
 f(X):                       -d-e-f|
 catchError(f)(errorStream): -a-b-c--d-e-f|
 ```
+
 Recover from an observable failure by calling a function to create a new observable.
 
 ```typescript

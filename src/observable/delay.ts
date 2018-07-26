@@ -2,11 +2,10 @@ import { Observable } from '../core/Observable'
 import { Subscribable, Subscription } from '../core/types.h'
 import { getSpecies } from '../helpers/getSpecies'
 import { uniqueId } from '../helpers/uniqueId'
-import { from } from './from'
 
 export const delay = <T>(wait: number, stream: Subscribable<T>): Observable<T> => {
   if (wait <= 0) {
-    return from(stream)
+    return stream as Observable<T>
   }
 
   const C = getSpecies(stream)

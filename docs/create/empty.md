@@ -1,10 +1,11 @@
 # `EMPTY`
 ```typescript
-type EMPTY = Observable<any>
+type EMPTY = Observable<never>
 ```
 
 ```
-EMPTY: |
+EMPTY:   |
+empty(): |
 ```
 
 Represents an empty observable which emits `complete` event immediately after subscription.

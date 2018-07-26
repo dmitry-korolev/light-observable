@@ -16,7 +16,7 @@ describe('(Extra) mergeMap', () => {
     const observer = getTestObserver()
 
     mergeMap(map, of(1)).subscribe(observer)
-    expect(map).toBeCalledWith(1)
+    expect(map).toBeCalledWith(1, 0)
     expect(observer.next).toBeCalledWith(2)
   })
 

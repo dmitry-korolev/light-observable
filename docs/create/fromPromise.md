@@ -8,7 +8,7 @@ promise:              -----a
 fromPromise(promise): -----a|
 ```
 
-Creates an Observable, that waits for the provided promise to resolve or reject. Emits resolved value and completes in the first case, errors in the second case.
+Creates an Observable, that waits for the provided `promise` to resolve or reject. Emits resolved value and completes in the first case, errors in the second case.
 ```typescript
 import { fromPromise } from 'light-observable/observable'
 

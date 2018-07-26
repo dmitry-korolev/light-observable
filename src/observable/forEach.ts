@@ -4,14 +4,16 @@ import { Subscribable } from '../core/types.h'
 const noop = () => {}
 
 export const forEach = <S>(
-  fn: (value: S) => void = noop,
+  fn: (value: S, index: number) => void = noop,
   stream: Subscribable<S>
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
+    let i = 0
     const subscription = stream.subscribe({
       next(value) {
         try {
-          fn(value)
+          fn(value, i)
+          i += 1
         } catch (e) {
           reject(e)
           subscription.unsubscribe()

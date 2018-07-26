@@ -1,6 +1,8 @@
 # `mergeMap`
 ```typescript
-type mergeMap = <T, R>(fn: (value: T) => Observable<T> | Iterable<T>) => <T>(stream: Observable<T>) => Observable<R>
+type mergeMap = <T, R>(
+  fn: (value: T, index: number) => Observable<T> | Iterable<T>
+) => <T>(stream: Observable<T>) => Observable<R>
 ```
 
 ```
@@ -9,7 +11,7 @@ fn(x):                -xx|
 mergeMap(fn)(stream): -aa---bb--bb--dd->
 ```
 
-Given a higher-order stream, return a new stream that merges all the inner streams as they arrive.
+Projects each value from the source `stream` to an Observable with the provided `fn` and merges the result into the output Observable.
 
 ```typescript
 import { interval, of } from 'light-observable/observable'

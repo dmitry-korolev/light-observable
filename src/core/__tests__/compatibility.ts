@@ -25,10 +25,7 @@ describe('(Core) compatibility', () => {
     ])
 
     variants.forEach((getters) => {
-      const {
-        order,
-        result: { Rx, most, Observable, createStore }
-      } = getters.reduce(
+      const { order, result: { Rx, most, Observable, createStore } } = getters.reduce(
         (result, getter) => {
           const o = getter()
           result.order = result.order.concat(Object.keys(o))

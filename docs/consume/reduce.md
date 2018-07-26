@@ -6,7 +6,7 @@ type reduce = <T, R>(
 ) => (stream: Observable<T>) => Promise<R>
 ```
 
-Starts consuming a source, reducing it to the single value with a provided function starting from an initial value. Returns a Promise, which resolves with a resulting value when the source completes, or rejects if the source errors.
+Starts consuming a source `stream`, reducing it to the single value with a provided `fn` starting from an `initial` value. Returns a Promise, which resolves with a resulting value when the source completes, or rejects if the source errors.
 
 ```typescript
 import { interval } from 'light-observable/observable'

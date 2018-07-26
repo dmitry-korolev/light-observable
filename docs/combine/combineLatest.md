@@ -9,7 +9,7 @@ streamB:                         --1--2--3--4--5->
 combineLatest(streamA, streamB): --[a,1][b,1]-[c,2]->
 ```
 
-When any observable emits a value, emits the latest value from each.
+When any source `stream` emits a value, emits the latest value from each.
 
 ```typescript
 import { combineLatest, interval } from 'light-observable/observable'

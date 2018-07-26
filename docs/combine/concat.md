@@ -1,6 +1,8 @@
 # `concat`
 ```typescript
-type concat = <TS extends Array<Observable<any>>>(...streams: TS) => Observable<TS extends Array<Observable<infer T>> ? T : void>
+type concat = <TS extends Array<Observable<any>>>(
+  ...streams: TS
+) => Observable<TS extends Array<Observable<infer T>> ? T : void>
 ```
 
 ```
@@ -9,7 +11,7 @@ streamB:                  -d-e-f-|
 concat(streamA, streamB): -a-b-c--d-e-f-|
 ```
 
-Creates an output Observable which sequentially emits all values from given Observable and then moves on to the next.
+Creates an output Observable which sequentially emits all values from given source `stream` and then moves on to the next.
 ```typescript
 import { concat, of } from 'light-observable/observable'
 

@@ -13,7 +13,7 @@ describe('(Extra) reduce', () => {
     const spy = jest.fn((acc, val) => acc + val)
     await reduce(spy, 0, of(1, 2, 3))
 
-    expect(spy.mock.calls).toEqual([[0, 1], [1, 2], [3, 3]])
+    expect(spy.mock.calls).toEqual([[0, 1, 0], [1, 2, 1], [3, 3, 2]])
   })
 
   it('resolves to accumulated result', async () => {

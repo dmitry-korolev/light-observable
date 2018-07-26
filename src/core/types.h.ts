@@ -49,8 +49,6 @@ export interface Subscribable<T> {
   ): Subscription
 }
 
-export type FromInput<T> = Subscribable<T> | Iterable<T> | T[]
-
 export type Unary<T, R> = (arg: T) => R
 
 export const enum SignalType {

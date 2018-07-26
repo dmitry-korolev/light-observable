@@ -8,7 +8,7 @@ f():      ---a
 defer(f): ---a|
 ```
 
-Creates an Observable that executes provided function on subscribe and uses it's result. Handles async functions, emitting upon resolution. This is similar to the `fromPromise` method, but allows to delay an execution of heavy operation until the subscription happens.
+Creates an Observable that executes provided `fn` on subscribe and uses it's result. Handles async functions, emitting upon resolution. This is similar to the `fromPromise` method, but allows to delay an execution of heavy operation until the subscription happens.
 
 ```typescript
 import { defer } from 'light-observable/observable'

@@ -1,6 +1,6 @@
 # `delay`
 ```typescript
-type delay = (wait: number) => <T>(stream: Observable<T>): Observable<T>
+type delay = (wait: number) => <T>(stream: Observable<T>) => Observable<T>
 ```
 
 ```
@@ -8,7 +8,7 @@ stream:           -a-b-c-d-|
 delay(2)(stream): ---a-b-c-d-|
 ```
 
-Delay stream events by the specified number of milliseconds. Maintains the relative spacing of events. Doesn't delay error event.
+Delay `stream` events by `wait` milliseconds. Maintains the relative spacing of events. Doesn't delay error event.
 
 ```typescript
 import { of } from 'light-observable/observable'

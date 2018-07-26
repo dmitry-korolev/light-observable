@@ -1,11 +1,13 @@
 # `merge`
 ```typescript
-type merge = <TS extends Array<Observable<any>>>(...streams: TS) => Observable<TS extends Array<Observable<infer T>> ? T : void>
+type merge = <TS extends Array<Observable<any>>>(
+  ...streams: TS
+) => Observable<TS extends Array<Observable<infer T>> ? T : void>
 ```
 
 ```
-streamA:                  -a-b---c->
-streamB:                  --d-e-f-->
+streamA:                 -a-b---c->
+streamB:                 --d-e-f-->
 merge(streamA, streamB): -adbe-fc->
 ```
 
