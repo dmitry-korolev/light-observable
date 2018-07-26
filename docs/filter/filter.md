@@ -1,6 +1,6 @@
 # `filter`
 ```typescript
-type filter = <T>(predicate: (value: T) => boolean) => (stream: Observable<T>) => Observable<T>
+type filter = <T>(predicate: (value: T, index: number) => boolean) => (stream: Observable<T>) => Observable<T>
 ```
 
 ```

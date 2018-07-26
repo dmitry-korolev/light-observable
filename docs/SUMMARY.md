@@ -39,6 +39,11 @@
 * [mergeMap](hos/mergeMap.md)
 * [mergeMapTo](hos/mergeMapTo.md)
 
+### Slice
+* [slice](slice/slice.md)
+* [skip](slice/skip.md)
+* [skipLast](slice/skipLast.md)
+
 ### Handle errors
 * [catchError](errors/catchError.md)
 

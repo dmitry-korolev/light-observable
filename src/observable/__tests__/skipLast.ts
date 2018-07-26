@@ -22,11 +22,10 @@ describe('(Extra) skipLast', () => {
     expect(observer.next).not.toBeCalled()
 
     sink.next(3)
-    expect(observer.next).not.toBeCalled()
+    expect(observer.next).toBeCalledWith(1)
 
-    sink.complete()
-    expect(observer.next.mock.calls).toEqual([[1]])
-    expect(observer.complete).toBeCalled()
+    sink.next(4)
+    expect(observer.next).toBeCalledWith(2)
   })
 
   it('propagates error from source stream', () => {

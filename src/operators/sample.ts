@@ -1,6 +1,6 @@
 import { Observable } from '../core/Observable'
 import { Subscribable } from '../core/types.h'
-import { sample as sampleObservable } from '../observable'
+import { sample as sampleObservable } from '../observable/sample'
 
 export const sample = (signal: Subscribable<any>) => <T>(
   source: Subscribable<T>

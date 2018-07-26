@@ -5,7 +5,7 @@ type pairwise = () => <T>(stream: Observable<T>) => Observable<[T, T]>
 
 ```
 source:           --a--b--c-->
-pairwise(source): -----[a,b]--[b,c]-->
+pairwise(source): -----([a,b])--(b,c)-->
 ```
 
 Returns an Observable, that groups consecutive emissions into pairs, and emits them as an arrays of values. Starts emitting from the second emit of the source Observable.
