@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>delay · GitBook</title>
+        <title>reject · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="partition.html" />
     
-    <link rel="prev" href="../limiting/debounceTime.html" />
+    
+    <link rel="prev" href="filter.html" />
     
 
     </head>
@@ -317,9 +319,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../filter/filter.html">
+        <li class="chapter " data-level="6.1" data-path="filter.html">
             
-                <a href="../filter/filter.html">
+                <a href="filter.html">
             
                     
                     filter
@@ -330,9 +332,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../filter/reject.html">
+        <li class="chapter active" data-level="6.2" data-path="reject.html">
             
-                <a href="../filter/reject.html">
+                <a href="reject.html">
             
                     
                     reject
@@ -343,9 +345,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../filter/partition.html">
+        <li class="chapter " data-level="6.3" data-path="partition.html">
             
-                <a href="../filter/partition.html">
+                <a href="partition.html">
             
                     
                     partition
@@ -521,9 +523,9 @@
         
         
     
-        <li class="chapter active" data-level="11.1" data-path="delay.html">
+        <li class="chapter " data-level="11.1" data-path="../delay/delay.html">
             
-                <a href="delay.html">
+                <a href="../delay/delay.html">
             
                     
                     delay
@@ -564,7 +566,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >delay</a>
+        <a href=".." >reject</a>
     </h1>
 </div>
 
@@ -579,38 +581,36 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="delay"><code>delay</code></h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> delay = (wait: <span class="hljs-built_in">number</span>) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;): Observable&lt;T&gt;
+                                <h1 id="reject"><code>reject</code></h1>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> reject = &lt;T&gt;(predicate: (value: T) =&gt; <span class="hljs-built_in">boolean</span>) =&gt; (stream: Observable&lt;T&gt;) =&gt; Observable&lt;T&gt;
 </code></pre>
-<pre><code>stream:           -a-b-c-d-|
-delay(2)(stream): ---a-b-c-d-|
-</code></pre><p>Delay stream events by the specified number of milliseconds. Maintains the relative spacing of events. Doesn&apos;t delay error event.</p>
+<pre><code>stream:       -1-2-3-4-5-6|
+filter(even): -1---3---5--|
+</code></pre><p>Create a stream containing only events for which <code>predicate</code> returns falsy.</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
-<span class="hljs-keyword">import</span> { delay } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
+<span class="hljs-keyword">import</span> { reject } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>).pipe(
-  delay(<span class="hljs-number">1000</span>)
+<span class="hljs-keyword">const</span> stream = of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>).pipe(
+  reject(x =&gt; x % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>)
 )
 
 stream.subscribe(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">/*
- Second after:
  -&gt; 1
- -&gt; 2
  -&gt; 3
+ -&gt; 5
 */</span>
 </code></pre>
 <p>Also available as an Observable creator:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { delay, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { reject, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = delay(<span class="hljs-number">1000</span>, of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
+<span class="hljs-keyword">const</span> stream = reject(x =&gt; x % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>, of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>))
 
 stream.subscribe(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">/*
- Second after:
  -&gt; 1
- -&gt; 2
  -&gt; 3
+ -&gt; 5
 */</span>
 </code></pre>
 
@@ -640,10 +640,14 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
 
             
                 
-                <a href="../limiting/debounceTime.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: debounceTime">
+                <a href="filter.html" class="navigation navigation-prev " aria-label="Previous page: filter">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="partition.html" class="navigation navigation-next " aria-label="Next page: partition">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -652,7 +656,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"delay","level":"11.1","depth":1,"previous":{"title":"debounceTime","level":"10.2","depth":1,"path":"limiting/debounceTime.md","ref":"limiting/debounceTime.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"delay/delay.md","mtime":"2018-07-25T14:01:07.919Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T10:38:17.521Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"reject","level":"6.2","depth":1,"next":{"title":"partition","level":"6.3","depth":1,"path":"filter/partition.md","ref":"filter/partition.md","articles":[]},"previous":{"title":"filter","level":"6.1","depth":1,"path":"filter/filter.md","ref":"filter/filter.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"filter/reject.md","mtime":"2018-07-26T10:15:27.573Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T10:38:17.521Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

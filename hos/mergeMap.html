@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>delay · GitBook</title>
+        <title>mergeMap · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="mergeMapTo.html" />
     
-    <link rel="prev" href="../limiting/debounceTime.html" />
+    
+    <link rel="prev" href="mergeAll.html" />
     
 
     </head>
@@ -422,9 +424,9 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../hos/mergeAll.html">
+        <li class="chapter " data-level="8.1" data-path="mergeAll.html">
             
-                <a href="../hos/mergeAll.html">
+                <a href="mergeAll.html">
             
                     
                     mergeAll
@@ -435,9 +437,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.2" data-path="../hos/mergeMap.html">
+        <li class="chapter active" data-level="8.2" data-path="mergeMap.html">
             
-                <a href="../hos/mergeMap.html">
+                <a href="mergeMap.html">
             
                     
                     mergeMap
@@ -448,9 +450,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.3" data-path="../hos/mergeMapTo.html">
+        <li class="chapter " data-level="8.3" data-path="mergeMapTo.html">
             
-                <a href="../hos/mergeMapTo.html">
+                <a href="mergeMapTo.html">
             
                     
                     mergeMapTo
@@ -521,9 +523,9 @@
         
         
     
-        <li class="chapter active" data-level="11.1" data-path="delay.html">
+        <li class="chapter " data-level="11.1" data-path="../delay/delay.html">
             
-                <a href="delay.html">
+                <a href="../delay/delay.html">
             
                     
                     delay
@@ -564,7 +566,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >delay</a>
+        <a href=".." >mergeMap</a>
     </h1>
 </div>
 
@@ -579,38 +581,48 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="delay"><code>delay</code></h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> delay = (wait: <span class="hljs-built_in">number</span>) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;): Observable&lt;T&gt;
+                                <h1 id="mergemap"><code>mergeMap</code></h1>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> mergeMap = &lt;T, R&gt;(fn: (value: T) =&gt; Observable&lt;T&gt; | Iterable&lt;T&gt;) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;) =&gt; Observable&lt;R&gt;
 </code></pre>
-<pre><code>stream:           -a-b-c-d-|
-delay(2)(stream): ---a-b-c-d-|
-</code></pre><p>Delay stream events by the specified number of milliseconds. Maintains the relative spacing of events. Doesn&apos;t delay error event.</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
-<span class="hljs-keyword">import</span> { delay } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
+<pre><code>stream:               a---b---c---d-&gt;
+fn(x):                -xx|
+mergeMap(fn)(stream): -aa---bb--bb--dd-&gt;
+</code></pre><p>Given a higher-order stream, return a new stream that merges all the inner streams as they arrive.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { interval, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<span class="hljs-keyword">import</span> { mergeMap } from <span class="hljs-string">&apos;light-observable/operator&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>).pipe(
-  delay(<span class="hljs-number">1000</span>)
+<span class="hljs-keyword">const</span> stream = interval(<span class="hljs-number">1000</span>).pipe(
+  mergeMap(x =&gt; of(x, x + <span class="hljs-number">10</span>, x + <span class="hljs-number">20</span>))
 )
 
 stream.subscribe(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">/*
- Second after:
- -&gt; 1
- -&gt; 2
- -&gt; 3
+ -&gt; 0 // 1000ms
+ -&gt; 10 // 1000ms
+ -&gt; 20 // 1000ms
+ -&gt; 1 // 2000ms
+ -&gt; 11 // 2000ms
+ -&gt; 21 // 2000ms
+ ...
 */</span>
 </code></pre>
 <p>Also available as an Observable creator:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { delay, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { mergeAll, interval, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = delay(<span class="hljs-number">1000</span>, of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
+<span class="hljs-keyword">const</span> stream = mergeAll(of(
+  [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>],
+  of(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>),
+  interval(<span class="hljs-number">100</span>)
+))
 
 stream.subscribe(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">/*
- Second after:
  -&gt; 1
  -&gt; 2
  -&gt; 3
+ -&gt; 4
+ -&gt; 0 // 100ms
+ -&gt; 1 // 200ms
 */</span>
 </code></pre>
 
@@ -640,10 +652,14 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
 
             
                 
-                <a href="../limiting/debounceTime.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: debounceTime">
+                <a href="mergeAll.html" class="navigation navigation-prev " aria-label="Previous page: mergeAll">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="mergeMapTo.html" class="navigation navigation-next " aria-label="Next page: mergeMapTo">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -652,7 +668,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"delay","level":"11.1","depth":1,"previous":{"title":"debounceTime","level":"10.2","depth":1,"path":"limiting/debounceTime.md","ref":"limiting/debounceTime.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"delay/delay.md","mtime":"2018-07-25T14:01:07.919Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T10:38:17.521Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"mergeMap","level":"8.2","depth":1,"next":{"title":"mergeMapTo","level":"8.3","depth":1,"path":"hos/mergeMapTo.md","ref":"hos/mergeMapTo.md","articles":[]},"previous":{"title":"mergeAll","level":"8.1","depth":1,"path":"hos/mergeAll.md","ref":"hos/mergeAll.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"hos/mergeMap.md","mtime":"2018-07-26T07:19:41.826Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T10:38:17.521Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

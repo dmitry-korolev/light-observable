@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>delay · GitBook</title>
+        <title>reduce · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../create/of.html" />
     
-    <link rel="prev" href="../limiting/debounceTime.html" />
+    
+    <link rel="prev" href="forEach.html" />
     
 
     </head>
@@ -127,9 +129,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="../consume/forEach.html">
+        <li class="chapter " data-level="3.1" data-path="forEach.html">
             
-                <a href="../consume/forEach.html">
+                <a href="forEach.html">
             
                     
                     forEach
@@ -140,9 +142,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../consume/reduce.html">
+        <li class="chapter active" data-level="3.2" data-path="reduce.html">
             
-                <a href="../consume/reduce.html">
+                <a href="reduce.html">
             
                     
                     reduce
@@ -521,9 +523,9 @@
         
         
     
-        <li class="chapter active" data-level="11.1" data-path="delay.html">
+        <li class="chapter " data-level="11.1" data-path="../delay/delay.html">
             
-                <a href="delay.html">
+                <a href="../delay/delay.html">
             
                     
                     delay
@@ -564,7 +566,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >delay</a>
+        <a href=".." >reduce</a>
     </h1>
 </div>
 
@@ -579,39 +581,38 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="delay"><code>delay</code></h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> delay = (wait: <span class="hljs-built_in">number</span>) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;): Observable&lt;T&gt;
+                                <h1 id="reduce"><code>reduce</code></h1>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> reduce = &lt;T, R&gt;(
+  fn: (result: R, value: T, index: <span class="hljs-built_in">number</span>) =&gt; <span class="hljs-built_in">void</span>,
+  initial: R
+) =&gt; (stream: Observable&lt;T&gt;) =&gt; Promise&lt;R&gt;
 </code></pre>
-<pre><code>stream:           -a-b-c-d-|
-delay(2)(stream): ---a-b-c-d-|
-</code></pre><p>Delay stream events by the specified number of milliseconds. Maintains the relative spacing of events. Doesn&apos;t delay error event.</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
-<span class="hljs-keyword">import</span> { delay } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
+<p>Starts consuming a source, reducing it to the single value with a provided function starting from an initial value. Returns a Promise, which resolves with a resulting value when the source completes, or rejects if the source errors.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { interval } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<span class="hljs-keyword">import</span> { reduce, skip, take } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>).pipe(
-  delay(<span class="hljs-number">1000</span>)
+<span class="hljs-keyword">const</span> promise = interval(<span class="hljs-number">50</span>).pipe(
+  skip(<span class="hljs-number">1</span>),
+  take(<span class="hljs-number">5</span>),
+  reduce((prev, value) =&gt; prev * value, <span class="hljs-number">1</span>)
 )
 
-stream.subscribe(<span class="hljs-built_in">console</span>.log)
+promise.then(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">/*
- Second after:
- -&gt; 1
- -&gt; 2
- -&gt; 3
+ -&gt; 120
 */</span>
 </code></pre>
-<p>Also available as an Observable creator:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { delay, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<p>Also available as function:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { reduce, interval } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<span class="hljs-keyword">import</span> { skip, take } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = delay(<span class="hljs-number">1000</span>, of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
+<span class="hljs-keyword">const</span> stream = interval(<span class="hljs-number">50</span>).pipe(
+  skip(<span class="hljs-number">1</span>),
+  take(<span class="hljs-number">5</span>)
+)
 
-stream.subscribe(<span class="hljs-built_in">console</span>.log)
-<span class="hljs-comment">/*
- Second after:
- -&gt; 1
- -&gt; 2
- -&gt; 3
-*/</span>
+<span class="hljs-keyword">const</span> promise = reduce((prev, value) =&gt; prev * value, <span class="hljs-number">1</span>, stream)
+promise.then(<span class="hljs-built_in">console</span>.log)
 </code></pre>
 
                                 
@@ -640,10 +641,14 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
 
             
                 
-                <a href="../limiting/debounceTime.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: debounceTime">
+                <a href="forEach.html" class="navigation navigation-prev " aria-label="Previous page: forEach">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../create/of.html" class="navigation navigation-next " aria-label="Next page: of">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -652,7 +657,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"delay","level":"11.1","depth":1,"previous":{"title":"debounceTime","level":"10.2","depth":1,"path":"limiting/debounceTime.md","ref":"limiting/debounceTime.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"delay/delay.md","mtime":"2018-07-25T14:01:07.919Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T10:38:17.521Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"reduce","level":"3.2","depth":1,"next":{"title":"of","level":"4.1","depth":1,"path":"create/of.md","ref":"create/of.md","articles":[]},"previous":{"title":"forEach","level":"3.1","depth":1,"path":"consume/forEach.md","ref":"consume/forEach.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"consume/reduce.md","mtime":"2018-07-26T10:12:56.022Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T10:38:17.521Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

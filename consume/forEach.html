@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../create/of.html" />
+    <link rel="next" href="reduce.html" />
     
     
     <link rel="prev" href="../core/Observable.html" />
@@ -135,6 +135,19 @@
             
                     
                     forEach
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="reduce.html">
+            
+                <a href="reduce.html">
+            
+                    
+                    reduce
             
                 </a>
             
@@ -273,6 +286,32 @@
             
         </li>
     
+        <li class="chapter " data-level="5.3" data-path="../transform/pairwise.html">
+            
+                <a href="../transform/pairwise.html">
+            
+                    
+                    pairwise
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="../transform/scan.html">
+            
+                <a href="../transform/scan.html">
+            
+                    
+                    scan
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -286,6 +325,32 @@
             
                     
                     filter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../filter/reject.html">
+            
+                <a href="../filter/reject.html">
+            
+                    
+                    reject
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../filter/partition.html">
+            
+                <a href="../filter/partition.html">
+            
+                    
+                    partition
             
                 </a>
             
@@ -339,6 +404,19 @@
             
         </li>
     
+        <li class="chapter " data-level="7.4" data-path="../combine/sample.html">
+            
+                <a href="../combine/sample.html">
+            
+                    
+                    sample
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -352,6 +430,32 @@
             
                     
                     mergeAll
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../hos/mergeMap.html">
+            
+                <a href="../hos/mergeMap.html">
+            
+                    
+                    mergeMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="../hos/mergeMapTo.html">
+            
+                <a href="../hos/mergeMapTo.html">
+            
+                    
+                    mergeMapTo
             
                 </a>
             
@@ -480,7 +584,7 @@
                                 <h1 id="foreach"><code>forEach</code></h1>
 <pre><code class="lang-typescript"><span class="hljs-keyword">type</span> forEach = &lt;T&gt;(fn?: (value: T) =&gt; <span class="hljs-built_in">void</span>) =&gt; (stream: Observable&lt;S&gt;) =&gt; Promise&lt;<span class="hljs-built_in">void</span>&gt;
 </code></pre>
-<p>Starts consuming a source, processing each <code>next</code> event with provided function. Returns a Promise, which resolves, when the source completes, or rejects it the source errors.</p>
+<p>Starts consuming a source, processing each <code>next</code> event with provided function. Returns a Promise, which resolves when the source completes, or rejects if the source errors.</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 <span class="hljs-keyword">import</span> { forEach } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
@@ -541,7 +645,7 @@ promise.then(() =&gt; <span class="hljs-built_in">console</span>.log(<span class
                 </a>
                 
                 
-                <a href="../create/of.html" class="navigation navigation-next " aria-label="Next page: of">
+                <a href="reduce.html" class="navigation navigation-next " aria-label="Next page: reduce">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -552,7 +656,7 @@ promise.then(() =&gt; <span class="hljs-built_in">console</span>.log(<span class
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"forEach","level":"3.1","depth":1,"next":{"title":"of","level":"4.1","depth":1,"path":"create/of.md","ref":"create/of.md","articles":[]},"previous":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"consume/forEach.md","mtime":"2018-07-25T14:01:07.900Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-25T15:07:12.501Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"forEach","level":"3.1","depth":1,"next":{"title":"reduce","level":"3.2","depth":1,"path":"consume/reduce.md","ref":"consume/reduce.md","articles":[]},"previous":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"consume/forEach.md","mtime":"2018-07-26T10:00:31.725Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T10:38:17.521Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

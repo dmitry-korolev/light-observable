@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>delay · GitBook</title>
+        <title>sample · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../hos/mergeAll.html" />
     
-    <link rel="prev" href="../limiting/debounceTime.html" />
+    
+    <link rel="prev" href="merge.html" />
     
 
     </head>
@@ -363,9 +365,9 @@
         
         
     
-        <li class="chapter " data-level="7.1" data-path="../combine/concat.html">
+        <li class="chapter " data-level="7.1" data-path="concat.html">
             
-                <a href="../combine/concat.html">
+                <a href="concat.html">
             
                     
                     concat
@@ -376,9 +378,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.2" data-path="../combine/combineLatest.html">
+        <li class="chapter " data-level="7.2" data-path="combineLatest.html">
             
-                <a href="../combine/combineLatest.html">
+                <a href="combineLatest.html">
             
                     
                     combineLatest
@@ -389,9 +391,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.3" data-path="../combine/merge.html">
+        <li class="chapter " data-level="7.3" data-path="merge.html">
             
-                <a href="../combine/merge.html">
+                <a href="merge.html">
             
                     
                     merge
@@ -402,9 +404,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../combine/sample.html">
+        <li class="chapter active" data-level="7.4" data-path="sample.html">
             
-                <a href="../combine/sample.html">
+                <a href="sample.html">
             
                     
                     sample
@@ -521,9 +523,9 @@
         
         
     
-        <li class="chapter active" data-level="11.1" data-path="delay.html">
+        <li class="chapter " data-level="11.1" data-path="../delay/delay.html">
             
-                <a href="delay.html">
+                <a href="../delay/delay.html">
             
                     
                     delay
@@ -564,7 +566,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >delay</a>
+        <a href=".." >sample</a>
     </h1>
 </div>
 
@@ -579,38 +581,33 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="delay"><code>delay</code></h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> delay = (wait: <span class="hljs-built_in">number</span>) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;): Observable&lt;T&gt;
+                                <h1 id="sample"><code>sample</code></h1>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> sample = (signal: Observable&lt;<span class="hljs-built_in">any</span>&gt;) =&gt; &lt;T&gt;(source: Observable&lt;T&gt;) =&gt; Observable&lt;T&gt;
 </code></pre>
-<pre><code>stream:           -a-b-c-d-|
-delay(2)(stream): ---a-b-c-d-|
-</code></pre><p>Delay stream events by the specified number of milliseconds. Maintains the relative spacing of events. Doesn&apos;t delay error event.</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
-<span class="hljs-keyword">import</span> { delay } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
+<pre><code>source:                 -a--b-cd----d-&gt;
+signal:                 --x--x--x--x--&gt;
+sample(signal)(source): --a--b--d-----&gt;
+</code></pre><p>Emits the most recently emitted value from the source Observable whenever another Observable, the <code>signal</code>, emits.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { fromEvent } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<span class="hljs-keyword">import</span> { sample } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>).pipe(
-  delay(<span class="hljs-number">1000</span>)
-)
+<span class="hljs-keyword">const</span> stream = fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&apos;mousemove&apos;</span>).pipe(
+  sample(fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&apos;keydown&apos;</span>))
+) 
 
 stream.subscribe(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">/*
- Second after:
- -&gt; 1
- -&gt; 2
- -&gt; 3
+  logs mousemove event on every keydown event
 */</span>
 </code></pre>
 <p>Also available as an Observable creator:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { delay, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { sample, fromEvent } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = delay(<span class="hljs-number">1000</span>, of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
+<span class="hljs-keyword">const</span> stream = sample(fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&apos;keydown&apos;</span>), fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&apos;mousemove&apos;</span>))
 
 stream.subscribe(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">/*
- Second after:
- -&gt; 1
- -&gt; 2
- -&gt; 3
+  logs mousemove event on every keydown event
 */</span>
 </code></pre>
 
@@ -640,10 +637,14 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
 
             
                 
-                <a href="../limiting/debounceTime.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: debounceTime">
+                <a href="merge.html" class="navigation navigation-prev " aria-label="Previous page: merge">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../hos/mergeAll.html" class="navigation navigation-next " aria-label="Next page: mergeAll">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -652,7 +653,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"delay","level":"11.1","depth":1,"previous":{"title":"debounceTime","level":"10.2","depth":1,"path":"limiting/debounceTime.md","ref":"limiting/debounceTime.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"delay/delay.md","mtime":"2018-07-25T14:01:07.919Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T10:38:17.521Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"sample","level":"7.4","depth":1,"next":{"title":"mergeAll","level":"8.1","depth":1,"path":"hos/mergeAll.md","ref":"hos/mergeAll.md","articles":[]},"previous":{"title":"merge","level":"7.3","depth":1,"path":"combine/merge.md","ref":"combine/merge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"combine/sample.md","mtime":"2018-07-26T10:31:43.759Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T10:38:17.521Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
