@@ -155,7 +155,20 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="consume/reduce.html">
+        <li class="chapter " data-level="3.2" data-path="consume/drain.html">
+            
+                <a href="consume/drain.html">
+            
+                    
+                    drain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="consume/reduce.html">
             
                 <a href="consume/reduce.html">
             
@@ -168,7 +181,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="consume/toArray.html">
+        <li class="chapter " data-level="3.4" data-path="consume/toArray.html">
             
                 <a href="consume/toArray.html">
             
@@ -279,7 +292,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.8" data-path="create/subject.html">
+        <li class="chapter " data-level="4.8" data-path="create/never.html">
+            
+                <a href="create/never.html">
+            
+                    
+                    never
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.9" data-path="create/subject.html">
             
                 <a href="create/subject.html">
             
@@ -416,6 +442,19 @@
             
                     
                     partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="filter/skipRepeats.html">
+            
+                <a href="filter/skipRepeats.html">
+            
+                    
+                    skipRepeats
             
                 </a>
             
@@ -871,6 +910,7 @@ o.subscribe(<span class="hljs-built_in">console</span>.log)
 <h3 id="consume">Consume</h3>
 <ul>
 <li><a href="https://dmitry-korolev.github.io/light-observable/consume/forEach.html" target="_blank">forEach</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/consume/drain.html" target="_blank">drain</a></li>
 <li><a href="https://dmitry-korolev.github.io/light-observable/consume/reduce.html" target="_blank">reduce</a></li>
 <li><a href="https://dmitry-korolev.github.io/light-observable/consume/toArray.html" target="_blank">toArray</a></li>
 </ul>
@@ -883,6 +923,7 @@ o.subscribe(<span class="hljs-built_in">console</span>.log)
 <li><a href="https://dmitry-korolev.github.io/light-observable/create/interval.html" target="_blank">interval</a></li>
 <li><a href="https://dmitry-korolev.github.io/light-observable/create/defer.html" target="_blank">defer</a></li>
 <li><a href="https://dmitry-korolev.github.io/light-observable/create/empty.html" target="_blank">empty</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/create/never.html" target="_blank">never</a></li>
 <li><a href="https://dmitry-korolev.github.io/light-observable/create/subject.html" target="_blank">createSubject</a></li>
 </ul>
 <h3 id="transform">Transform</h3>
@@ -899,6 +940,7 @@ o.subscribe(<span class="hljs-built_in">console</span>.log)
 <li><a href="https://dmitry-korolev.github.io/light-observable/filter/filter.html" target="_blank">filter</a></li>
 <li><a href="https://dmitry-korolev.github.io/light-observable/filter/reject.html" target="_blank">reject</a></li>
 <li><a href="https://dmitry-korolev.github.io/light-observable/filter/partition.html" target="_blank">partition</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/filter/skipRepeats.html" target="_blank">skipRepeats</a></li>
 </ul>
 <h3 id="combine">Combine</h3>
 <ul>
@@ -939,7 +981,7 @@ o.subscribe(<span class="hljs-built_in">console</span>.log)
 </ul>
 <h3 id="delay">Delay</h3>
 <ul>
-<li><a href="delay/delay.html">delay</a></li>
+<li><a href="https://dmitry-korolev.github.io/light-observable/delay/delay.html" target="_blank">delay</a></li>
 </ul>
 <h2 id="notice-on-interoperability">Notice on interoperability</h2>
 <p>RxJS 6 doesn&apos;t use &apos;symbol-observable&apos; polyfill. This may cause some weird issues with interop depending on the import order. It is recommended to install and import <code>symbol-observable</code> polyfill before RxJS.</p>
@@ -999,7 +1041,7 @@ limitations under the License.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2018-07-26T19:10:30.671Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2018-07-26T20:56:21.077Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

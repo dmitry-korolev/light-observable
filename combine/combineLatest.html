@@ -157,7 +157,20 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../consume/reduce.html">
+        <li class="chapter " data-level="3.2" data-path="../consume/drain.html">
+            
+                <a href="../consume/drain.html">
+            
+                    
+                    drain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../consume/reduce.html">
             
                 <a href="../consume/reduce.html">
             
@@ -170,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="../consume/toArray.html">
+        <li class="chapter " data-level="3.4" data-path="../consume/toArray.html">
             
                 <a href="../consume/toArray.html">
             
@@ -281,7 +294,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.8" data-path="../create/subject.html">
+        <li class="chapter " data-level="4.8" data-path="../create/never.html">
+            
+                <a href="../create/never.html">
+            
+                    
+                    never
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.9" data-path="../create/subject.html">
             
                 <a href="../create/subject.html">
             
@@ -418,6 +444,19 @@
             
                     
                     partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../filter/skipRepeats.html">
+            
+                <a href="../filter/skipRepeats.html">
+            
+                    
+                    skipRepeats
             
                 </a>
             
@@ -817,7 +856,7 @@
 <pre><code>streamA:                         -a-b-c-d-e-f-g-h-&gt;
 streamB:                         --1--2--3--4--5-&gt;
 combineLatest(streamA, streamB): --[a,1][b,1]-[c,2]-&gt;
-</code></pre><p>When any observable emits a value, emits the latest value from each.</p>
+</code></pre><p>When any source <code>stream</code> emits a value, emits the latest value from each.</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { combineLatest, interval } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
 <span class="hljs-keyword">const</span> stream = combineLatest(interval(<span class="hljs-number">300</span>), interval(<span class="hljs-number">1000</span>))
@@ -901,7 +940,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"combineLatest","level":"7.2","depth":1,"next":{"title":"merge","level":"7.3","depth":1,"path":"combine/merge.md","ref":"combine/merge.md","articles":[]},"previous":{"title":"concat","level":"7.1","depth":1,"path":"combine/concat.md","ref":"combine/concat.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"combine/combineLatest.md","mtime":"2018-07-25T13:58:50.933Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"combineLatest","level":"7.2","depth":1,"next":{"title":"merge","level":"7.3","depth":1,"path":"combine/merge.md","ref":"combine/merge.md","articles":[]},"previous":{"title":"concat","level":"7.1","depth":1,"path":"combine/concat.md","ref":"combine/concat.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"combine/combineLatest.md","mtime":"2018-07-26T20:40:58.172Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

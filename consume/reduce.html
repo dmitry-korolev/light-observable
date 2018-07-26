@@ -62,7 +62,7 @@
     <link rel="next" href="toArray.html" />
     
     
-    <link rel="prev" href="forEach.html" />
+    <link rel="prev" href="drain.html" />
     
 
     </head>
@@ -157,7 +157,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.2" data-path="reduce.html">
+        <li class="chapter " data-level="3.2" data-path="drain.html">
+            
+                <a href="drain.html">
+            
+                    
+                    drain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.3" data-path="reduce.html">
             
                 <a href="reduce.html">
             
@@ -170,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="toArray.html">
+        <li class="chapter " data-level="3.4" data-path="toArray.html">
             
                 <a href="toArray.html">
             
@@ -281,7 +294,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.8" data-path="../create/subject.html">
+        <li class="chapter " data-level="4.8" data-path="../create/never.html">
+            
+                <a href="../create/never.html">
+            
+                    
+                    never
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.9" data-path="../create/subject.html">
             
                 <a href="../create/subject.html">
             
@@ -418,6 +444,19 @@
             
                     
                     partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../filter/skipRepeats.html">
+            
+                <a href="../filter/skipRepeats.html">
+            
+                    
+                    skipRepeats
             
                 </a>
             
@@ -817,7 +856,7 @@
   initial: R
 ) =&gt; (stream: Observable&lt;T&gt;) =&gt; Promise&lt;R&gt;
 </code></pre>
-<p>Starts consuming a source, reducing it to the single value with a provided function starting from an initial value. Returns a Promise, which resolves with a resulting value when the source completes, or rejects if the source errors.</p>
+<p>Starts consuming a source <code>stream</code>, reducing it to the single value with a provided <code>fn</code> starting from an <code>initial</code> value. Returns a Promise, which resolves with a resulting value when the source completes, or rejects if the source errors.</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { interval } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 <span class="hljs-keyword">import</span> { reduce, skip, take } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
@@ -871,7 +910,7 @@ promise.then(<span class="hljs-built_in">console</span>.log)
 
             
                 
-                <a href="forEach.html" class="navigation navigation-prev " aria-label="Previous page: forEach">
+                <a href="drain.html" class="navigation navigation-prev " aria-label="Previous page: drain">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -887,7 +926,7 @@ promise.then(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"reduce","level":"3.2","depth":1,"next":{"title":"toArray","level":"3.3","depth":1,"path":"consume/toArray.md","ref":"consume/toArray.md","articles":[]},"previous":{"title":"forEach","level":"3.1","depth":1,"path":"consume/forEach.md","ref":"consume/forEach.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"consume/reduce.md","mtime":"2018-07-26T10:12:56.022Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"reduce","level":"3.3","depth":1,"next":{"title":"toArray","level":"3.4","depth":1,"path":"consume/toArray.md","ref":"consume/toArray.md","articles":[]},"previous":{"title":"drain","level":"3.2","depth":1,"path":"consume/drain.md","ref":"consume/drain.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"consume/reduce.md","mtime":"2018-07-26T20:11:04.182Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

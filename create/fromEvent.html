@@ -157,7 +157,20 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../consume/reduce.html">
+        <li class="chapter " data-level="3.2" data-path="../consume/drain.html">
+            
+                <a href="../consume/drain.html">
+            
+                    
+                    drain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../consume/reduce.html">
             
                 <a href="../consume/reduce.html">
             
@@ -170,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="../consume/toArray.html">
+        <li class="chapter " data-level="3.4" data-path="../consume/toArray.html">
             
                 <a href="../consume/toArray.html">
             
@@ -281,7 +294,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.8" data-path="subject.html">
+        <li class="chapter " data-level="4.8" data-path="never.html">
+            
+                <a href="never.html">
+            
+                    
+                    never
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.9" data-path="subject.html">
             
                 <a href="subject.html">
             
@@ -418,6 +444,19 @@
             
                     
                     partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../filter/skipRepeats.html">
+            
+                <a href="../filter/skipRepeats.html">
+            
+                    
+                    skipRepeats
             
                 </a>
             
@@ -812,14 +851,17 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="fromevent"><code>fromEvent</code></h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> fromEvent = (eventSource: EventEmitter | EventTarget, eventName: <span class="hljs-built_in">string</span> | symbol, capture?: <span class="hljs-built_in">boolean</span>) =&gt; Observable&lt;<span class="hljs-built_in">any</span>&gt;
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> fromEvent = (
+  eventSource: EventEmitter | EventTarget,
+  eventName: <span class="hljs-built_in">string</span> | symbol,
+  capture?: <span class="hljs-built_in">boolean</span>
+) =&gt; Observable&lt;<span class="hljs-built_in">any</span>&gt;
 </code></pre>
 <pre><code>source:                       -a--b--c----d-&gt;
 fromEvent(source, eventName): -a--b--c----d-&gt;
-</code></pre><p>Creates an Observable containing events from provided EventTarget (like a DOM element), or an EventEmitter (like a Node EventEmitter).</p>
+</code></pre><p>Creates an Observable containing <code>eventName</code> events from provided <code>eventSource</code> (EventTarget like a DOM element, or an EventEmitter like a Node EventEmitter).</p>
 <p>When subscribing to an EventTarget, a third parameter, <code>capture</code>, may be provided. If not provided, will default to <code>false</code>.</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { fromEvent } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
-<span class="hljs-keyword">import</span> {  } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
 <span class="hljs-keyword">const</span> stream = fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&apos;click&apos;</span>)
 
@@ -868,7 +910,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"fromEvent","level":"4.3","depth":1,"next":{"title":"fromPromise","level":"4.4","depth":1,"path":"create/fromPromise.md","ref":"create/fromPromise.md","articles":[]},"previous":{"title":"from","level":"4.2","depth":1,"path":"create/from.md","ref":"create/from.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"create/fromEvent.md","mtime":"2018-07-25T14:01:07.903Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"fromEvent","level":"4.3","depth":1,"next":{"title":"fromPromise","level":"4.4","depth":1,"path":"create/fromPromise.md","ref":"create/fromPromise.md","articles":[]},"previous":{"title":"from","level":"4.2","depth":1,"path":"create/from.md","ref":"create/from.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"create/fromEvent.md","mtime":"2018-07-26T20:16:28.694Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

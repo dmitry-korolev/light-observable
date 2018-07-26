@@ -1,6 +1,8 @@
 # `takeUntil`
 ```typescript
-type takeUntil = (signal: Observable<any>) => <T>(source: Observable<T>) => Observable<T>
+type takeUntil = (
+  signal: Observable<any>
+) => <T>(source: Observable<T>) => Observable<T>
 ```
 
 ```

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>types · GitBook</title>
+        <title>never · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -59,10 +59,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../consume/forEach.html" />
+    <link rel="next" href="subject.html" />
     
     
-    <link rel="prev" href="Observable.html" />
+    <link rel="prev" href="empty.html" />
     
 
     </head>
@@ -111,9 +111,9 @@
         
         
     
-        <li class="chapter " data-level="2.1" data-path="Observable.html">
+        <li class="chapter " data-level="2.1" data-path="../core/Observable.html">
             
-                <a href="Observable.html">
+                <a href="../core/Observable.html">
             
                     
                     Observable
@@ -124,9 +124,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.2" data-path="types.html">
+        <li class="chapter " data-level="2.2" data-path="../core/types.html">
             
-                <a href="types.html">
+                <a href="../core/types.html">
             
                     
                     types
@@ -203,9 +203,9 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../create/of.html">
+        <li class="chapter " data-level="4.1" data-path="of.html">
             
-                <a href="../create/of.html">
+                <a href="of.html">
             
                     
                     of
@@ -216,9 +216,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="../create/from.html">
+        <li class="chapter " data-level="4.2" data-path="from.html">
             
-                <a href="../create/from.html">
+                <a href="from.html">
             
                     
                     from
@@ -229,9 +229,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="../create/fromEvent.html">
+        <li class="chapter " data-level="4.3" data-path="fromEvent.html">
             
-                <a href="../create/fromEvent.html">
+                <a href="fromEvent.html">
             
                     
                     fromEvent
@@ -242,9 +242,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.4" data-path="../create/fromPromise.html">
+        <li class="chapter " data-level="4.4" data-path="fromPromise.html">
             
-                <a href="../create/fromPromise.html">
+                <a href="fromPromise.html">
             
                     
                     fromPromise
@@ -255,9 +255,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.5" data-path="../create/interval.html">
+        <li class="chapter " data-level="4.5" data-path="interval.html">
             
-                <a href="../create/interval.html">
+                <a href="interval.html">
             
                     
                     interval
@@ -268,9 +268,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.6" data-path="../create/defer.html">
+        <li class="chapter " data-level="4.6" data-path="defer.html">
             
-                <a href="../create/defer.html">
+                <a href="defer.html">
             
                     
                     defer
@@ -281,9 +281,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.7" data-path="../create/empty.html">
+        <li class="chapter " data-level="4.7" data-path="empty.html">
             
-                <a href="../create/empty.html">
+                <a href="empty.html">
             
                     
                     empty
@@ -294,9 +294,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.8" data-path="../create/never.html">
+        <li class="chapter active" data-level="4.8" data-path="never.html">
             
-                <a href="../create/never.html">
+                <a href="never.html">
             
                     
                     never
@@ -307,9 +307,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.9" data-path="../create/subject.html">
+        <li class="chapter " data-level="4.9" data-path="subject.html">
             
-                <a href="../create/subject.html">
+                <a href="subject.html">
             
                     
                     createSubject
@@ -835,7 +835,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >types</a>
+        <a href=".." >never</a>
     </h1>
 </div>
 
@@ -850,86 +850,20 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="types">Types</h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">class</span> Observable&lt;T&gt; <span class="hljs-keyword">implements</span> Subscribable&lt;T&gt; {
-  <span class="hljs-keyword">static</span> of&lt;TS extends <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">any</span>&gt;&gt;(
-    ...args: TS
-  ): Observable&lt;TS extends <span class="hljs-built_in">Array</span>&lt;infer T&gt; ? T : <span class="hljs-literal">null</span>&gt;
-  <span class="hljs-keyword">static</span> from&lt;A&gt;(ish: Observable&lt;A&gt; | Iterable&lt;A&gt;): Observable&lt;A&gt;
-  <span class="hljs-keyword">constructor</span>(source: Subscriber&lt;T&gt;)
-  subscribe(
-    next?: PartialObserver&lt;T&gt; | ((value: T) =&gt; void),
-    error?: (reason: any) =&gt; void,
-    complete?: () =&gt; void
-  ): ObservableSubscription&lt;T&gt;
-  pipe(...operations: Array&lt;Unary&lt;any, any&gt;&gt;): any
-}
+                                <h1 id="never"><code>NEVER</code></h1>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> never = Observable&lt;never&gt;
+</code></pre>
+<pre><code>NEVER:   ---&gt;
+never(): ---&gt;
+</code></pre><p>Represents an empty observable which never emits nor completes.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { NEVER, never } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
-declare class ObservableSubscription&lt;T&gt; implements Subscription {
-  <span class="hljs-keyword">constructor</span>(observer: PartialObserver&lt;T&gt;, source: Subscriber&lt;T&gt;)
-  readonly closed: boolean
-  unsubscribe(): void
-}
+NEVER.subscribe({ complete: () =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;This will never ever happen&apos;</span>) })
+never().subscribe({ complete: () =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;This will never happen neither&apos;</span>) })
 
-interface Subscribable&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  subscribe(
-    next?: PartialObserver&lt;T&gt; | ((value: T) =&gt; <span class="hljs-built_in">void</span>),
-    error?: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>,
-    complete?: () =&gt; <span class="hljs-built_in">void</span>
-  ): Subscription
-}
-
-<span class="hljs-keyword">interface</span> Subscription {
-  closed?: <span class="hljs-built_in">boolean</span>
-  unsubscribe(): <span class="hljs-built_in">void</span>
-}
-
-<span class="hljs-keyword">interface</span> NextObserver&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  next: (value: T) =&gt; <span class="hljs-built_in">void</span>
-  error?: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>
-  complete?: () =&gt; <span class="hljs-built_in">void</span>
-  start?: (subscription: Subscription) =&gt; <span class="hljs-built_in">void</span>
-}
-
-<span class="hljs-keyword">interface</span> ErrorObserver&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  next?: (value: T) =&gt; <span class="hljs-built_in">void</span>
-  error: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>
-  complete?: () =&gt; <span class="hljs-built_in">void</span>
-  start?: (subscription: Subscription) =&gt; <span class="hljs-built_in">void</span>
-}
-
-<span class="hljs-keyword">interface</span> CompletionObserver&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  next?: (value: T) =&gt; <span class="hljs-built_in">void</span>
-  error?: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>
-  complete: () =&gt; <span class="hljs-built_in">void</span>
-  start?: (subscription: Subscription) =&gt; <span class="hljs-built_in">void</span>
-}
-
-<span class="hljs-keyword">type</span> PartialObserver&lt;T&gt; =
-  | NextObserver&lt;T&gt;
-  | ErrorObserver&lt;T&gt;
-  | CompletionObserver&lt;T&gt;
-
-<span class="hljs-keyword">interface</span> SubscriptionObserver&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  next: (value: T) =&gt; <span class="hljs-built_in">void</span>
-  error: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>
-  complete: () =&gt; <span class="hljs-built_in">void</span>
-}
-
-<span class="hljs-keyword">type</span> Subscriber&lt;T&gt; = (observer: SubscriptionObserver&lt;T&gt;) =&gt; Disposer
-
-<span class="hljs-keyword">type</span> Disposer =
-  | <span class="hljs-built_in">void</span>
-  | (() =&gt; <span class="hljs-built_in">void</span>)
-  | ({ unsubscribe: () =&gt; <span class="hljs-built_in">void</span> })
-  | Subscription
-
-<span class="hljs-keyword">type</span> Unary&lt;T, R&gt; = (arg: T) =&gt; R
+<span class="hljs-comment">/*
+ crickets chirping...
+*/</span>
 </code></pre>
 
                                 
@@ -958,12 +892,12 @@ interface Subscribable&lt;T&gt; {
 
             
                 
-                <a href="Observable.html" class="navigation navigation-prev " aria-label="Previous page: Observable">
+                <a href="empty.html" class="navigation navigation-prev " aria-label="Previous page: empty">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../consume/forEach.html" class="navigation navigation-next " aria-label="Next page: forEach">
+                <a href="subject.html" class="navigation navigation-next " aria-label="Next page: createSubject">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -974,7 +908,7 @@ interface Subscribable&lt;T&gt; {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"types","level":"2.2","depth":1,"next":{"title":"forEach","level":"3.1","depth":1,"path":"consume/forEach.md","ref":"consume/forEach.md","articles":[]},"previous":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"core/types.md","mtime":"2018-07-26T19:06:43.554Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"never","level":"4.8","depth":1,"next":{"title":"createSubject","level":"4.9","depth":1,"path":"create/subject.md","ref":"create/subject.md","articles":[]},"previous":{"title":"empty","level":"4.7","depth":1,"path":"create/empty.md","ref":"create/empty.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"create/never.md","mtime":"2018-07-26T20:23:42.675Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

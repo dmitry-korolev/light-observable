@@ -157,7 +157,20 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../consume/reduce.html">
+        <li class="chapter " data-level="3.2" data-path="../consume/drain.html">
+            
+                <a href="../consume/drain.html">
+            
+                    
+                    drain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../consume/reduce.html">
             
                 <a href="../consume/reduce.html">
             
@@ -170,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="../consume/toArray.html">
+        <li class="chapter " data-level="3.4" data-path="../consume/toArray.html">
             
                 <a href="../consume/toArray.html">
             
@@ -281,7 +294,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.8" data-path="subject.html">
+        <li class="chapter " data-level="4.8" data-path="never.html">
+            
+                <a href="never.html">
+            
+                    
+                    never
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.9" data-path="subject.html">
             
                 <a href="subject.html">
             
@@ -418,6 +444,19 @@
             
                     
                     partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../filter/skipRepeats.html">
+            
+                <a href="../filter/skipRepeats.html">
+            
+                    
+                    skipRepeats
             
                 </a>
             
@@ -816,7 +855,7 @@
 </code></pre>
 <pre><code>promise:              -----a
 fromPromise(promise): -----a|
-</code></pre><p>Creates an Observable, that waits for the provided promise to resolve or reject. Emits resolved value and completes in the first case, errors in the second case.</p>
+</code></pre><p>Creates an Observable, that waits for the provided <code>promise</code> to resolve or reject. Emits resolved value and completes in the first case, errors in the second case.</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { fromPromise } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
 <span class="hljs-keyword">const</span> fetchData = (params) =&gt; fromPromise(fetch(params))
@@ -867,7 +906,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"fromPromise","level":"4.4","depth":1,"next":{"title":"interval","level":"4.5","depth":1,"path":"create/interval.md","ref":"create/interval.md","articles":[]},"previous":{"title":"fromEvent","level":"4.3","depth":1,"path":"create/fromEvent.md","ref":"create/fromEvent.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"create/fromPromise.md","mtime":"2018-07-25T14:01:07.917Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"fromPromise","level":"4.4","depth":1,"next":{"title":"interval","level":"4.5","depth":1,"path":"create/interval.md","ref":"create/interval.md","articles":[]},"previous":{"title":"fromEvent","level":"4.3","depth":1,"path":"create/fromEvent.md","ref":"create/fromEvent.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"create/fromPromise.md","mtime":"2018-07-26T20:17:21.437Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

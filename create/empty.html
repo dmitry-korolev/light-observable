@@ -59,7 +59,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="subject.html" />
+    <link rel="next" href="never.html" />
     
     
     <link rel="prev" href="defer.html" />
@@ -157,7 +157,20 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../consume/reduce.html">
+        <li class="chapter " data-level="3.2" data-path="../consume/drain.html">
+            
+                <a href="../consume/drain.html">
+            
+                    
+                    drain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../consume/reduce.html">
             
                 <a href="../consume/reduce.html">
             
@@ -170,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="../consume/toArray.html">
+        <li class="chapter " data-level="3.4" data-path="../consume/toArray.html">
             
                 <a href="../consume/toArray.html">
             
@@ -281,7 +294,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.8" data-path="subject.html">
+        <li class="chapter " data-level="4.8" data-path="never.html">
+            
+                <a href="never.html">
+            
+                    
+                    never
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.9" data-path="subject.html">
             
                 <a href="subject.html">
             
@@ -418,6 +444,19 @@
             
                     
                     partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../filter/skipRepeats.html">
+            
+                <a href="../filter/skipRepeats.html">
+            
+                    
+                    skipRepeats
             
                 </a>
             
@@ -814,7 +853,8 @@
                                 <h1 id="empty"><code>EMPTY</code></h1>
 <pre><code class="lang-typescript"><span class="hljs-keyword">type</span> EMPTY = Observable&lt;never&gt;
 </code></pre>
-<pre><code>EMPTY: |
+<pre><code>EMPTY:   |
+empty(): |
 </code></pre><p>Represents an empty observable which emits <code>complete</code> event immediately after subscription.</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { EMPTY, empty } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
@@ -857,7 +897,7 @@ empty().subscribe(<span class="hljs-built_in">console</span>.log)
                 </a>
                 
                 
-                <a href="subject.html" class="navigation navigation-next " aria-label="Next page: createSubject">
+                <a href="never.html" class="navigation navigation-next " aria-label="Next page: never">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -868,7 +908,7 @@ empty().subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"empty","level":"4.7","depth":1,"next":{"title":"createSubject","level":"4.8","depth":1,"path":"create/subject.md","ref":"create/subject.md","articles":[]},"previous":{"title":"defer","level":"4.6","depth":1,"path":"create/defer.md","ref":"create/defer.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"create/empty.md","mtime":"2018-07-26T18:23:14.651Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"empty","level":"4.7","depth":1,"next":{"title":"never","level":"4.8","depth":1,"path":"create/never.md","ref":"create/never.md","articles":[]},"previous":{"title":"defer","level":"4.6","depth":1,"path":"create/defer.md","ref":"create/defer.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"create/empty.md","mtime":"2018-07-26T20:22:18.957Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

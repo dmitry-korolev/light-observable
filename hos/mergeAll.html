@@ -157,7 +157,20 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../consume/reduce.html">
+        <li class="chapter " data-level="3.2" data-path="../consume/drain.html">
+            
+                <a href="../consume/drain.html">
+            
+                    
+                    drain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../consume/reduce.html">
             
                 <a href="../consume/reduce.html">
             
@@ -170,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="../consume/toArray.html">
+        <li class="chapter " data-level="3.4" data-path="../consume/toArray.html">
             
                 <a href="../consume/toArray.html">
             
@@ -281,7 +294,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.8" data-path="../create/subject.html">
+        <li class="chapter " data-level="4.8" data-path="../create/never.html">
+            
+                <a href="../create/never.html">
+            
+                    
+                    never
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.9" data-path="../create/subject.html">
             
                 <a href="../create/subject.html">
             
@@ -418,6 +444,19 @@
             
                     
                     partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../filter/skipRepeats.html">
+            
+                <a href="../filter/skipRepeats.html">
+            
+                    
+                    skipRepeats
             
                 </a>
             
@@ -812,13 +851,15 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="mergeall"><code>mergeAll</code></h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> mergeAll = () =&gt; &lt;T&gt;(stream: Observable&lt;Observable&lt;T&gt; | Iterable&lt;T&gt;&gt;) =&gt; Observable&lt;T&gt;
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> mergeAll = () =&gt; &lt;T&gt;(
+  stream: Observable&lt;Observable&lt;T&gt; | Iterable&lt;T&gt;&gt;
+) =&gt; Observable&lt;T&gt;
 </code></pre>
 <pre><code>s:                  --a--b--c--d-&gt;
 t:                  -e-f--gh--j--&gt;
 stream:             s---t--------&gt;
 mergeAll()(stream): --a--bghc-jd-&gt;
-</code></pre><p>Given a higher-order stream, return a new stream that merges all the inner streams as they arrive.</p>
+</code></pre><p>Given a higher-order <code>stream</code>, return a new stream that merges all the inner streams as they arrive.</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { interval, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 <span class="hljs-keyword">import</span> { mergeAll } from <span class="hljs-string">&apos;light-observable/operator&apos;</span>
 
@@ -898,7 +939,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"mergeAll","level":"8.1","depth":1,"next":{"title":"mergeMap","level":"8.2","depth":1,"path":"hos/mergeMap.md","ref":"hos/mergeMap.md","articles":[]},"previous":{"title":"sample","level":"7.4","depth":1,"path":"combine/sample.md","ref":"combine/sample.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"hos/mergeAll.md","mtime":"2018-07-26T07:19:41.824Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"mergeAll","level":"8.1","depth":1,"next":{"title":"mergeMap","level":"8.2","depth":1,"path":"hos/mergeMap.md","ref":"hos/mergeMap.md","articles":[]},"previous":{"title":"sample","level":"7.4","depth":1,"path":"combine/sample.md","ref":"combine/sample.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"hos/mergeAll.md","mtime":"2018-07-26T20:43:30.418Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

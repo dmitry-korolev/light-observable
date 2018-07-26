@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>types · GitBook</title>
+        <title>skipRepeats · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -59,10 +59,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../consume/forEach.html" />
+    <link rel="next" href="../combine/concat.html" />
     
     
-    <link rel="prev" href="Observable.html" />
+    <link rel="prev" href="partition.html" />
     
 
     </head>
@@ -111,9 +111,9 @@
         
         
     
-        <li class="chapter " data-level="2.1" data-path="Observable.html">
+        <li class="chapter " data-level="2.1" data-path="../core/Observable.html">
             
-                <a href="Observable.html">
+                <a href="../core/Observable.html">
             
                     
                     Observable
@@ -124,9 +124,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.2" data-path="types.html">
+        <li class="chapter " data-level="2.2" data-path="../core/types.html">
             
-                <a href="types.html">
+                <a href="../core/types.html">
             
                     
                     types
@@ -412,9 +412,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../filter/filter.html">
+        <li class="chapter " data-level="6.1" data-path="filter.html">
             
-                <a href="../filter/filter.html">
+                <a href="filter.html">
             
                     
                     filter
@@ -425,9 +425,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../filter/reject.html">
+        <li class="chapter " data-level="6.2" data-path="reject.html">
             
-                <a href="../filter/reject.html">
+                <a href="reject.html">
             
                     
                     reject
@@ -438,9 +438,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../filter/partition.html">
+        <li class="chapter " data-level="6.3" data-path="partition.html">
             
-                <a href="../filter/partition.html">
+                <a href="partition.html">
             
                     
                     partition
@@ -451,9 +451,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.4" data-path="../filter/skipRepeats.html">
+        <li class="chapter active" data-level="6.4" data-path="skipRepeats.html">
             
-                <a href="../filter/skipRepeats.html">
+                <a href="skipRepeats.html">
             
                     
                     skipRepeats
@@ -835,7 +835,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >types</a>
+        <a href=".." >skipRepeats</a>
     </h1>
 </div>
 
@@ -850,86 +850,57 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="types">Types</h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">class</span> Observable&lt;T&gt; <span class="hljs-keyword">implements</span> Subscribable&lt;T&gt; {
-  <span class="hljs-keyword">static</span> of&lt;TS extends <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">any</span>&gt;&gt;(
-    ...args: TS
-  ): Observable&lt;TS extends <span class="hljs-built_in">Array</span>&lt;infer T&gt; ? T : <span class="hljs-literal">null</span>&gt;
-  <span class="hljs-keyword">static</span> from&lt;A&gt;(ish: Observable&lt;A&gt; | Iterable&lt;A&gt;): Observable&lt;A&gt;
-  <span class="hljs-keyword">constructor</span>(source: Subscriber&lt;T&gt;)
-  subscribe(
-    next?: PartialObserver&lt;T&gt; | ((value: T) =&gt; void),
-    error?: (reason: any) =&gt; void,
-    complete?: () =&gt; void
-  ): ObservableSubscription&lt;T&gt;
-  pipe(...operations: Array&lt;Unary&lt;any, any&gt;&gt;): any
-}
+                                <h1 id="skiprepeats"><code>skipRepeats</code></h1>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> skipRepeats = &lt;T&gt;(
+  equals?: ((a: T, b: T, index: <span class="hljs-built_in">number</span>) =&gt; <span class="hljs-built_in">boolean</span>)
+) =&gt; (stream: Observable&lt;T&gt;) =&gt; Observable&lt;T&gt;
+</code></pre>
+<pre><code>stream:                -a-a-b-a-a-c-c-&gt;
+skipRepeats()(stream): -a---b-a---c---&gt;
+</code></pre><p>Returns an Observable that emits all items emitted by the source Observable skipping adjacent repeating items, using the provided <code>equals</code> function. <code>equals</code> defaults to <code>(a, b) =&gt; a === b</code>.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<span class="hljs-keyword">import</span> { skipRepeats } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
-declare class ObservableSubscription&lt;T&gt; implements Subscription {
-  <span class="hljs-keyword">constructor</span>(observer: PartialObserver&lt;T&gt;, source: Subscriber&lt;T&gt;)
-  readonly closed: boolean
-  unsubscribe(): void
-}
+<span class="hljs-keyword">const</span> streamA = of(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>).pipe(
+  skipRepeats()
+)
 
-interface Subscribable&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  subscribe(
-    next?: PartialObserver&lt;T&gt; | ((value: T) =&gt; <span class="hljs-built_in">void</span>),
-    error?: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>,
-    complete?: () =&gt; <span class="hljs-built_in">void</span>
-  ): Subscription
-}
+streamA.subscribe(<span class="hljs-built_in">console</span>.log)
+<span class="hljs-comment">/*
+ -&gt; 1
+ -&gt; 2
+ -&gt; 3
+ -&gt; 4
+ -&gt; 1
+ -&gt; 2
+*/</span>
 
-<span class="hljs-keyword">interface</span> Subscription {
-  closed?: <span class="hljs-built_in">boolean</span>
-  unsubscribe(): <span class="hljs-built_in">void</span>
-}
+<span class="hljs-keyword">const</span> streamB = of(<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;A&apos;</span>, <span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>, <span class="hljs-string">&apos;B&apos;</span>, <span class="hljs-string">&apos;D&apos;</span>, <span class="hljs-string">&apos;d&apos;</span>).pipe(
+  skipRepeats((a, b) =&gt; a.toLowerCase() === b.toLowerCase())
+)
 
-<span class="hljs-keyword">interface</span> NextObserver&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  next: (value: T) =&gt; <span class="hljs-built_in">void</span>
-  error?: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>
-  complete?: () =&gt; <span class="hljs-built_in">void</span>
-  start?: (subscription: Subscription) =&gt; <span class="hljs-built_in">void</span>
-}
+streamB.subscribe(<span class="hljs-built_in">console</span>.log)
+<span class="hljs-comment">/*
+ -&gt; &apos;a&apos;
+ -&gt; &apos;b&apos;
+ -&gt; &apos;D&apos;
+*/</span>
+</code></pre>
+<p>Also available as an Observable creator:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { skipRepeats, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<span class="hljs-keyword">import</span> { skipRepeats } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
-<span class="hljs-keyword">interface</span> ErrorObserver&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  next?: (value: T) =&gt; <span class="hljs-built_in">void</span>
-  error: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>
-  complete?: () =&gt; <span class="hljs-built_in">void</span>
-  start?: (subscription: Subscription) =&gt; <span class="hljs-built_in">void</span>
-}
+<span class="hljs-keyword">const</span> stream = skipRepeats(
+  (a, b) =&gt; a.toLowerCase() === b.toLowerCase(),
+  of(<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;A&apos;</span>, <span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>, <span class="hljs-string">&apos;B&apos;</span>, <span class="hljs-string">&apos;D&apos;</span>, <span class="hljs-string">&apos;d&apos;</span>)
+)
 
-<span class="hljs-keyword">interface</span> CompletionObserver&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  next?: (value: T) =&gt; <span class="hljs-built_in">void</span>
-  error?: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>
-  complete: () =&gt; <span class="hljs-built_in">void</span>
-  start?: (subscription: Subscription) =&gt; <span class="hljs-built_in">void</span>
-}
-
-<span class="hljs-keyword">type</span> PartialObserver&lt;T&gt; =
-  | NextObserver&lt;T&gt;
-  | ErrorObserver&lt;T&gt;
-  | CompletionObserver&lt;T&gt;
-
-<span class="hljs-keyword">interface</span> SubscriptionObserver&lt;T&gt; {
-  closed?: <span class="hljs-built_in">boolean</span>
-  next: (value: T) =&gt; <span class="hljs-built_in">void</span>
-  error: (reason: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>
-  complete: () =&gt; <span class="hljs-built_in">void</span>
-}
-
-<span class="hljs-keyword">type</span> Subscriber&lt;T&gt; = (observer: SubscriptionObserver&lt;T&gt;) =&gt; Disposer
-
-<span class="hljs-keyword">type</span> Disposer =
-  | <span class="hljs-built_in">void</span>
-  | (() =&gt; <span class="hljs-built_in">void</span>)
-  | ({ unsubscribe: () =&gt; <span class="hljs-built_in">void</span> })
-  | Subscription
-
-<span class="hljs-keyword">type</span> Unary&lt;T, R&gt; = (arg: T) =&gt; R
+stream.subscribe(<span class="hljs-built_in">console</span>.log)
+<span class="hljs-comment">/*
+ -&gt; &apos;a&apos;
+ -&gt; &apos;b&apos;
+ -&gt; &apos;D&apos;
+*/</span>
 </code></pre>
 
                                 
@@ -958,12 +929,12 @@ interface Subscribable&lt;T&gt; {
 
             
                 
-                <a href="Observable.html" class="navigation navigation-prev " aria-label="Previous page: Observable">
+                <a href="partition.html" class="navigation navigation-prev " aria-label="Previous page: partition">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../consume/forEach.html" class="navigation navigation-next " aria-label="Next page: forEach">
+                <a href="../combine/concat.html" class="navigation navigation-next " aria-label="Next page: concat">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -974,7 +945,7 @@ interface Subscribable&lt;T&gt; {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"types","level":"2.2","depth":1,"next":{"title":"forEach","level":"3.1","depth":1,"path":"consume/forEach.md","ref":"consume/forEach.md","articles":[]},"previous":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"core/types.md","mtime":"2018-07-26T19:06:43.554Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"skipRepeats","level":"6.4","depth":1,"next":{"title":"concat","level":"7.1","depth":1,"path":"combine/concat.md","ref":"combine/concat.md","articles":[]},"previous":{"title":"partition","level":"6.3","depth":1,"path":"filter/partition.md","ref":"filter/partition.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"filter/skipRepeats.md","mtime":"2018-07-26T20:37:06.332Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
