@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>delay · GitBook</title>
+        <title>skipLast · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -59,8 +59,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="skipUntil.html" />
     
-    <link rel="prev" href="../limiting/throttleTime.html" />
+    
+    <link rel="prev" href="skip.html" />
     
 
     </head>
@@ -574,9 +576,9 @@
         
         
     
-        <li class="chapter " data-level="9.1" data-path="../slice/slice.html">
+        <li class="chapter " data-level="9.1" data-path="slice.html">
             
-                <a href="../slice/slice.html">
+                <a href="slice.html">
             
                     
                     slice
@@ -587,9 +589,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.2" data-path="../slice/skip.html">
+        <li class="chapter " data-level="9.2" data-path="skip.html">
             
-                <a href="../slice/skip.html">
+                <a href="skip.html">
             
                     
                     skip
@@ -600,9 +602,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.3" data-path="../slice/skipLast.html">
+        <li class="chapter active" data-level="9.3" data-path="skipLast.html">
             
-                <a href="../slice/skipLast.html">
+                <a href="skipLast.html">
             
                     
                     skipLast
@@ -613,9 +615,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.4" data-path="../slice/skipUntil.html">
+        <li class="chapter " data-level="9.4" data-path="skipUntil.html">
             
-                <a href="../slice/skipUntil.html">
+                <a href="skipUntil.html">
             
                     
                     skipUntil
@@ -626,9 +628,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.5" data-path="../slice/take.html">
+        <li class="chapter " data-level="9.5" data-path="take.html">
             
-                <a href="../slice/take.html">
+                <a href="take.html">
             
                     
                     take
@@ -639,9 +641,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.6" data-path="../slice/skipUntil.html">
+        <li class="chapter " data-level="9.6" data-path="skipUntil.html">
             
-                <a href="../slice/skipUntil.html">
+                <a href="skipUntil.html">
             
                     
                     takeLast
@@ -751,9 +753,9 @@
         
         
     
-        <li class="chapter active" data-level="12.1" data-path="delay.html">
+        <li class="chapter " data-level="12.1" data-path="../delay/delay.html">
             
-                <a href="delay.html">
+                <a href="../delay/delay.html">
             
                     
                     delay
@@ -794,7 +796,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >delay</a>
+        <a href=".." >skipLast</a>
     </h1>
 </div>
 
@@ -809,35 +811,33 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="delay"><code>delay</code></h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> delay = (wait: <span class="hljs-built_in">number</span>) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;): Observable&lt;T&gt;
+                                <h1 id="skiplast"><code>skipLast</code></h1>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> skipLast = (count: <span class="hljs-built_in">number</span>) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;) =&gt; Observable&lt;T&gt;
 </code></pre>
-<pre><code>stream:           -a-b-c-d-|
-delay(2)(stream): ---a-b-c-d-|
-</code></pre><p>Delay stream events by the specified number of milliseconds. Maintains the relative spacing of events. Doesn&apos;t delay error event.</p>
+<pre><code>stream:              -a-b-c-d--e-&gt;
+skipLast(2)(stream): -----a-b--c-&gt;
+</code></pre><p>Skips last <code>count</code> values emitted by the source Observable.</p>
 <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
-<span class="hljs-keyword">import</span> { delay } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
+<span class="hljs-keyword">import</span> { skipLast } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>).pipe(
-  delay(<span class="hljs-number">1000</span>)
+<span class="hljs-keyword">const</span> stream = of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>).pipe(
+  skipLast(<span class="hljs-number">2</span>)
 )
 
 stream.subscribe(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">/*
- Second after:
  -&gt; 1
  -&gt; 2
  -&gt; 3
 */</span>
 </code></pre>
 <p>Also available as an Observable creator:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { delay, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { skipLast, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = delay(<span class="hljs-number">1000</span>, of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
+<span class="hljs-keyword">const</span> stream = skipLast(<span class="hljs-number">2</span>, of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>))
 
 stream.subscribe(<span class="hljs-built_in">console</span>.log)
 <span class="hljs-comment">/*
- Second after:
  -&gt; 1
  -&gt; 2
  -&gt; 3
@@ -870,10 +870,14 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
 
             
                 
-                <a href="../limiting/throttleTime.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: throttleTime">
+                <a href="skip.html" class="navigation navigation-prev " aria-label="Previous page: skip">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="skipUntil.html" class="navigation navigation-next " aria-label="Next page: skipUntil">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -882,7 +886,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"delay","level":"12.1","depth":1,"previous":{"title":"throttleTime","level":"11.3","depth":1,"path":"limiting/throttleTime.md","ref":"limiting/throttleTime.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"delay/delay.md","mtime":"2018-07-25T14:01:07.919Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"skipLast","level":"9.3","depth":1,"next":{"title":"skipUntil","level":"9.4","depth":1,"path":"slice/skipUntil.md","ref":"slice/skipUntil.md","articles":[]},"previous":{"title":"skip","level":"9.2","depth":1,"path":"slice/skip.md","ref":"slice/skip.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"slice/skipLast.md","mtime":"2018-07-26T17:22:40.200Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

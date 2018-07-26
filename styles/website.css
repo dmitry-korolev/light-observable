@@ -1,0 +1,9 @@
+.badge {
+    font-size: .5em;
+    background-color: #ccc;
+    color: white;
+    display: inline-block;
+    padding: 4px;
+    line-height: 1;
+    border-radius: 4px;
+}

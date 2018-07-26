@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>delay · GitBook</title>
+        <title>createSubject · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -59,8 +59,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../transform/map.html" />
     
-    <link rel="prev" href="../limiting/throttleTime.html" />
+    
+    <link rel="prev" href="empty.html" />
     
 
     </head>
@@ -188,9 +190,9 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../create/of.html">
+        <li class="chapter " data-level="4.1" data-path="of.html">
             
-                <a href="../create/of.html">
+                <a href="of.html">
             
                     
                     of
@@ -201,9 +203,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="../create/from.html">
+        <li class="chapter " data-level="4.2" data-path="from.html">
             
-                <a href="../create/from.html">
+                <a href="from.html">
             
                     
                     from
@@ -214,9 +216,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="../create/fromEvent.html">
+        <li class="chapter " data-level="4.3" data-path="fromEvent.html">
             
-                <a href="../create/fromEvent.html">
+                <a href="fromEvent.html">
             
                     
                     fromEvent
@@ -227,9 +229,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.4" data-path="../create/fromPromise.html">
+        <li class="chapter " data-level="4.4" data-path="fromPromise.html">
             
-                <a href="../create/fromPromise.html">
+                <a href="fromPromise.html">
             
                     
                     fromPromise
@@ -240,9 +242,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.5" data-path="../create/interval.html">
+        <li class="chapter " data-level="4.5" data-path="interval.html">
             
-                <a href="../create/interval.html">
+                <a href="interval.html">
             
                     
                     interval
@@ -253,9 +255,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.6" data-path="../create/defer.html">
+        <li class="chapter " data-level="4.6" data-path="defer.html">
             
-                <a href="../create/defer.html">
+                <a href="defer.html">
             
                     
                     defer
@@ -266,9 +268,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.7" data-path="../create/empty.html">
+        <li class="chapter " data-level="4.7" data-path="empty.html">
             
-                <a href="../create/empty.html">
+                <a href="empty.html">
             
                     
                     empty
@@ -279,9 +281,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.8" data-path="../create/subject.html">
+        <li class="chapter active" data-level="4.8" data-path="subject.html">
             
-                <a href="../create/subject.html">
+                <a href="subject.html">
             
                     
                     createSubject
@@ -751,9 +753,9 @@
         
         
     
-        <li class="chapter active" data-level="12.1" data-path="delay.html">
+        <li class="chapter " data-level="12.1" data-path="../delay/delay.html">
             
-                <a href="delay.html">
+                <a href="../delay/delay.html">
             
                     
                     delay
@@ -794,7 +796,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >delay</a>
+        <a href=".." >createSubject</a>
     </h1>
 </div>
 
@@ -809,35 +811,21 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="delay"><code>delay</code></h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> delay = (wait: <span class="hljs-built_in">number</span>) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;): Observable&lt;T&gt;
+                                <h1 id="createsubject"><code>createSubject</code></h1>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> createSubject = &lt;T&gt;() =&gt; [Observable&lt;T&gt;, Observer&lt;T&gt;]
 </code></pre>
-<pre><code>stream:           -a-b-c-d-|
-delay(2)(stream): ---a-b-c-d-|
-</code></pre><p>Delay stream events by the specified number of milliseconds. Maintains the relative spacing of events. Doesn&apos;t delay error event.</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
-<span class="hljs-keyword">import</span> { delay } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
+<p>Returns a tuple of an Observable and a controller Observer.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { createSubject } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>).pipe(
-  delay(<span class="hljs-number">1000</span>)
-)
+<span class="hljs-keyword">const</span> [stream, sink] = createSubject()
 
 stream.subscribe(<span class="hljs-built_in">console</span>.log)
-<span class="hljs-comment">/*
- Second after:
- -&gt; 1
- -&gt; 2
- -&gt; 3
-*/</span>
-</code></pre>
-<p>Also available as an Observable creator:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { delay, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = delay(<span class="hljs-number">1000</span>, of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
-
-stream.subscribe(<span class="hljs-built_in">console</span>.log)
+sink.next(<span class="hljs-number">1</span>)
+sink.next(<span class="hljs-number">2</span>)
+sink.next(<span class="hljs-number">3</span>)
+sink.complete()
 <span class="hljs-comment">/*
- Second after:
  -&gt; 1
  -&gt; 2
  -&gt; 3
@@ -870,10 +858,14 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
 
             
                 
-                <a href="../limiting/throttleTime.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: throttleTime">
+                <a href="empty.html" class="navigation navigation-prev " aria-label="Previous page: empty">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../transform/map.html" class="navigation navigation-next " aria-label="Next page: map">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -882,7 +874,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"delay","level":"12.1","depth":1,"previous":{"title":"throttleTime","level":"11.3","depth":1,"path":"limiting/throttleTime.md","ref":"limiting/throttleTime.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"delay/delay.md","mtime":"2018-07-25T14:01:07.919Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"createSubject","level":"4.8","depth":1,"next":{"title":"map","level":"5.1","depth":1,"path":"transform/map.md","ref":"transform/map.md","articles":[]},"previous":{"title":"empty","level":"4.7","depth":1,"path":"create/empty.md","ref":"create/empty.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"create/subject.md","mtime":"2018-07-26T14:04:03.234Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

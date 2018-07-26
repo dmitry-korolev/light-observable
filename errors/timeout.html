@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>delay · GitBook</title>
+        <title>timeout · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -59,8 +59,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../limiting/auditTime.html" />
     
-    <link rel="prev" href="../limiting/throttleTime.html" />
+    
+    <link rel="prev" href="throwError.html" />
     
 
     </head>
@@ -659,9 +661,9 @@
         
         
     
-        <li class="chapter " data-level="10.1" data-path="../errors/catchError.html">
+        <li class="chapter " data-level="10.1" data-path="catchError.html">
             
-                <a href="../errors/catchError.html">
+                <a href="catchError.html">
             
                     
                     catchError
@@ -672,9 +674,9 @@
             
         </li>
     
-        <li class="chapter " data-level="10.2" data-path="../errors/throwError.html">
+        <li class="chapter " data-level="10.2" data-path="throwError.html">
             
-                <a href="../errors/throwError.html">
+                <a href="throwError.html">
             
                     
                     throwError
@@ -685,9 +687,9 @@
             
         </li>
     
-        <li class="chapter " data-level="10.3" data-path="../errors/timeout.html">
+        <li class="chapter active" data-level="10.3" data-path="timeout.html">
             
-                <a href="../errors/timeout.html">
+                <a href="timeout.html">
             
                     
                     timeout
@@ -751,9 +753,9 @@
         
         
     
-        <li class="chapter active" data-level="12.1" data-path="delay.html">
+        <li class="chapter " data-level="12.1" data-path="../delay/delay.html">
             
-                <a href="delay.html">
+                <a href="../delay/delay.html">
             
                     
                     delay
@@ -794,7 +796,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >delay</a>
+        <a href=".." >timeout</a>
     </h1>
 </div>
 
@@ -809,39 +811,36 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="delay"><code>delay</code></h1>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> delay = (wait: <span class="hljs-built_in">number</span>) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;): Observable&lt;T&gt;
+                                <h1 id="timeout"><code>timeout</code></h1>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> timeout = (time: <span class="hljs-built_in">number</span>) =&gt; &lt;T&gt;(stream: Observable&lt;T&gt;) =&gt; Observable&lt;T&gt;
 </code></pre>
-<pre><code>stream:           -a-b-c-d-|
-delay(2)(stream): ---a-b-c-d-|
-</code></pre><p>Delay stream events by the specified number of milliseconds. Maintains the relative spacing of events. Doesn&apos;t delay error event.</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
-<span class="hljs-keyword">import</span> { delay } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
+<pre><code>streamA:             --a--b--c--d---&gt;
+timeout(3)(streamA): --a--b--c--d---&gt;
 
-<span class="hljs-keyword">const</span> stream = of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>).pipe(
-  delay(<span class="hljs-number">1000</span>)
+streamB:             ----a--b--c--d-&gt;
+timeout(3)(streamA): --X
+</code></pre><p>Returns an Observable that throws an error if the source <code>stream</code> doesn&apos;t emit within specified amount of <code>time</code> in ms and mirrors the source <code>stream</code> otherwise.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { defer } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<span class="hljs-keyword">import</span> { timeout } from <span class="hljs-string">&apos;light-observable/operators&apos;</span>
+
+<span class="hljs-keyword">const</span> request = defer(() =&gt; fetch(params)).pipe(
+  timeout(<span class="hljs-number">1000</span>)
 )
 
-stream.subscribe(<span class="hljs-built_in">console</span>.log)
-<span class="hljs-comment">/*
- Second after:
- -&gt; 1
- -&gt; 2
- -&gt; 3
-*/</span>
+request.subscribe(
+  result =&gt; <span class="hljs-built_in">console</span>.log(result), <span class="hljs-comment">// Logs if request completed within specified timeout</span>
+  error =&gt; <span class="hljs-built_in">console</span>.log(error) <span class="hljs-comment">// Logs if request did not complete within timeout</span>
+)
 </code></pre>
 <p>Also available as an Observable creator:</p>
-<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { delay, of } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { timeout, defer } from <span class="hljs-string">&apos;light-observable/observable&apos;</span>
 
-<span class="hljs-keyword">const</span> stream = delay(<span class="hljs-number">1000</span>, of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
+<span class="hljs-keyword">const</span> request = timeout(<span class="hljs-number">1000</span>, defer(() =&gt; fetch(params)))
 
-stream.subscribe(<span class="hljs-built_in">console</span>.log)
-<span class="hljs-comment">/*
- Second after:
- -&gt; 1
- -&gt; 2
- -&gt; 3
-*/</span>
+request.subscribe(
+  result =&gt; <span class="hljs-built_in">console</span>.log(result), <span class="hljs-comment">// Logs if request completed within specified timeout</span>
+  error =&gt; <span class="hljs-built_in">console</span>.log(error) <span class="hljs-comment">// Logs if request did not complete within timeout</span>
+)
 </code></pre>
 
                                 
@@ -870,10 +869,14 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
 
             
                 
-                <a href="../limiting/throttleTime.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: throttleTime">
+                <a href="throwError.html" class="navigation navigation-prev " aria-label="Previous page: throwError">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../limiting/auditTime.html" class="navigation navigation-next " aria-label="Next page: auditTime">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -882,7 +885,7 @@ stream.subscribe(<span class="hljs-built_in">console</span>.log)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"delay","level":"12.1","depth":1,"previous":{"title":"throttleTime","level":"11.3","depth":1,"path":"limiting/throttleTime.md","ref":"limiting/throttleTime.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"delay/delay.md","mtime":"2018-07-25T14:01:07.919Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"timeout","level":"10.3","depth":1,"next":{"title":"auditTime","level":"11.1","depth":1,"path":"limiting/auditTime.md","ref":"limiting/auditTime.md","articles":[]},"previous":{"title":"throwError","level":"10.2","depth":1,"path":"errors/throwError.md","ref":"errors/throwError.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"errors/timeout.md","mtime":"2018-07-26T18:20:26.938Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T19:10:35.805Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
