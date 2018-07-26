@@ -1,6 +1,6 @@
 # `from`
 ```typescript
-type from = <T>(ish: Observable<T> | Iterable<T> | T[]) => Observable<T>
+type from = <T>(ish: Observable<T> | Iterable<T>) => Observable<T>
 ```
 
 ```

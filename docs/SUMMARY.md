@@ -6,6 +6,7 @@
   
 ### Consume
 * [forEach](consume/forEach.md)
+* [reduce](consume/reduce.md)
   
 ### Create
 * [of](create/of.md)
@@ -19,17 +20,24 @@
 ### Transform
 * [map](transform/map.md)
 * [mapTo](transform/mapTo.md)
+* [pairwise](transform/pairwise.md)
+* [scan](transform/scan.md)
 
 ### Filter
 * [filter](filter/filter.md)
+* [reject](filter/reject.md)
+* [partition](filter/partition.md)
 
 ### Combine
 * [concat](combine/concat.md)
 * [combineLatest](combine/combineLatest.md)
 * [merge](combine/merge.md)
+* [sample](combine/sample.md)
 
 ### Combine higher-order streams
 * [mergeAll](hos/mergeAll.md)
+* [mergeMap](hos/mergeMap.md)
+* [mergeMapTo](hos/mergeMapTo.md)
 
 ### Handle errors
 * [catchError](errors/catchError.md)

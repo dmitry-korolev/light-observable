@@ -16,7 +16,7 @@
     "prebuild": "rimraf index.js && rimraf index.d.ts && rimraf core && rimraf helpers && rimraf operators && rimraf observable",
     "docs": "rimraf _book && npm run docs:move && npm run docs:book && npm run docs:publish",
     "docs:move": "cp README.md ./docs",
-    "docs:book": "gitbook build",
+    "docs:book": "gitbook install && gitbook build",
     "docs:publish": "gh-pages -d _book",
     "test": "npm run test:lint && npm run test:jest && npm run test:size",
     "test:size": "npm run build && size-limit",
@@ -30,14 +30,21 @@
     "prepublishOnly": "npm run build"
   },
   "lint-staged": {
-    "./src/**/*.{ts,tsx}": [
-      "tslint -t verbose -p ./tsconfig.json -c ./tslint.json --fix",
-      "prettier --write --config .prettierrc",
-      "git add"
-    ],
-    "./README.md": [
-      "doctoc --notitle --github --maxlevel 3",
-      "git add"
+    "linters": {
+      "./src/**/*.{ts,tsx}": [
+        "tslint -t verbose -p ./tsconfig.json -c ./tslint.json --fix",
+        "prettier --write --config .prettierrc",
+        "git add"
+      ],
+      "./README.md": [
+        "doctoc --notitle --github --maxlevel 3",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "**/__tests__/**/*.ts",
+      "**/*.spec.ts",
+      "**/*.spec.tsx"
     ]
   },
   "keywords": [

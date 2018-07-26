@@ -33,6 +33,7 @@ Standard implementation of Observables for JavaScript. Requires a Promise polyfi
 * **Type-safe**: written in typescript.
 * **Reliable**: 100% unit test coverage.
 * **Moderate**: only standard methods are included to the Observable and Observable prototype + special `Observable.prototype.pipe` method that allows usage of pipeable operators.
+* **Universal**: every observable operator is available as an observable creator function. Every observable utility is compatible with any standard observable implementation like RxJS, zen-observable, etc.
 * **Documented**: [see the docs](https://dmitry-korolev.github.io/light-observable/)!
 
 ## Installation

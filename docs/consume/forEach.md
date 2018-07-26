@@ -3,7 +3,7 @@
 type forEach = <T>(fn?: (value: T) => void) => (stream: Observable<S>) => Promise<void>
 ```
 
-Starts consuming a source, processing each `next` event with provided function. Returns a Promise, which resolves, when the source completes, or rejects it the source errors.
+Starts consuming a source, processing each `next` event with provided function. Returns a Promise, which resolves when the source completes, or rejects if the source errors.
 ```typescript
 import { of } from 'light-observable/observable'
 import { forEach } from 'light-observable/operators'

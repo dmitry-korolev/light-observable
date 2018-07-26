@@ -3,7 +3,7 @@ import { forEach } from './forEach'
 import { scan } from './scan'
 
 export const reduce = <T, R>(
-  fn: (result: R, value: T) => R,
+  fn: (result: R, value: T, index: number) => R,
   initial: R,
   stream: Subscribable<T>
 ): Promise<R> => {
