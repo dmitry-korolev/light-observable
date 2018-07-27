@@ -11,9 +11,7 @@ pids
 *.pid.lock
 
 # Coverage
-lib-cov
 coverage
-.nyc_output
 
 # Dependency directories
 node_modules/
@@ -39,11 +37,13 @@ compiled
 
 # Other
 tsconfig.json
+tsconfig.esm.json
+tsconfig.test.json
+jest.config.json
 tslint.json
 testSetup.ts
-src/
-examples/
 .coveralls.yml
 .size-limit.js
 .travis.yml
 .prettierrc
+.gitignore
