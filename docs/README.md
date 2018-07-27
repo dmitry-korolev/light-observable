@@ -18,6 +18,7 @@ Standard implementation of Observables for JavaScript. Requires a Promise polyfi
   - [Filter](#filter)
   - [Combine](#combine)
   - [Combine higher-order streams](#combine-higher-order-streams)
+  - [Slice](#slice)
   - [Handle errors](#handle-errors)
   - [Rate limit](#rate-limit)
   - [Delay](#delay)
@@ -29,7 +30,7 @@ Standard implementation of Observables for JavaScript. Requires a Promise polyfi
 
 ## Features
 * **Standard**: fully compatible with the [Observable Proposal](https://github.com/tc39/proposal-observable).
-* **Tiny**: Observable itself is ~[1 kilobyte in gzip](.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package). **The whole library including ~80 operators and observable utilities is less than 6kb in gzip.**
+* **Tiny**: Observable itself is ~[1 kilobyte in gzip](https://github.com/dmitry-korolev/light-observable/blob/master/.size-limit.js) (including [symbol-observable](https://github.com/benlesh/symbol-observable) package). **The whole library including ~80 operators and observable utilities is less than 6kb in gzip.**
 * **Type-safe**: written in typescript.
 * **Reliable**: 100% unit test coverage.
 * **Moderate**: only standard methods are included to the Observable and Observable prototype + special `Observable.prototype.pipe` method that allows usage of pipeable operators.

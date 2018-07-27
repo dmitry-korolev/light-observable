@@ -2,7 +2,7 @@ module.exports = [
   {
     name: 'Observable',
     path: './esm/index.js',
-    limit: '1.1KB'
+    limit: '1KB'
   },
   {
     name: 'Total',
