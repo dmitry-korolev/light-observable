@@ -1,6 +1,6 @@
 {
   "name": "light-observable",
-  "version": "2.9.0",
+  "version": "2.9.1",
   "description": "Light observable ponyfill",
   "main": "index.js",
   "module": "esm/index.js",
