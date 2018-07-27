@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "target": "es6",
-    "module": "commonjs",
+    "target": "es5",
+    "module": "esnext",
     "lib": ["es2015", "es2016", "es2017", "dom"],
     "strict": true,
     "strictFunctionTypes": false,
@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "outDir": "./test/",
+    "outDir": "./esm/",
     "skipLibCheck": true,
     "importHelpers": false,
     "typeRoots": [

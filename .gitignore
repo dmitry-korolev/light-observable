@@ -1,24 +1,21 @@
 # Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/logs
+/*.log
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
 
 # Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+/pids
+/*.pid
+/*.seed
+/*.pid.lock
 
 # Coverage
-lib-cov
-coverage
-.nyc_output
+/coverage
 
 # Dependency directories
-node_modules/
-jspm_packages/
+/node_modules/
 
 # IDE
 .DS_Store
@@ -26,25 +23,24 @@ jspm_packages/
 .idea
 
 # Compiled sources
-lib
-es
-docs/_book
-_book
-.tempdocs
-compiled
-/index.js
-/index.js.map
+/esm/
 /operators/
+/index.js
+/index.d.ts
+/index.js.map
 /observable/
 /types/
 /core/
 /helpers/
 
+# Compiled book
+/docs/_book
+/_book
+
 # Cache
-.awcache
-.rpt2_cache
-.npm
+/.awcache
+/.rpt2_cache
+/.npm
 
 # Private data
-.npmrc
-/index.d.ts
+/.npmrc

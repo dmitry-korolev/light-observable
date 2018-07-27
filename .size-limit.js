@@ -1,15 +1,15 @@
 module.exports = [
   {
     name: 'Observable',
-    path: './index.js',
+    path: './esm/index.js',
     limit: '1.1KB'
   },
   {
     name: 'Total',
     path: [
-      './index.js',
-      './observable/index.js',
-      './operators/index.js'
+      './esm/index.js',
+      './esm/observable/index.js',
+      './esm/operators/index.js'
     ]
   }
 ]
