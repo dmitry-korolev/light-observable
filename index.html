@@ -865,6 +865,7 @@
 <li><a href="#filter">Filter</a></li>
 <li><a href="#combine">Combine</a></li>
 <li><a href="#combine-higher-order-streams">Combine higher-order streams</a></li>
+<li><a href="#slice">Slice</a></li>
 <li><a href="#handle-errors">Handle errors</a></li>
 <li><a href="#rate-limit">Rate limit</a></li>
 <li><a href="#delay">Delay</a></li>
@@ -878,7 +879,7 @@
 <h2 id="features">Features</h2>
 <ul>
 <li><strong>Standard</strong>: fully compatible with the <a href="https://github.com/tc39/proposal-observable" target="_blank">Observable Proposal</a>.</li>
-<li><strong>Tiny</strong>: Observable itself is ~<a href=".size-limit.js">1 kilobyte in gzip</a> (including <a href="https://github.com/benlesh/symbol-observable" target="_blank">symbol-observable</a> package). <strong>The whole library including ~80 operators and observable utilities is less than 6kb in gzip.</strong></li>
+<li><strong>Tiny</strong>: Observable itself is ~<a href="https://github.com/dmitry-korolev/light-observable/blob/master/.size-limit.js" target="_blank">1 kilobyte in gzip</a> (including <a href="https://github.com/benlesh/symbol-observable" target="_blank">symbol-observable</a> package). <strong>The whole library including ~80 operators and observable utilities is less than 6kb in gzip.</strong></li>
 <li><strong>Type-safe</strong>: written in typescript.</li>
 <li><strong>Reliable</strong>: 100% unit test coverage.</li>
 <li><strong>Moderate</strong>: only standard methods are included to the Observable and Observable prototype + special <code>Observable.prototype.pipe</code> method that allows usage of pipeable operators.</li>
@@ -1041,7 +1042,7 @@ limitations under the License.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2018-07-26T20:56:21.077Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-26T20:56:26.862Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Observable","level":"2.1","depth":1,"path":"core/Observable.md","ref":"core/Observable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/dmitry-korolev/light-observable/edit/master/docs"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2018-07-27T10:33:13.439Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-27T10:33:17.526Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
