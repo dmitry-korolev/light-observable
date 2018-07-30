@@ -44,3 +44,4 @@
 
 # Private data
 /.npmrc
+/.coveralls.yml
