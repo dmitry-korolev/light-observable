@@ -28,6 +28,7 @@
 * [pairwise](transform/pairwise.md)
 * [scan](transform/scan.md)
 * [startWith](transform/startWith.md)
+* [groupBy](transform/groupBy.md)
 * [tap](transform/tap.md)
 
 ### Filter
