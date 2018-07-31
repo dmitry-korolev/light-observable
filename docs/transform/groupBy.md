@@ -1,4 +1,4 @@
-# ``
+# `groupBy`
 ```typescript
 type groupBy = <T>(
   selector: (value: T) => any
@@ -8,8 +8,8 @@ type groupBy = <T>(
 ```
 stream:                -0-1-2-3-4-5->
 groupBy(even)(stream): -a-b--------->
-                        | |
-                        | 1---3---5->
+                        | ↓
+                        ↓	1---3---5->
                         0---2---4--->
 ```
 

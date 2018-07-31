@@ -1,4 +1,5 @@
 import { Observable } from '../Observable'
+import { Subscription } from '../types.h'
 import { testMethodProperty } from './utils'
 
 describe('(Core) of', () => {
@@ -28,5 +29,23 @@ describe('(Core) of', () => {
     const values: number[] = []
     Observable.of(1, 2, 3, 4).subscribe((v) => values.push(v))
     expect(values).toEqual([1, 2, 3, 4])
+  })
+
+  it('stops iterating if observer is closed', () => {
+    const result: number[] = []
+    let subscription: Subscription
+    Observable.of(1, 2, 3, 4).subscribe({
+      start(s) {
+        subscription = s
+      },
+      next(x) {
+        result.push(x)
+        if (x === 2) {
+          subscription!.unsubscribe()
+        }
+      }
+    })
+
+    expect(result).toEqual([1, 2])
   })
 })
