@@ -89,6 +89,7 @@ Full list of extras:
 * [pairwise](https://dmitry-korolev.github.io/light-observable/transform/pairwise.html)
 * [scan](https://dmitry-korolev.github.io/light-observable/transform/scan.html)
 * [startWith](https://dmitry-korolev.github.io/light-observable/transform/startWith.html)
+* [groupBy](https://dmitry-korolev.github.io/light-observable/transform/groupBy.html)
 * [tap](https://dmitry-korolev.github.io/light-observable/transform/tap.html)
 
 ### Filter

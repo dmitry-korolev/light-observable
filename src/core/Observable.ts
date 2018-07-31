@@ -13,14 +13,51 @@ import {
 
 const fromArray = <T>(arrayLike: ArrayLike<T>): Subscriber<T> => {
   return (observer) => {
-    for (const item of arrayLike as T[]) {
+    for (let index = 0; index < arrayLike.length; index += 1) {
       if (observer.closed) {
         return
       }
-      observer.next(item)
+      observer.next(arrayLike[index])
     }
 
     observer.complete()
+  }
+}
+
+const fromIterable = <T>(iterable: Iterable<T>): Subscriber<T> => {
+  const iterator = iterable[Symbol.iterator]()
+
+  return (observer) => {
+    let iteratorNormalCompletion = true
+    let iteratorError: any
+    let step = iterator.next()
+
+    try {
+      while (!step.done) {
+        iteratorNormalCompletion = step.done
+        if (observer.closed) {
+          return
+        }
+
+        observer.next(step.value)
+        iteratorNormalCompletion = true
+        step = iterator.next()
+      }
+      observer.complete()
+    } catch (e) {
+      iteratorError = { e }
+    } finally {
+      try {
+        /* istanbul ignore next */
+        if (!iteratorNormalCompletion && iterator.return) {
+          iterator.return()
+        }
+      } finally {
+        if (iteratorError) {
+          observer.error(iteratorError.e)
+        }
+      }
+    }
   }
 }
 
@@ -187,7 +224,7 @@ export class Observable<T> implements Subscribable<T> {
     }
 
     if (Symbol.iterator && (ish as any)[Symbol.iterator]) {
-      return new C(fromArray((ish as any)[Symbol.iterator]()))
+      return new C(fromIterable((ish as any)[Symbol.iterator]()))
     }
 
     // For old browsers that doesn't support @@iterator

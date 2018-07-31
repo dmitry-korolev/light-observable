@@ -1,5 +1,5 @@
 import { Observable } from '../Observable'
-import { SubscriptionObserver, Subscription } from '../types.h'
+import { Subscription, SubscriptionObserver } from '../types.h'
 import { testMethodProperty } from './utils'
 
 describe('(Core) from', () => {
