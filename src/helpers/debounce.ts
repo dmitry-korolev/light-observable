@@ -1,7 +1,7 @@
-export const debounce = <This = any>(wait: number, func: (this: This, ...args: any[]) => void) => {
+export const debounce = <TS extends any[]>(wait: number, func: (...args: TS) => void) => {
   let timeoutId: any = null
 
-  return function(this: This, ...args: any[]): void {
+  return function(this: any, ...args: TS): void {
     timeoutId > 0 && clearTimeout(timeoutId)
 
     timeoutId = setTimeout(() => {

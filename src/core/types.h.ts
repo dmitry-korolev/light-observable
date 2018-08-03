@@ -56,3 +56,5 @@ export const enum SignalType {
   error,
   complete
 }
+
+export type ArrayValues<TS extends any[]> = TS extends Array<infer T> ? T : void

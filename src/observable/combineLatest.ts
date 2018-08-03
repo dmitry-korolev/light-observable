@@ -2,23 +2,12 @@
 import { Observable } from '../core/Observable'
 import { Subscribable, Subscription } from '../core/types.h'
 import { getSpecies } from '../helpers/getSpecies'
+import { ExtractInnerTypes } from '../helpers/types/extractInnnerTypes'
 import { EMPTY } from './empty'
 
-// TODO: replace with spread after TS3.0 release
-export function combineLatest(): Observable<void>
-export function combineLatest<A>(s: Observable<A>): Observable<[A]>
-export function combineLatest<A, B>(sA: Observable<A>, sB: Observable<B>): Observable<[A, B]>
-export function combineLatest<A, B, C>(
-  sA: Observable<A>,
-  sB: Observable<B>,
-  sC: Observable<C>
-): Observable<[A, B, C]>
-export function combineLatest<A, B, C, D>(
-  sA: Observable<A>,
-  sB: Observable<B>,
-  sC: Observable<C>,
-  sD: Observable<D>
-): Observable<[A, B, C, D]>
+export function combineLatest<TS extends Array<Subscribable<any>>>(
+  ...streams: TS
+): Observable<ExtractInnerTypes<TS>>
 export function combineLatest(): Observable<any> {
   if (arguments.length < 1) {
     return EMPTY
