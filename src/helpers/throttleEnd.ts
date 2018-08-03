@@ -1,8 +1,8 @@
-export const throttleEnd = <This = any>(wait: number, fn: (this: This, ...args: any[]) => void) => {
-  let lastValues: any[] = []
+export const throttleEnd = <TS extends any[]>(wait: number, fn: (...args: TS) => void) => {
+  let lastValues: TS
   let timeout: any
 
-  return function(this: This, ...args: any[]): void {
+  return function(this: any, ...args: TS): void {
     lastValues = args
 
     if (timeout) {

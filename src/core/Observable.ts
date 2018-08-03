@@ -1,6 +1,7 @@
 // tslint:disable max-classes-per-file no-use-before-declare
 import $$observable from 'symbol-observable'
 import {
+  ArrayValues,
   Disposer,
   PartialObserver,
   SignalType,
@@ -190,18 +191,13 @@ class ConcreteObserver<T> implements SubscriptionObserver<T> {
 }
 
 export class Observable<T> implements Subscribable<T> {
-  static of(): Observable<any>
-  static of<A>(a: A): Observable<A>
-  static of<A, B>(a: A, b: B): Observable<A | B>
-  static of<A, B, C>(a: A, b: B, c: C): Observable<A | B | C>
-  static of<A, B, C, D>(a: A, b: B, c: C, d: D): Observable<A | B | C | D>
-  static of<A, B, C, D, E>(a: A, b: B, c: C, d: D, e: E): Observable<A | B | C | D | E>
+  static of<TS extends any[]>(...args: TS): Observable<ArrayValues<TS>>
   static of() {
     const C = typeof this === 'function' ? this : Observable
     return new C(fromArray(arguments))
   }
 
-  static from<A>(ish: Observable<A> | Iterable<A>) {
+  static from<A>(ish: Subscribable<A> | Observable<A> | Iterable<A>) {
     const C = typeof this === 'function' ? this : Observable
     const error = `${ish} is not an object`
 

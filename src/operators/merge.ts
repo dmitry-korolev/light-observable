@@ -1,34 +1,14 @@
 import { Observable } from '../core/Observable'
-import { Subscribable, Unary } from '../core/types.h'
+import { ArrayValues, Subscribable } from '../core/types.h'
+import { ExtractInnerTypes } from '../helpers/types/extractInnnerTypes'
 import { merge as mergeObservable } from '../observable/merge'
 
-export function merge<T>(): Unary<Subscribable<T>, Subscribable<T>>
-export function merge<T, A>(arg1: Subscribable<A>): Unary<Subscribable<T>, Subscribable<T | A>>
-export function merge<T, A, B>(
-  arg1: Subscribable<A>,
-  arg2: Subscribable<B>
-): Unary<Subscribable<T>, Subscribable<T | A | B>>
-export function merge<T, A, B, C>(
-  arg1: Subscribable<A>,
-  arg2: Subscribable<B>,
-  arg3: Subscribable<C>
-): Unary<Subscribable<T>, Subscribable<T | A | B | C>>
-export function merge<T, A, B, C, D>(
-  arg1: Subscribable<A>,
-  arg2: Subscribable<B>,
-  arg3: Subscribable<C>,
-  arg4: Subscribable<D>
-): Unary<Subscribable<T>, Subscribable<T | A | B | C | D>>
-export function merge<T, A, B, C, D, E>(
-  arg1: Subscribable<A>,
-  arg2: Subscribable<B>,
-  arg3: Subscribable<C>,
-  arg4: Subscribable<D>,
-  arg5: Subscribable<E>
-): Unary<Subscribable<T>, Subscribable<T | A | B | C | D | E>>
-export function merge(
-  ...streams: Array<Subscribable<any>>
-): Unary<Subscribable<any>, Observable<any>> {
+export function merge<TS extends Array<Subscribable<any>>>(
+  ...streams: TS
+): <T>(stream: Subscribable<T>) => Observable<T | ArrayValues<ExtractInnerTypes<TS>>>
+export function merge() {
+  const streams: Array<Subscribable<any>> = Array.prototype.slice.call(arguments)
+
   return (stream: Subscribable<any>) => {
     const allStreams = [stream].concat(streams)
 

@@ -1,19 +1,15 @@
 import { Observable } from '../core/Observable'
-import { Subscribable, Unary } from '../core/types.h'
+import { Subscribable } from '../core/types.h'
+import { Concat } from '../helpers/types/concat'
+import { ExtractInnerTypes } from '../helpers/types/extractInnnerTypes'
 import { combineLatest as combineLatestObservable } from '../observable/combineLatest'
 
-export function combineLatest<A>(): Unary<Subscribable<A>, Observable<[A]>>
-export function combineLatest<A, B>(sA: Subscribable<A>): Unary<Subscribable<B>, Observable<[B, A]>>
-export function combineLatest<A, B, C>(
-  sA: Subscribable<A>,
-  sB: Subscribable<B>
-): Unary<Subscribable<C>, Observable<[C, A, B]>>
-export function combineLatest<A, B, C, D>(
-  sA: Subscribable<A>,
-  sB: Subscribable<B>,
-  sC: Subscribable<C>
-): Unary<Subscribable<C>, Observable<[D, A, B, C]>>
-export function combineLatest(...streams: Array<Subscribable<any>>) {
+export function combineLatest<TS extends Array<Subscribable<any>>>(
+  ...streams: TS
+): <T>(stream: Subscribable<T>) => Observable<Concat<[T], ExtractInnerTypes<TS>>>
+export function combineLatest() {
+  const streams: Array<Subscribable<any>> = Array.prototype.slice.call(arguments)
+
   return (stream: Subscribable<any>) => {
     const allStreams = [stream].concat(streams)
 
