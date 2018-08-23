@@ -45,3 +45,4 @@
 # Private data
 /.npmrc
 /.coveralls.yml
+/package-lock.json
