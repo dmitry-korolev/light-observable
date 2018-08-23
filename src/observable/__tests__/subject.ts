@@ -1,4 +1,5 @@
 import { Observable } from '../../core/Observable'
+import { getTestObserver } from '../../helpers/testHelpers/getTestObserver'
 import { createSubject } from '../subject'
 
 describe('(Extra) subject', () => {
@@ -85,6 +86,50 @@ describe('(Extra) subject', () => {
 
       const subscription = stream.subscribe()
       expect(subscription.closed).toBe(true)
+    })
+  })
+
+  describe('Behavior mode', () => {
+    it('emits initial value', () => {
+      const [stream, sink] = createSubject({ initial: 1 })
+      const observer = getTestObserver()
+
+      stream.subscribe(observer)
+
+      expect(observer.next).toBeCalledWith(1)
+    })
+
+    it('saves and emits last emitted value', () => {
+      const [stream, sink] = createSubject({ initial: 1 })
+      const observer = getTestObserver()
+
+      sink.next(2)
+      stream.subscribe(observer)
+
+      expect(observer.next).toBeCalledWith(2)
+      expect(observer.next.mock.calls).toHaveLength(1)
+    })
+
+    it('emits last value and completes', () => {
+      const [stream, sink] = createSubject({ initial: 1 })
+      const observer = getTestObserver()
+
+      sink.complete()
+      stream.subscribe(observer)
+
+      expect(observer.next).toBeCalledWith(1)
+      expect(observer.complete).toBeCalled()
+    })
+
+    it('doesnt emit last value and errors', () => {
+      const [stream, sink] = createSubject({ initial: 1 })
+      const observer = getTestObserver()
+
+      sink.error('error')
+      stream.subscribe(observer)
+
+      expect(observer.next).not.toBeCalled()
+      expect(observer.error).toBeCalledWith('error')
     })
   })
 })
