@@ -28,8 +28,6 @@
     "test:jest:ci": "jest --config ./jest.config.json --runInBand --coverage --coverageReporters=text-lcov | coveralls",
     "test:ci": "npm run test:lint && npm run test:jest:ci && npm run test:size",
     "pretest": "rimraf coverage",
-    "precommit": "lint-staged",
-    "prepush": "npm run test",
     "prepublishOnly": "npm run build"
   },
   "lint-staged": {
@@ -96,5 +94,11 @@
   "dependencies": {
     "gitbook-plugin-edit-link": "^2.0.2",
     "symbol-observable": "^1.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test"
+    }
   }
 }
