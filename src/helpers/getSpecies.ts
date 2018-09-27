@@ -1,5 +1,5 @@
 import { Observable } from '../core/Observable'
 
-export function getSpecies<T>(obj: any): typeof Observable {
+export function getSpecies(obj: any): typeof Observable {
   return obj.constructor || Observable
 }

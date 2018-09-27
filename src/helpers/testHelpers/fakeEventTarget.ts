@@ -2,7 +2,7 @@ export class FakeEventTarget implements EventTarget {
   handler?: (value: any) => void
   event?: string
 
-  addEventListener = jest.fn((event: string, handler: (value: any) => void, capture?: boolean) => {
+  addEventListener = jest.fn((event: string, handler: (value: any) => void) => {
     this.event = event
     this.handler = handler
   })

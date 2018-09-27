@@ -12,6 +12,9 @@ describe('(Util) throttle', () => {
     throttled.call({ a: 2 }, 3, 4)
     throttled.call({ a: 3 }, 5, 6)
     expect(f.mock.calls).toHaveLength(0)
+    jest.runTimersToTime(500)
+    expect(f.mock.calls).toHaveLength(0)
+
     jest.runAllTimers()
     expect(f.mock.calls).toHaveLength(1)
     expect(f).toBeCalledWith(5, 6)

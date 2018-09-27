@@ -12,6 +12,6 @@ export const throttleEnd = <TS extends any[]>(wait: number, fn: (...args: TS) =>
     timeout = setTimeout(() => {
       timeout = null
       fn.apply(this, lastValues)
-    })
+    }, wait)
   }
 }

@@ -10,7 +10,6 @@
   "rules": {
     "prefer-for-of": false,
     "object-literal-sort-keys": false,
-    "no-unused-variable": true,
     "interface-name": false,
     "max-line-length": [false],
     "interface-over-type-literal": false,
