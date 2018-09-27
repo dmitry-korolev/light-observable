@@ -12,6 +12,10 @@ import {
   Unary
 } from './types.h'
 
+/* istanbul ignore next */
+const $$toStringTag: symbol =
+  (typeof Symbol === 'function' && Symbol.toStringTag) || ('@@toStringTag' as any)
+
 const fromArray = <T>(arrayLike: ArrayLike<T>): Subscriber<T> => {
   return (observer) => {
     for (let index = 0; index < arrayLike.length; index += 1) {
@@ -132,6 +136,9 @@ function notifySubscription<T>(
 }
 
 class ObservableSubscription<T> implements Subscription {
+  // @ts-ignore
+  [$$toStringTag]: 'Subscription'
+
   _disposer: Disposer | undefined
   _observer: PartialObserver<T> | undefined
   _closed: boolean = false
@@ -170,7 +177,10 @@ class ObservableSubscription<T> implements Subscription {
 }
 
 class ConcreteObserver<T> implements SubscriptionObserver<T> {
-  _subscription: ObservableSubscription<T>
+  _subscription: ObservableSubscription<T>;
+
+  // @ts-ignore
+  [$$toStringTag]: 'Subscription Observer'
 
   constructor(subscription: ObservableSubscription<T>) {
     this._subscription = subscription
@@ -234,6 +244,9 @@ export class Observable<T> implements Subscribable<T> {
 
     throw new TypeError(error)
   }
+
+  // @ts-ignore
+  [$$toStringTag]: 'Observable'
 
   private _subscribe: Subscriber<T>
 
