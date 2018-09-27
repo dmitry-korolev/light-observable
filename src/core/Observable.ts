@@ -148,6 +148,9 @@ class ObservableSubscription<T> implements Subscription {
     try {
       this._disposer = source(subscriptionObserver)
     } catch (error) {
+      if (!observer.error) {
+        throw error
+      }
       subscriptionObserver.error(error)
     }
   }

@@ -130,6 +130,21 @@ describe('(Core) observer.error', () => {
     }
   })
 
+  it('throws error from inner observable if error is undefined', () => {
+    const error = {}
+    let errorValue
+    try {
+      new Observable((observer) => {
+        observer.error(error)
+      }).subscribe()
+    } catch (e) {
+      errorValue = e
+    }
+
+    expect(errorValue).toBe(error)
+  })
+
+
   it('calls the cleanup method after "error"', () => {
     const calls: string[] = []
     let observer: SubscriptionObserver<any>
