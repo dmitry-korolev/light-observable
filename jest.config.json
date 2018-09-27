@@ -37,7 +37,8 @@
   "globals": {
     "process.env.NODE_ENV": "test",
     "ts-jest": {
-      "tsConfigFile": "tsconfig.test.json"
+      "tsConfig": "tsconfig.test.json",
+      "diagnostics": false
     }
   }
 }
