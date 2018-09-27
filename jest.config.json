@@ -1,7 +1,7 @@
 {
   "testURL": "http://localhost",
   "transform": {
-    ".(ts|tsx|js|jsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    ".(ts|tsx|js|jsx)": "ts-jest"
   },
   "modulePaths": [
     "<rootDir>"
