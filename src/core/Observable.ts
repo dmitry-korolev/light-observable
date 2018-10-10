@@ -232,7 +232,7 @@ export class Observable<T> implements Subscribable<T> {
       return new C<A>((observer) => observable.subscribe(observer))
     }
 
-    if (Symbol.iterator && (ish as any)[Symbol.iterator]) {
+    if (typeof Symbol === 'function' && Symbol.iterator && (ish as any)[Symbol.iterator]) {
       return new C(fromIterable((ish as any)[Symbol.iterator]()))
     }
 
