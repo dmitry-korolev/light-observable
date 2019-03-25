@@ -59,7 +59,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/jest": "^23.3.2",
-    "@types/node": "^10.11.0",
+    "@types/node": "^11.11.7",
     "cash-cp": "^0.2.0",
     "commitizen": "^2.10.1",
     "coveralls": "^3.0.2",
