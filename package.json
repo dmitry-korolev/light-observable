@@ -68,7 +68,7 @@
     "es-observable-tests": "^0.3.0",
     "gh-pages": "^2.0.0",
     "gitbook-cli": "^2.3.2",
-    "husky": "^1.0.1",
+    "husky": "^2.3.0",
     "jest": "^23.6.0",
     "lint-staged": "^7.3.0",
     "most": "^1.7.3",
