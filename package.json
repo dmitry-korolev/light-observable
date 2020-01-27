@@ -70,7 +70,7 @@
     "gitbook-cli": "^2.3.2",
     "husky": "^1.0.1",
     "jest": "^23.6.0",
-    "lint-staged": "^7.3.0",
+    "lint-staged": "^10.0.3",
     "most": "^1.7.3",
     "observable-operators": "^1.7.3",
     "prettier": "^1.14.3",
