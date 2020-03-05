@@ -76,7 +76,7 @@
     "prettier": "^1.14.3",
     "redux": "^4.0.0",
     "rxjs": "^6.3.3",
-    "size-limit": "^0.20.0",
+    "size-limit": "^4.1.1",
     "ts-jest": "^23.10.2",
     "ts-node": "^7.0.1",
     "tslib": "^1.9.3",
